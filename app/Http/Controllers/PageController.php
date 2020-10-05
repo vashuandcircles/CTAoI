@@ -15,20 +15,18 @@ class PageController extends Controller
 {
     public function index()
     {
-        // $coachings = Coaching::where('verified', '1')->where('active', '1')->where('is_featured', '1');
         $coachings = Coaching::all();
-        // $coachings = DB::table('coachings')->select('verified', 1)->select('is_featured', 1)->select('active', 1)->get();
         $teachers = Teacher::all();
         return view('index', compact('teachers', 'coachings'));
     }
     public function coachings()
     {
-        $coachings = Coaching::orderBy('id', 'desc')->paginate(16);
+        $coachings = Coaching::orderBy('id', 'desc')->paginate(20);
         return view('coachings', compact('coachings'));
     }
     public function teachers()
     {
-        $teachers = Teacher::orderBy('id', 'desc')->paginate(16);
+        $teachers = Teacher::orderBy('id', 'desc')->paginate(20);
         return view('teachers', compact('teachers'));
     }
     public function contact()
@@ -93,8 +91,7 @@ class PageController extends Controller
             'address2' => 'required|max:255|min:4',
             'city' => 'required|min:4',
         ]);
-        $path = $request->file('image')->store('coachingimages', 's3');
-        $imgpath = Storage::disk('s3')->url($path);
+        $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         Coaching::create([
             'name' => ucwords(strtolower($request->name)),
             'directorname' => ucwords(strtolower($request->directorname)),
@@ -106,7 +103,7 @@ class PageController extends Controller
             'landmark' => ucwords(strtolower($request->landmark)),
             'state' => ucwords(strtolower($request->state)),
             'description' => ucwords(strtolower($request->description)),
-            'imgpath' => $imgpath,
+            'imgpath' => $img,
             'address1' => ucwords(strtolower($request->address1)),
             'address2' => ucwords(strtolower($request->address2)),
             'city' => ucwords(strtolower($request->city)),
@@ -127,8 +124,7 @@ class PageController extends Controller
             'state' => 'required|max:255|min:4',
             'city' => 'required|min:4',
         ]);
-        $path = $request->file('image')->store('teacherimages', 's3');
-        $imgpath = Storage::disk('s3')->url($path);
+        $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         Teacher::create([
             'firstname' => ucwords(strtolower($request->firstname)),
             'lastname' => ucwords(strtolower($request->lastname)),
@@ -139,7 +135,7 @@ class PageController extends Controller
             'altphone' => $request->altphone,
             'specialization' => ucwords(strtolower($request->specialization)),
             'description' => ucwords(strtolower($request->description)),
-            'imgpath' => $imgpath,
+            'imgpath' => $img,
             'state' => ucwords(strtolower($request->state)),
             'city' => ucwords(strtolower($request->city)),
         ]);

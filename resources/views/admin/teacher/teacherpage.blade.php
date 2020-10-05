@@ -62,6 +62,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                        <div class="d-flex justify-content-center">
+                            {!! $teachers->links() !!}
+                        </div>
             </div>
         </div>
     </div>

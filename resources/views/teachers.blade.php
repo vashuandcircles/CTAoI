@@ -21,7 +21,7 @@
                         </div>
                         <div class="course_content">
                             <h4 class="mb-4">
-                                <a href="course-details.html">{{ $row->firstname}} {{ $row->lastname}}</a>
+                                <a>{{ $row->firstname}} {{ $row->lastname}}</a>
                             </h4>
                             <p>
                                 {{ $row->description}}

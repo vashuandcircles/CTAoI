@@ -11,7 +11,6 @@ use App\place;
 use App\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -43,7 +42,7 @@ class HomeController extends Controller
     }
     public function teacherPage()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::orderBy('id', 'desc')->paginate(25);
         return view('admin/teacher/teacherpage', compact('teachers'));
     }
     public function addEvent(Request $request)
@@ -56,8 +55,7 @@ class HomeController extends Controller
             'priority' => 'required|regex:/[0-9]{10}/',
             'image' => 'required|mimes:jpeg,jpg,png', 
         ]);
-        $path = $request->file('image')->store('eventimages', 's3');
-        $imgpath = Storage::disk('s3')->url($path);
+        $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         Teacher::create([
             'firstname' => ucwords(strtolower($request->firstname)),
             'lastname' => ucwords(strtolower($request->lastname)),
@@ -68,7 +66,7 @@ class HomeController extends Controller
             'altphone' => $request->altphone,
             'specialization' => $request->specialization,
             'description' => ucwords(strtolower($request->description)),
-            'imgpath' => $imgpath,
+            'imgpath' => $img,
             'state' => ucwords(strtolower($request->state)),
             'city' => ucwords(strtolower($request->city)),
             'verified' => 1,
@@ -77,7 +75,7 @@ class HomeController extends Controller
     }
     public function coachingPage()
     {
-        $coachings = Coaching::all();
+        $coachings = Coaching::orderBy('id', 'desc')->paginate(25);
         return view('admin/coaching/coachingpage', compact('coachings'));
     }
     public function featuredTeacherPage()
@@ -123,8 +121,7 @@ class HomeController extends Controller
             'state' => 'required|max:255|min:4',
             'city' => 'required|min:4',
         ]);
-        $path = $request->file('image')->store('teacherimages', 's3');
-        $imgpath = Storage::disk('s3')->url($path);
+        $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         Teacher::create([
             'firstname' => ucwords(strtolower($request->firstname)),
             'lastname' => ucwords(strtolower($request->lastname)),
@@ -135,7 +132,7 @@ class HomeController extends Controller
             'altphone' => $request->altphone,
             'specialization' => $request->specialization,
             'description' => ucwords(strtolower($request->description)),
-            'imgpath' => $imgpath,
+            'imgpath' => $img,
             'state' => ucwords(strtolower($request->state)),
             'city' => ucwords(strtolower($request->city)),
             'verified' => 1,
@@ -155,8 +152,7 @@ class HomeController extends Controller
             'address1' => 'required|max:255|min:4',
             'city' => 'required|min:4',
         ]);
-        $path = $request->file('image')->store('coachingimages', 's3');
-        $imgpath = Storage::disk('s3')->url($path);
+        $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         Coaching::create([
             'name' => ucwords(strtolower($request->name)),
             'directorname' => ucwords(strtolower($request->directorname)),
@@ -168,7 +164,7 @@ class HomeController extends Controller
             'landmark' => ucwords(strtolower($request->landmark)),
             'state' => ucwords(strtolower($request->state)),
             'description' => ucwords(strtolower($request->description)),
-            'imgpath' => $request->image, //$imgpath,
+            'imgpath' => $img,
             'address1' => ucwords(strtolower($request->address1)),
             'address2' => ucwords(strtolower($request->address2)),
             'city' => ucwords(strtolower($request->city)),
@@ -295,7 +291,8 @@ class HomeController extends Controller
     public function acceptTeacher(Request $request, $id)
     {
         $teachers = Teacher::findOrFail($id);
-        Mail::to($teachers->email)->send(new ApprovedMail());
+        $data = ['name' => $teachers->firstname];
+        Mail::to($teachers->email)->send(new ApprovedMail($data));
         $teachers->verified = 1;
         $teachers->update();
         return redirect('/teacher-request')->with('status', 'Teacher is verified now');
@@ -305,6 +302,8 @@ class HomeController extends Controller
         $coachings = Coaching::findOrFail($id);
         $coachings->verified = 1;
         $coachings->update();
+        $data = $coachings->directorname;
+        Mail::to($coachings->email)->send(new ApprovedMail($data));
         return redirect('/coaching-request')->with('status', 'Coaching is verified now');
     }
 }

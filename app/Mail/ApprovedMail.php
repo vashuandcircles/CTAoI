@@ -11,23 +11,18 @@ class ApprovedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $data;
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
-        return $this->view('mails.approvedmail');
+        return $this->view('mails.approvedmail')
+        ->from('noreply@ctaoi.com', 'CTAoI')
+        ->replyTo('admin@ctaoi.com', 'CTAoI')
+        ->subject("Request Approved at CTAoI")
+        ->with([ 'username' => $this->data['name'] ]);
     }
 }

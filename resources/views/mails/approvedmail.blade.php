@@ -1,4 +1,4 @@
-Dear User's First Name
+Dear {{ $username }}
 
 Welcome to CTAoI!
 
