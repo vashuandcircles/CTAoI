@@ -19,10 +19,15 @@ class ApprovedMail extends Mailable
 
     public function build()
     {
+        $address = 'noreply@ctaoi.com';
+        $subject = 'Request Approved at CTAoI';
+        $name = 'CTAoI';
         return $this->view('mails.approvedmail')
-        ->from('noreply@ctaoi.com', 'CTAoI')
-        ->replyTo('admin@ctaoi.com', 'CTAoI')
-        ->subject("Request Approved at CTAoI")
-        ->with([ 'username' => $this->data['name'] ]);
+        ->from($address, $name)
+        ->cc($address, $name)
+        ->bcc($address, $name)
+        ->replyTo($address, $name)
+        ->subject($subject)
+        ->with(['name' => $this->data['name']]);
     }
 }

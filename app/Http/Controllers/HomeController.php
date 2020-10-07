@@ -292,7 +292,8 @@ class HomeController extends Controller
     {
         $teachers = Teacher::findOrFail($id);
         $data = ['name' => $teachers->firstname];
-        Mail::to($teachers->email)->send(new ApprovedMail($data));
+        $tomail = $teachers->email;
+        Mail::to($tomail)->send(new ApprovedMail($data));
         $teachers->verified = 1;
         $teachers->update();
         return redirect('/teacher-request')->with('status', 'Teacher is verified now');
@@ -300,10 +301,12 @@ class HomeController extends Controller
     public function acceptCoaching(Request $request, $id)
     {
         $coachings = Coaching::findOrFail($id);
+        $tomail = $coachings->email;
+        $data = ['name' => $coachings->name];
+        Mail::to($tomail)->send(new ApprovedMail($data));
         $coachings->verified = 1;
         $coachings->update();
         $data = $coachings->directorname;
-        Mail::to($coachings->email)->send(new ApprovedMail($data));
         return redirect('/coaching-request')->with('status', 'Coaching is verified now');
     }
 }
