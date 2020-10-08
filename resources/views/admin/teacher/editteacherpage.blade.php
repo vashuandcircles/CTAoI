@@ -104,6 +104,22 @@
                                 @enderror
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
+
+                            <div class="col-md-3">
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" autocomplete="image">
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-3">
+                            <img src="{{ $teachers->imgpath }}" style="height: 75px; object-fit: cover;">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
 
@@ -148,7 +164,7 @@
 
                             <div class="col-md-6">
                                 <select id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" autocomplete="state" autofocus>
-                                    <option value="{{ old('state') }}">{{ old('state') }}</option>
+                                    <option value="{{ $teachers->state }}">{{ $teachers->state }}</option>    
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>
