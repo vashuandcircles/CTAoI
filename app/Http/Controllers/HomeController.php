@@ -198,8 +198,9 @@ class HomeController extends Controller
             'city' => 'required|min:4',
         ]);
         
-        if($request->input('image')){
-        $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+        if(($request->input('image')) == null){
+            $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+            $teachers->imgpath = $img;
         }
         $teachers->firstname = ucwords(strtolower($request->input('firstname')));
         $teachers->lastname = ucwords(strtolower($request->input('lastname')));
@@ -208,9 +209,6 @@ class HomeController extends Controller
         $teachers->description = ucwords(strtolower($request->input('description')));
         $teachers->phone = $request->input('phone');
         $teachers->altphone = $request->input('altphone');
-        if($request->input('image')){
-            $teachers->imgpath = $img;
-        }
         $teachers->specialization = $request->input('specialization');
         $teachers->address = ucwords(strtolower($request->input('address')));
         $teachers->state = ucwords(strtolower($request->input('state')));
@@ -232,17 +230,16 @@ class HomeController extends Controller
             'state' => 'required|max:255|min:4',
             'city' => 'required|min:4',
         ]);
-        if($request->input('image')){
+        if(($request->input('image')) == null){
             $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-            }
+            $coachings->imgpath = $img;
+        }
         $coachings->name = ucwords(strtolower($request->input('name')));
         $coachings->directorname = ucwords(strtolower($request->input('directorname')));
         $coachings->email = mb_strtolower($request->input('email'));
         $coachings->description = ucwords(strtolower($request->input('description')));
         $coachings->phone = $request->input('phone');
-        $coachings->altphone = $request->input('altphone');if($request->input('image')){
-            $coachings->imgpath = $img;
-        }
+        $coachings->altphone = $request->input('altphone');
         $coachings->specialization = $request->input('specialization');
         $coachings->address2 = ucwords(strtolower($request->input('address2')));
         $coachings->address1 = ucwords(strtolower($request->input('address1')));
