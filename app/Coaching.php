@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Coaching extends Model
 {
     protected $fillable = [
-        'name',
         'level',
+        'userid',
         'directorname',
-        'email',
         'description',
+        'eligibility',
         'phone',
         'imgpath',
         'altphone',

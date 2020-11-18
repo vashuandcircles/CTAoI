@@ -29,14 +29,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($coachings as $row)
+                        @foreach ($coachings as $key => $row)
                         <?php if (!$row->verified) { ?>
                             <tr>
                                 <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
-                                <td>{{ $row->name}}</td>
+                                <td>{{ $user[$key]->name }}</td>
                                 <td>{{ $row->directorname}}</td>
                                 <td>{{ $row->phone}} <br> {{ $row->altphone}} </td>
-                                <td>{{ $row->email}}</td>
+                                <td>{{ $user[$key]->email }}</td>
                                 <td>{{ $row->address1}} {{ $row->address2}}, {{ $row->state}}, {{ $row->city}} {{ $row->zipcode}}</td>
                                 <td>
                                 <div class="row">

@@ -12,38 +12,39 @@
             </div>
         </div>
         <div class="row">
-            @foreach ($teachers as $row)
-            <?php if ($row->verified && $row->active) { ?>
-                <div class="col-lg-3 mb-4">
-                    <div class="single_course">
-                        <div class="course_head">
-                            <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;" alt="" />
+                    @foreach ($teachers as $key => $row)
+                    <?php if ($row->verified && $row->active) { ?>
+                        <div class="single_course col-lg-4 col-sm-12 col-md-6 p-4">
+                            <div class="course_head">
+                                <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;" alt="" />
+                            </div>
+                            <div class="course_content">
+                                <h4 class="mb-4">
+                                    <a>{{ $teacheruser[$key]->name }}</a>
+                                </h4>
+                                <p>
+                                    {{ $row->description}}
+                                </p>
+                                <br>
+                                <h6>
+                                    Contact : {{ $row->phone}}
+                                </h6>
+                                <h6 style="word-wrap: break-word;">
+                                    Email : {{ $teacheruser[$key]->email }}
+                                </h6>
+                                <h6>
+                                    Expert in : {{ $row->specialization}}
+                                </h6>
+                                <h6>
+                                    Address : {{ $row->city}}, {{ $row->state}}
+                                </h6>
+                                <div class="col-12 text-center">
+                                    <a href="/teacherdetail/{{ $row->userid }}" class="mt-4 primary-btn ">Details</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="course_content">
-                            <h4 class="mb-4">
-                                <a>{{ $row->firstname}} {{ $row->lastname}}</a>
-                            </h4>
-                            <p>
-                                {{ $row->description}}
-                            </p>
-                            <br>
-                            <h6>
-                                Contact : {{ $row->phone}}
-                            </h6>
-                            <h6>
-                                Email : {{ $row->email}}
-                            </h6>
-                            <h6>
-                                Expert in : {{ $row->specialization}}
-                            </h6>
-                            <h6>
-                                Address : {{ $row->city}}, {{ $row->state}}
-                            </h6>
-                        </div>
-                    </div>
-                <?php } ?>
-                </div>
-                @endforeach
+                    <?php } ?>
+                    @endforeach
         </div>
 
         <div class="d-flex justify-content-center">

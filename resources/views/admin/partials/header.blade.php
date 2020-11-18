@@ -97,6 +97,11 @@
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>Event</span></a>
             </li>
+            <li class="nav-item {{ (request()->is('level')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('/level') }}">
+                    <i class="fas fa-fw fa-tasks"></i>
+                    <span>Levels</span></a>
+            </li>
             <li class="nav-item {{ (request()->is('emailhistory')) ? 'active' : '' }}">
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-envelope"></i>

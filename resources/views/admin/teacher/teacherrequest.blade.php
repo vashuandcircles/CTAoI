@@ -17,8 +17,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Name</th>
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Specialization</th>
@@ -29,14 +28,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($teachers as $row)
+                        @foreach ($teachers as $key => $row)
                         <?php if (!$row->verified  && $row->active) { ?>
                             <tr>
                                 <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
-                                <td>{{ $row->firstname}}</td>
-                                <td>{{ $row->lastname}}</td>
+                                <td>{{ $user[$key]->name }}</td>
                                 <td>{{ $row->phone}}, {{ $row->altphone}}</td>
-                                <td>{{ $row->email}}</td>
+                                <td>{{ $user[$key]->email }}</td>
                                 <td>{{ $row->specialization}}</td>
                                 <td>{{ $row->gender}}</td>
                                 <td>{{ $row->city}}, {{ $row->state}}</td>

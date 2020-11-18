@@ -308,13 +308,13 @@ button:focus {
 ============================================================================================ */
 .home_banner_area {
   z-index: 1;
-  min-height: 900px;
+  min-height: 700px;
   position: relative;
   background: url(../img/banner/home-banner.jpg) no-repeat center;
   background-size: cover; }
   .home_banner_area .banner_inner {
     position: absolute;
-    top: 40%;
+    top: 50%;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);

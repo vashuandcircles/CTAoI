@@ -15,17 +15,14 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->integer('userid');
             $table->string('level')->nullable();
-            $table->string('phone');
             $table->string('altphone')->nullable();
             $table->string('description')->nullable();
             $table->string('specialization')->nullable();
-            $table->string('email');
-            $table->string('city');
-            $table->string('gender');
-            $table->string('state');
+            $table->string('city')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('state')->nullable();
             $table->string('imgpath')->nullable();
             $table->boolean('verified')->default(0);
             $table->boolean('is_featured')->default(0);

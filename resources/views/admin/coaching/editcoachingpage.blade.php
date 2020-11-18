@@ -6,13 +6,13 @@
             <div class="card">
                 <div class="card-header">Edit Coaching</div>
                 <div class="card-body">
-                    <form method="POST" action="/coaching-update/{{$coachings->id}}" enctype="multipart/form-data">
+                    <form method="POST" action="/coaching-update/{{$coachings->userid}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" value="{{ $coachings->name }}" class="form-control @error('name') is-invalid @enderror" name="name" autocomplete="name" autofocus>
+                                <input id="name" type="text" value="{{ $user->name }}" class="form-control @error('name') is-invalid @enderror" name="name" autocomplete="name" autofocus>
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" value="{{ $coachings->email }}" class="form-control @error('email') is-invalid @enderror" name="email" autocomplete="email">
+                                <input id="email" type="email" value="{{ $user->email }}" class="form-control @error('email') is-invalid @enderror" name="email" autocomplete="email">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -77,8 +77,12 @@
                         <div class="form-group row">
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
 
-                            <div class="col-md-6">
-                                <input id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ $coachings->level }}" autocomplete="level">
+                            <div class="col-md-6"><select id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" autocomplete="level" autofocus>
+                                    <option value="{{ $coachings->level }}">{{ $coachings->level }}</option>
+                                    @foreach($levels as $level)
+                                    <option value="{{ $level->name }}">{{ $level->name }}</option>
+                                    @endforeach
+                                </select>
 
                                 @error('level')
                                 <span class="invalid-feedback" role="alert">

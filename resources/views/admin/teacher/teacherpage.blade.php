@@ -20,8 +20,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Name</th>
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Gender</th>
@@ -30,14 +29,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($teachers as $row)
+                        @foreach ($teachers as $key => $row)
                         <?php if ($row->verified) { ?>
                             <tr>
                                 <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
-                                <td>{{ $row->firstname}}</td>
-                                <td>{{ $row->lastname}}</td>
+                                <td>{{ $user[$key]->name }}</td>
                                 <td>{{ $row->phone}} <br> {{ $row->altphone}} </td>
-                                <td>{{ $row->email}}</td>
+                                <td>{{ $user[$key]->email }}</td>
                                 <td>{{ $row->gender}}</td>
                                 <td>{{ $row->city}}, {{ $row->state}}</td>
                                 <td>
@@ -49,8 +47,8 @@
                                                 <button type="submit" href="" class="btn btn-success m-1">Feature</button>
                                             </form>
                                         <?php } ?>
-                                        <a href="/teacher-edit/{{ $row->id }}" class="btn btn-secondary m-1">Edit</a>
-                                        <form action="/teacher-delete/{{ $row->id }}" method="POST">
+                                        <a href="/teacher-edit/{{ $user[$key]->id }}" class="btn btn-secondary m-1">Edit</a>
+                                        <form action="/teacher-delete/{{ $user[$key]->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" href="" class="btn btn-danger m-1">Delete</button>

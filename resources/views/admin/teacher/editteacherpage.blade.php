@@ -6,26 +6,14 @@
             <div class="card">
                 <div class="card-header">Edit Teacher</div>
                 <div class="card-body">
-                    <form method="POST" action="/teacher-update/{{$teachers->id}}" enctype="multipart/form-data">
+                    <form method="POST" action="/teacher-update/{{$teachers->userid}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="form-group row">
-                            <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                             <div class="col-md-6">
-                                <input id="firstname" type="text" value="{{ $teachers->firstname }}" class="form-control @error('firstname') is-invalid @enderror" name="firstname" autocomplete="firstname" autofocus>
-                                @error('firstname')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
-                            <div class="col-md-6">
-                                <input id="lastname" type="text" value="{{ $teachers->lastname }}" class="form-control @error('lastname') is-invalid @enderror" name="lastname" autocomplete="lastname" autofocus>
-                                @error('lastname')
+                                <input id="name" type="text" value="{{ $user->name }}" class="form-control @error('name') is-invalid @enderror" name="name" autocomplete="name" autofocus>
+                                @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -37,7 +25,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" value="{{ $teachers->email }}" class="form-control @error('email') is-invalid @enderror" name="email" autocomplete="email">
+                                <input id="email" type="email" value="{{ $user->email }}" class="form-control @error('email') is-invalid @enderror" name="email" autocomplete="email">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -123,8 +111,12 @@
                         <div class="form-group row">
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
 
-                            <div class="col-md-6">
-                                <input id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ $teachers->level }}" autocomplete="level">
+                            <div class="col-md-6"><select id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" autocomplete="level" autofocus>
+                                    <option value="{{ $teachers->level }}">{{ $teachers->level }}</option>
+                                    @foreach($levels as $level)
+                                    <option value="{{ $level->name }}">{{ $level->name }}</option>
+                                    @endforeach
+                                </select>
 
                                 @error('level')
                                 <span class="invalid-feedback" role="alert">

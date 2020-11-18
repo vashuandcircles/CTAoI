@@ -10,22 +10,10 @@
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
                         <div class="form-group row">
-                            <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                             <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" value="{{ old('firstname') }}" name="firstname" autocomplete="firstname" autofocus>
-                                @error('firstname')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
-                            <div class="col-md-6">
-                                <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" value="{{ old('lastname') }}" name="lastname" autocomplete="lastname" autofocus>
-                                @error('lastname')
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name" autocomplete="name" autofocus>
+                                @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -106,9 +94,13 @@
                         </div>
                         <div class="form-group row">
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
-
                             <div class="col-md-6">
-                                <input id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level') }}" autocomplete="level">
+                                <select id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" autocomplete="level" autofocus>
+                                    <option value="">Select</option>
+                                    @foreach($levels as $level)
+                                    <option value="{{ $level->name }}">{{ $level->name }}</option>
+                                    @endforeach
+                                </select>
 
                                 @error('level')
                                 <span class="invalid-feedback" role="alert">

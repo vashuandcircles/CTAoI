@@ -10,15 +10,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="banner_content text-center">
-                        <p class="text-uppercase">
-                            Connecting Students and Teachers
-                        </p>
                         <h2 class="text-uppercase mt-4 mb-5">
                             Coaching Teachers Association of India
                         </h2>
+                        <p class="text-uppercase">
+                            Free Premium Trial for 30 Days! <br>
+                            Limited Offer!!
+                        </p>
                         <div>
-                            <a href="{{url('/registercoaching')}}" class="primary-btn2 mb-3 mb-sm-0">Coaching registration</a>
-                            <a href="{{url('/registerteacher')}}" class="primary-btn ml-sm-3 ml-0">Tutor Signup</a>
+                            <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
                         </div>
                     </div>
                 </div>
@@ -26,8 +26,6 @@
         </div>
     </div>
 </section>
-<!--================ End Home Banner Area =================-->
-
 <!--================ Start Feature Area =================-->
 <section class="feature_area section_gap_top">
     <div class="container">
@@ -122,7 +120,7 @@
 </section>
 <!--================ End Feature Area =================-->
 
-<!--================ Start Popular Courses Area =================-->
+<!--================ Start Coachings  Area =================-->
 <div class="popular_courses">
     <div class="container">
         <div class="row justify-content-center">
@@ -138,7 +136,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="owl-carousel active_course">
-                    @foreach ($coachings as $row)
+                    @foreach ($coachings as $key => $row)
                     <?php if ($row->verified && $row->active && $row->is_featured) { ?>
                         <div class="single_course">
                             <div class="course_head">
@@ -146,21 +144,19 @@
                             </div>
                             <div class="course_content">
                             <h4 class="mb-3">
-                                <a>{{ $row->name}}</a>
+                                <a>{{ $user[$key]->name }}</a>
                             </h4>
                             <h6>
-                                Expert in : {{ $row->specialization}}
+                                Expert in : {{ $row['specialization'] }}
                             </h6>
-                            @if($row->level)
                             <h6>
                                 Level : {{ $row->level}}
                             </h6>
-                            @endif
                             <h6>
                                 Contact : {{ $row->phone}}
                             </h6>
                             <h6 style="word-wrap: break-word;">
-                                Email : {{ $row->email}}
+                                Email : {{ $user[$key]->email }}
                             </h6>
                             <h6>
                                 Director : {{ $row->directorname}}
@@ -168,8 +164,11 @@
                             <h6>
                                 Address : @if($row->address1 != $row->city) {{ $row->address1}}, @endif @if($row->address2) {{ $row->address2}}, @endif {{ $row->city}}, {{ $row->state}}
                             </h6>
+                            <div class="col-12 text-center">
+                                <a href="/coachingdetail/{{ $row->userid }}" class="mt-4 primary-btn ">Details</a>
+                            </div>
                         </div>
-                        </div>
+                    </div>
                     <?php } ?>
                     @endforeach
                 </div>
@@ -177,7 +176,7 @@
         </div>
     </div>
 </div>
-<!--================ End Popular Courses Area =================-->
+<!--================ End Coachings Area =================-->
 
 <!--================ Start Popular Courses Area =================-->
 <div class="popular_courses">
@@ -196,8 +195,7 @@
 
             <div class="col-lg-12">
                 <div class="owl-carousel active_course">
-
-                    @foreach ($teachers as $row)
+                    @foreach ($teachers as $key => $row)
                     <?php if ($row->verified && $row->active && $row->is_featured) { ?>
                         <div class="single_course">
                             <div class="course_head">
@@ -205,7 +203,7 @@
                             </div>
                             <div class="course_content">
                                 <h4 class="mb-4">
-                                    <a href="course-details.html">{{ $row->firstname}} {{ $row->lastname}}</a>
+                                    <a>{{ $teacheruser[$key]->name }}</a>
                                 </h4>
                                 <p>
                                     {{ $row->description}}
@@ -214,8 +212,8 @@
                                 <h6>
                                     Contact : {{ $row->phone}}
                                 </h6>
-                                <h6>
-                                    Email : {{ $row->email}}
+                                <h6 style="word-wrap: break-word;">
+                                    Email : {{ $teacheruser[$key]->email }}
                                 </h6>
                                 <h6>
                                     Expert in : {{ $row->specialization}}
@@ -223,6 +221,9 @@
                                 <h6>
                                     Address : {{ $row->city}}, {{ $row->state}}
                                 </h6>
+                                <div class="col-12 text-center">
+                                    <a href="/teacherdetail/{{ $row->userid }}" class="mt-4 primary-btn ">Details</a>
+                                </div>
                             </div>
                         </div>
                     <?php } ?>
@@ -396,6 +397,7 @@
 <!--================ End Trainers Area =================-->
 
 <!-- ================ Start Events Area ================= -->
+@if($eventcount)
 <div class="events_area">
     <div class="container">
         <div class="row justify-content-center">
@@ -468,6 +470,7 @@
         </div>
     </div>
 </div>
+@endif
 <!--================ End Events Area =================-->
 
 <!--================ Start Testimonial Area =================-->

@@ -15,20 +15,19 @@ class CreateCoachingsTable extends Migration
     {
         Schema::create('coachings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('directorname');
+            $table->integer('userid');
+            $table->string('directorname')->nullable();
             $table->string('level')->nullable();
-            $table->string('phone');
             $table->string('altphone')->nullable();
             $table->string('description')->nullable();
+            $table->string('eligibility')->nullable();
             $table->string('specialization')->nullable();
-            $table->string('email');
-            $table->string('address1');
+            $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            $table->string('city');
-            $table->string('state');
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
             $table->string('landmark')->nullable();
-            $table->string('imgpath');
+            $table->string('imgpath')->nullable();
             $table->boolean('verified')->default(0);
             $table->boolean('is_featured')->default(0);
             $table->boolean('active')->default(1);
