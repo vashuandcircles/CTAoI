@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth;
 
 // Auth::routes();
 Auth::routes(['verify' => true]);
-
 Route::get('/', 'PageController@index');
 Route::get('/welcome', 'PageController@welcome');
 Route::post('/subscribe', 'PageController@subscribe');
