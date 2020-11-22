@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 // Auth::routes();
 Auth::routes(['verify' => true]);
@@ -27,8 +27,11 @@ Route::get('/teacherdetail/{id}', 'PageController@teacherDetail');
 Route::get('payment-razorpay', 'PaymentController@create')->name('paywithrazorpay');
 Route::post('payment', 'PaymentController@payment')->name('payment');
 
-Route::group(['middleware' => ['auth', ]], function () {
-
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'dashboard'], function () {
+        Route::resource('coachings', 'CoachingController');
+        Route::put('feature/{id}', 'CoachingController@feature')->name('coachings.feature');
+    });
     Route::get('/coachingdashboard', 'UserController@coachingDashboard')->name('coachingdashboard');
     Route::get('/editcoaching', 'UserController@editCoaching')->name('editcoaching');
     Route::post('/coachingupdate', 'UserController@updateCoaching')->name('coachingupdate');
@@ -99,3 +102,11 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
     Route::put('/coaching-unfeature/{id}', 'HomeController@unfeatureCoaching');
 });
 
+Route::get('laravel-logs', function () {
+    if (\Illuminate\Support\Facades\Auth::user()->isSuper()) {
+        $controller = new \Rap2hpoutre\LaravelLogViewer\LogViewerController();
+        return $controller->index();
+    } else {
+        abort(404);
+    }
+})->name('laravel.logs')->middleware('auth');

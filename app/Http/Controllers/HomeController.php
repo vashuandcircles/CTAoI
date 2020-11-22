@@ -50,7 +50,7 @@ class HomeController extends Controller
             'endtime' => 'required|max:255|email',
             'smalldesc' => 'required|max:6|min:3',
             'priority' => 'required|regex:/[0-9]{10}/',
-            'image' => 'required|mimes:jpeg,jpg,png', 
+            'image' => 'required|mimes:jpeg,jpg,png',
         ]);
         $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         Event::create([
@@ -247,7 +247,7 @@ class HomeController extends Controller
             'state' => 'required|max:255|min:3',
             'city' => 'required|min:4',
         ]);
-        
+
         if(($request->input('image')) != null){
             $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
             $data->imgpath = $img;

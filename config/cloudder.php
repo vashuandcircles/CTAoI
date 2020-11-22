@@ -13,11 +13,11 @@ return [
     */
 
     'cloudName'  => env('CLOUDINARY_CLOUD_NAME'),
-    'baseUrl'    => 'http://res.cloudinary.com/vashu',
-    'secureUrl'  => 'https://res.cloudinary.com/vashu',
-    'apiBaseUrl' => 'https://api.cloudinary.com/v1_1/vashu',
-    'apiKey'     => '834731939163338',
-    'apiSecret'  => 'X8FIVXYqEc2I4-ZU50bfGGUtWeI',
+    'baseUrl'    => env('CLOUDINARY_BASE_URL', 'http://res.cloudinary.com/'.env('CLOUDINARY_CLOUD_NAME')),
+    'secureUrl'  => env('CLOUDINARY_SECURE_URL', 'https://res.cloudinary.com/'.env('CLOUDINARY_CLOUD_NAME')),
+    'apiBaseUrl' => env('CLOUDINARY_API_BASE_URL', 'https://api.cloudinary.com/v1_1/'.env('CLOUDINARY_CLOUD_NAME')),
+    'apiKey'     => env('CLOUDINARY_API_KEY'),
+    'apiSecret'  => env('CLOUDINARY_API_SECRET'),
 
     'scaling'    => [
         'format' => 'png',

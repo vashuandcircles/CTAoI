@@ -10,7 +10,7 @@
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right required">{{ __('Name') }}</label>
                                 <div class="col-md-6">
                                     <input id="name" type="text" placeholder="Enter Name"
                                            class="form-control @error('name') is-invalid @enderror" name="name"
@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="phone"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                                       class="col-md-4 col-form-label text-md-right required" >{{ __('Phone') }}</label>
                                 <div class="col-md-6">
                                     <input id="phone" type="tel" placeholder="Enter Phone Number"
                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
+                                <label for="type" class="col-md-4 col-form-label text-md-right required">{{ __('Type') }}</label>
                                 <div class="col-md-6">
                                     <select id="type" type="text"
                                             class="form-control @error('type') is-invalid @enderror" name="type"
@@ -59,7 +59,7 @@
 
                             <div class="form-group row">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                       class="col-md-4 col-form-label text-md-right required">{{ __('E-Mail Address') }}</label>
                                 <div class="col-md-6">
                                     <input id="email" type="email" placeholder="Enter Email Address"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
@@ -74,7 +74,7 @@
 
                             <div class="form-group row">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right required">{{ __('Password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" placeholder="Enter Password"
@@ -91,7 +91,7 @@
 
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right required">{{ __('Confirm Password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" placeholder="Enter Confirmation Password"
@@ -114,3 +114,13 @@
     </div>
 </div>
 @include('partials.footer')
+<style>
+    .required:after {
+        content:" *";
+        color: red;
+    }
+    .required
+    {
+        color: red;
+    }
+</style>
