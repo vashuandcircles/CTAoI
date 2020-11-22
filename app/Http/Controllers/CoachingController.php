@@ -19,15 +19,11 @@ use JD\Cloudder\Facades\Cloudder;
 
 class CoachingController extends Controller
 {
-    /**
-     * @var string
-     */
-    protected $viewPath = 'coaching';
+
     /**
      * @var CoachingRepository
      */
     private $repo;
-
 
     public function __construct(\App\Entities\Coaching $coaching)
     {
@@ -92,7 +88,7 @@ class CoachingController extends Controller
             return redirect()->route('coachings.index')->with('status', 'Coaching created successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error($exception->getMessage());
+            Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->route('coachings.index')->with('status', 'Failed to create coaching.');
 
         }
@@ -123,7 +119,7 @@ class CoachingController extends Controller
             return redirect()->route('coachings.index')->with('status', 'Coaching Updated Successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error($exception->getMessage());
+            Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->route('coachings.index')->with('status', 'Failed to update Data');
 
         }
