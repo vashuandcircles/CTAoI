@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\place;
-use App\Query;
-use App\Subscription;
-use Illuminate\Http\Request;
-use App\Teacher;
 use App\Coaching;
 use App\Courses;
 use App\Event;
 use App\Level;
+use App\place;
+use App\Query;
 use App\Student;
+use App\Subscription;
+use App\Teacher;
 use App\User;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -26,30 +26,40 @@ class PageController extends Controller
         $teachers = Teacher::all();
         return view('index', compact('user', 'teachers', 'coachings', 'teacheruser', 'eventcount', 'event'));
     }
+
     public function welcome()
     {
         return view('welcome');
     }
-    public function coachings()
+
+    public function coachings(Request $request)
     {
-        $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(20);
-        $coachings = Coaching::orderBy('userid', 'desc')->paginate(20);
+        $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(3);
+        $coachings = Coaching::orderBy('userid', 'desc')->paginate(3);
+        if ($request->ajax()) {
+            $view = view('data')->with(compact('user', 'coachings'))->render();
+            return response()->json(['html' => $view]);
+        }
         return view('coachings', compact('coachings', 'user'));
     }
+
     public function teachers()
     {
         $teacheruser = User::where('type', 0)->orderBy('id', 'desc')->paginate(20);
         $teachers = Teacher::orderBy('userid', 'desc')->paginate(20);
         return view('teachers', compact('teachers', 'teacheruser'));
     }
+
     public function contact()
     {
         return view('contact');
     }
+
     public function about()
     {
         return view('about');
     }
+
     public function coachingDetail(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -57,6 +67,7 @@ class PageController extends Controller
         $course = Courses::where('userid', $id)->get();
         return view('coachingdetail', compact('user', 'data', 'course'));
     }
+
     public function teacherDetail(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -64,34 +75,40 @@ class PageController extends Controller
         $course = Courses::where('userid', $id)->get();
         return view('teacherdetail', compact('user', 'data', 'course'));
     }
+
     public function coachingRegister()
     {
         $level = Level::all();
         $places = place::all();
         return view('coachingregister', compact('places', 'level'));
     }
+
     public function featureCoachings()
     {
         $places = place::all();
         return view('coachingregister', compact('places'));
     }
+
     public function teacherRegister()
     {
         $level = Level::all();
         $places = place::all();
         return view('teacherregister', compact('places', 'level'));
     }
+
     public function featureTeachers()
     {
         $places = place::all();
         return view('teacherregister', compact('places'));
     }
+
     public function studentRegister()
     {
         $level = Level::all();
         $places = place::all();
         return view('studentregister', compact('places', 'level'));
     }
+
     public function subscribe(Request $request)
     {
         $request->validate([
@@ -102,6 +119,7 @@ class PageController extends Controller
         ]);
         return redirect('/')->with('status', 'Subscribed Successfully');
     }
+
     public function sendQuery(Request $request)
     {
         $request->validate([
@@ -120,6 +138,7 @@ class PageController extends Controller
         ]);
         return redirect('/contact')->with('status', 'Query has been sent successfully');
     }
+
     public function addCoachingUser(Request $request)
     {
         $request->validate([
@@ -142,8 +161,8 @@ class PageController extends Controller
             'email' => mb_strtolower($request->email),
             'password' => bcrypt($request->password),
             'type' => 1,
-            ]);
-            $secondaryid = $user->id;
+        ]);
+        $secondaryid = $user->id;
         $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         Coaching::create([
             'name' => ucwords(strtolower($request->name)),
@@ -163,6 +182,7 @@ class PageController extends Controller
         ]);
         return redirect('/welcome')->with('status', 'Coaching created successfully');
     }
+
     public function addTeacherUser(Request $request)
     {
         $request->validate([
@@ -198,6 +218,7 @@ class PageController extends Controller
         ]);
         return redirect('/welcome')->with('status', 'Teacher submitted successfully');
     }
+
     public function addStudentUser(Request $request)
     {
         $request->validate([
