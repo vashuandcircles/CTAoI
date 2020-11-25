@@ -15,7 +15,7 @@
                 <div class="col-lg-6">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title">How to Pay via UPI</h3>
+                                <h3 class="widget_title">Pay via UPI</h3>
                                 <div class="media post_item">
                                     Step 1:
                                     <div class="media-body">
@@ -46,7 +46,7 @@
                                 <div class="br"></div>
                             </aside>
                             <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title">How to Pay via Bank Transfer</h3>
+                                <h3 class="widget_title">Pay via NEFT/IMPS</h3>
                                 <div class="media post_item">
                                     Step 2:
                                     <div class="media-body">

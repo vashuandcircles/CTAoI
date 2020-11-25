@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,40 +41,7 @@
             </li>
             
             @if($data->is_featured != '1')
-            <a href="{{ url('/payment) }}" class="m-3 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-star fa-sm text-white-50"></i> Upgrade to Pro</a>
-            @endif
-            @if($data->is_featured == '1')
-
-            <!-- Divider -->
-            <!-- <hr class="sidebar-divider"> -->
-
-            <!-- Heading -->
-            <!-- <div class="sidebar-heading">
-                Interface
-            </div> -->
-
-            <!-- Nav Item - Pages Collapse Menu -->
-
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-star"></i>
-                    <span>Students Enrolled</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-chalkboard-teacher"></i>
-                    <span>Add Classes</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Join Classes</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Payments Recieved</span></a>
-            </li> -->
+            <a href="{{ url('/payment') }}" class="m-3 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-star fa-sm text-white-50"></i> Upgrade to Pro</a>
             @endif
             <hr class="sidebar-divider d-none d-md-block">
 
