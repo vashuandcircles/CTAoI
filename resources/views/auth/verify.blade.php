@@ -1,7 +1,6 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
+@include('partials.header')
+<div style="background: url(../img/banner/register.jpg) no-repeat center; background-size: cover;">
+<div class="container" style="padding-top: 120px; height: 80vh;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -18,11 +17,11 @@
                     {{ __('If you did not receive the email') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                        <button type="submit" class="primary-btn pl-2 pr-2 mt-2 align-baseline">{{ __('click here to request another') }}</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+@include('partials.footer')

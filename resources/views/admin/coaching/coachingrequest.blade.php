@@ -32,20 +32,20 @@
                         @foreach ($coachings as $key => $row)
                         <?php if (!$row->verified) { ?>
                             <tr>
-                                <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
+                                <td><img src="@if($row->imgpath != NULL){{ $row->imgpath}}@else ../img/elements/no-image.png  @endif" style="width: 50px; height: 75px; object-fit: cover;"> </td>
                                 <td>{{ $user[$key]->name }}</td>
                                 <td>{{ $row->directorname}}</td>
-                                <td>{{ $row->phone}} <br> {{ $row->altphone}} </td>
+                                <td>{{ $user[$key]->phone }} <br> {{ $row->altphone}} </td>
                                 <td>{{ $user[$key]->email }}</td>
                                 <td>{{ $row->address1}} {{ $row->address2}}, {{ $row->state}}, {{ $row->city}} {{ $row->zipcode}}</td>
                                 <td>
                                 <div class="row">
-                                        <form action="/coaching-accept/{{ $row->id }}" method="POST">
+                                        <form action="/coaching-accept/{{ $row->userid }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('PUT') }}
                                             <button type="submit" href="" class="btn btn-success m-1">Accept</button>
                                         </form>
-                                        <form action="/coaching-delete/{{ $row->id }}" method="POST">
+                                        <form action="/coaching-delete/{{ $row->userid }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" href="" class="btn btn-danger m-1">Decline</button>

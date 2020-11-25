@@ -4,28 +4,48 @@
     {{ session('status') }}
 </div>
 @endif
-<section class="home_banner_area">
-    <div class="banner_inner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="banner_content text-center">
-                        <h2 class="text-uppercase mt-4 mb-5">
-                            Coaching Teachers Association of India
-                        </h2>
-                        <p class="text-uppercase">
-                            Free Premium Trial for 30 Days! <br>
-                            Limited Offer!!
-                        </p>
-                        <div>
-                            <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../img/banner/banner1.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
+      <div class="carousel-caption">
+        <h5 style="color: #FFFFFF;">As an Institution</h5>
+        <p>You will find the large set of teachers and students.</p>
+        <div>
+            <a href="{{url('/register')}}" class="primary-btn mb-3">Free Registration</a>
         </div>
+      </div>
     </div>
-</section>
+    <div class="carousel-item">
+      <img src="../img/banner/banner2.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
+      <div class="carousel-caption">
+        <h5>As a Teacher</h5>
+        <p style="color: #002347;">You we get chance to connect with students and institutions.</p>
+        <div>
+            <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="../img/banner/banner3.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
+      <div class="carousel-caption">
+        <h5>As a Student</h5>
+        <p style="color: #002347;">You will choose from wide range of teachers and institutions.</p>
+        <div>
+            <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselFade" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselFade" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 <!--================ Start Feature Area =================-->
 <section class="feature_area section_gap_top">
     <div class="container">
@@ -119,7 +139,7 @@
     </div>
 </section>
 <!--================ End Feature Area =================-->
-
+@if($coachingscount)
 <!--================ Start Coachings  Area =================-->
 <div class="popular_courses">
     <div class="container">
@@ -138,30 +158,30 @@
                 <div class="owl-carousel active_course">
                     @foreach ($coachings as $key => $row)
                     <?php if ($row->verified && $row->active && $row->is_featured) { ?>
-                        <div class="single_course">
+                        <div class="single_course" style="height: 750px;">
                             <div class="course_head">
                                 <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;" alt="" />
                             </div>
                             <div class="course_content">
-                            <h4 class="mb-3">
+                            <h4 class="mb-3" style="height: 40px;">
                                 <a>{{ $user[$key]->name }}</a>
                             </h4>
-                            <h6>
+                            <h6 style="height: 30px;">
                                 Expert in : {{ $row['specialization'] }}
                             </h6>
-                            <h6>
+                            <h6 style="height: 30px;">
                                 Level : {{ $row->level}}
                             </h6>
-                            <h6>
+                            <h6 style="height: 30px;">
                                 Contact : {{ $row->phone}}
                             </h6>
-                            <h6 style="word-wrap: break-word;">
+                            <h6 style="height: 30px; word-wrap: break-word;">
                                 Email : {{ $user[$key]->email }}
                             </h6>
-                            <h6>
+                            <h6 style="height: 30px;">
                                 Director : {{ $row->directorname}}
                             </h6>
-                            <h6>
+                            <h6 style="height: 70px;">
                                 Address : @if($row->address1 != $row->city) {{ $row->address1}}, @endif @if($row->address2) {{ $row->address2}}, @endif {{ $row->city}}, {{ $row->state}}
                             </h6>
                             <div class="col-12 text-center">
@@ -177,7 +197,8 @@
     </div>
 </div>
 <!--================ End Coachings Area =================-->
-
+@endif
+@if($teacherscount)
 <!--================ Start Popular Courses Area =================-->
 <div class="popular_courses">
     <div class="container">
@@ -234,7 +255,7 @@
     </div>
 </div>
 <!--================ End Popular Courses Area =================-->
-
+@endif
 <!--================ Start Registration Area =================-->
 <!-- <div class="section_gap registration_area">
     <div class="container">

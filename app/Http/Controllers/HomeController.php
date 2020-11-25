@@ -148,7 +148,7 @@ class HomeController extends Controller
             'password' => 'required|confirmed',
             'email' => 'required|unique:users|max:255|email',
             'gender' => 'required|max:6|min:3',
-            'phone' => 'required|regex:/[0-9]{10}/',
+            'phone' => 'required|regex:/[0-9]{10}/|unique:users',
             'specialization' => 'required|max:255|min:3',
             'image' => 'required|mimes:jpeg,jpg,png',
             'level' => 'required|max:255',
@@ -183,14 +183,14 @@ class HomeController extends Controller
             'name' => 'max:255|min:3',
             'directorname' => 'max:255|min:2',
             'email' => 'unique:users|max:255|email',
-            'phone' => 'regex:/[0-9]{10}/',
+            'phone' => 'regex:/[0-9]{10}/|unique:users',
             'specialization' => 'max:255|min:3',
             'state' => 'max:255|min:4',
-            // 'landmark' => 'max:255|min:4',
+            'landmark' => 'max:255|min:4',
             'level' => 'max:255',
-            // 'image' => 'mimes:jpeg,jpg,png',
+            'image' => 'required|mimes:jpeg,jpg,png',
             'address1' => 'max:255|min:4',
-            // 'address2' => 'max:255|min:4',
+            'address2' => 'max:255|min:4',
             'city' => 'min:4',
         ]);
         $user = User::create([
@@ -240,9 +240,9 @@ class HomeController extends Controller
         $data = Teacher::where('userid', $id)->first();
         $request->validate([
             'name' => 'required|max:255|min:3',
-            'email' => 'required|max:255|email',
+            'email' => 'required|max:255|email|unique:users',
             'gender' => 'required|max:6|min:3',
-            'phone' => 'required|regex:/[0-9]{10}/',
+            'phone' => 'required|regex:/[0-9]{10}/|unique:users',
             'image' => 'required|mimes:jpeg,jpg',
             'state' => 'required|max:255|min:3',
             'city' => 'required|min:4',
@@ -272,10 +272,10 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required|max:255|min:3',
             'directorname' => 'required|max:255|min:2',
-            'email' => 'required|max:255|email',
+            'email' => 'required|max:255|email|unique:users',
             'phone' => 'required|regex:/[0-9]{10}/',
             'image' => 'mimes:jpeg,jpg',
-            'specialization' => 'required|max:255|min:3',
+            'specialization' => 'required|max:255|min:3|unique:users',
             'address1' => 'required|max:255|min:4',
             'state' => 'required|max:255|min:4',
             'city' => 'required|min:4',
@@ -288,7 +288,7 @@ class HomeController extends Controller
         $data->email = mb_strtolower($request->input('email'));
         $coachings->directorname = ucwords(strtolower($request->input('directorname')));
         $coachings->description = ucwords(strtolower($request->input('description')));
-        $coachings->phone = $request->input('phone');
+        $data->phone = $request->input('phone');
         $coachings->altphone = $request->input('altphone');
         $coachings->specialization = $request->input('specialization');
         $coachings->address2 = ucwords(strtolower($request->input('address2')));
@@ -301,15 +301,21 @@ class HomeController extends Controller
     }
     public function deleteTeacher(Request $request, $id)
     {
-        $teachers = Teacher::findOrFail($id);
+        $user = User::findOrFail($id);
+        $teachers = Teacher::where('userid', $id)->first();
+        $user->delete();
         $teachers->delete();
-        return redirect('/teacher-page')->with('status', 'Your data is deleted successfully');
+        return back()->with('status', 'Your data is deleted successfully');
     }
     public function deleteCoaching(Request $request, $id)
     {
-        $coachings = Coaching::findOrFail($id);
+        $user = User::findOrFail($id);
+        $coachings = Coaching::where('userid', $id)->first();
+        dd($user);
+        dd($coachings);
         $coachings->delete();
-        return redirect('/coaching-page')->with('status', 'Your data is deleted successfully');
+        $user->delete();
+        return back()->with('status', 'Your data is deleted successfully');
     }
     public function featureTeacher(Request $request, $id)
     {
@@ -352,9 +358,6 @@ class HomeController extends Controller
     public function acceptTeacher(Request $request, $id)
     {
         $teachers = Teacher::findOrFail($id);
-        // $data = ['name' => $teachers->firstname];
-        // $tomail = $teachers->email;
-        // Mail::to($tomail)->send(new ApprovedMail($data));
         $teachers->verified = 1;
         $teachers->update();
         return redirect('/teacher-request')->with('status', 'Teacher is verified now');
@@ -362,9 +365,6 @@ class HomeController extends Controller
     public function acceptCoaching(Request $request, $id)
     {
         $coachings = Coaching::findOrFail($id);
-        // $tomail = $coachings->email;
-        // $data = ['name' => $coachings->name];
-        // Mail::to($tomail)->send(new ApprovedMail($data));
         $coachings->verified = 1;
         $coachings->update();
         $data = $coachings->directorname;

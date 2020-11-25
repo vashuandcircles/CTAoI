@@ -13,9 +13,9 @@
         </div>
         <div class="row">
                     @foreach ($teachers as $key => $row)
-                    <?php if ($row->verified && $row->active) { ?>
+                    <?php if ($row->verified && $row->active && $row->imgpath && $row->city) { ?>
                         <div class="single_course col-lg-4 col-sm-12 col-md-6 p-4">
-                            <div class="course_head">
+                            <div class="course_head text-center">
                                 <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;" alt="" />
                             </div>
                             <div class="course_content">

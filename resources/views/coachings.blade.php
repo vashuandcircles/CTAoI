@@ -14,18 +14,18 @@
         <div class="row">
                 @foreach ($coachings as $key => $row)
                     <?php if ($row->verified && $row->active) { ?>
-                        <div class="single_course col-lg-4 col-sm-12 col-md-6 p-4">
-                            <div class="course_head">
+                        <div class="single_course col-lg-4 col-sm-12 col-md-6 p-4" style="height: 750px;">
+                            <div class="course_head text-center">
                                 <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;" alt="" />
                             </div>
-                            <div class="course_content">
-                            <h4 class="mb-3">
+                            <div class="course_content" style="height: 325px; width: 100%;">
+                            <h4 class="mb-3" style="height: 40px;">
                                 <a>@if($row->is_featured) {{ $user[$key]->name }} @endif</a>
                             </h4>
-                            <h6>
+                            <h6 style="height: 30px;">
                                 Expert in : {{ $row['specialization'] }}
                             </h6>
-                            <h6>
+                            <h6 style="height: 30px;">
                             <?php 
                             $newphone = $user[$key]->phone;
                             if(!$row->is_featured) {
@@ -35,7 +35,7 @@
                              ?>
                                 Contact : {{ $newphone }}
                             </h6>
-                            <h6 style="word-wrap: break-word;">
+                            <h6 style="height: 30px; word-wrap: break-word;">
                             <?php 
                             $newemail = $user[$key]->email;
                             if(!$row->is_featured) {
@@ -45,10 +45,10 @@
                              ?>
                                 Email : {{ $newemail }}
                             </h6>
-                            <h6>
+                            <h6 style="height: 30px;">
                                 Director : {{ $row->directorname}}
                             </h6>
-                            <h6>
+                            <h6 style="height: 70px;">
                                 Address : @if($row->address1 != $row->city) {{ $row->address1}}, @endif @if($row->address2) {{ $row->address2}}, @endif {{ $row->city}}, {{ $row->state}}
                             </h6>
                             @if($row->is_featured) 

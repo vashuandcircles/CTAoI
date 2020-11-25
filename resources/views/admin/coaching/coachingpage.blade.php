@@ -58,6 +58,31 @@
                                 </div>
                             </td>
                         </tr>
+                            <tr>
+                                <td><img src="@if($row->imgpath != NULL){{ $row->imgpath}}@else ../img/elements/no-image.png  @endif" style="width: 50px; height: 75px; object-fit: cover;"> </td>
+                                <td>{{ $user[$key]->name }}</td>
+                                <td>{{ $row->directorname}}</td>
+                                <td>{{ $user[$key]->phone }} <br> {{ $row->altphone}} </td>
+                                <td>{{ $user[$key]->email }}</td>
+                                <td>{{ $row->address1}} {{ $row->address2}}, {{ $row->state}}, {{ $row->city}} {{ $row->zipcode}}</td>
+                                <td>
+                                    <div class="row">
+                                        <?php if (!$row->is_featured) { ?>
+                                            <form action="/coaching-feature/{{ $row->userid }}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+                                                <button type="submit" href="" class="btn btn-success m-1">Feature</button>
+                                            </form>
+                                        <?php } ?>
+                                        <a href="/coaching-edit/{{ $row->userid }}" class="btn btn-secondary m-1">Edit</a>
+                                        <form action="/coaching-delete/{{ $row->userid }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
                         <?php } ?>
                     @endforeach
                     </tbody>
