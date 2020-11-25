@@ -41,6 +41,10 @@ class PageController extends Controller
     {
         return view('contact');
     }
+    public function payment()
+    {
+        return view('payment');
+    }
     public function about()
     {
         return view('about');

@@ -18,7 +18,8 @@ Route::get('/coachingdetail/{id}', 'PageController@coachingDetail');
 Route::get('/teacherdetail/{id}', 'PageController@teacherDetail');
 
 Route::group(['middleware' => ['auth', ]], function () {
-
+    
+    Route::get('/payment', 'PageController@payment')->name('payment');
     Route::get('/coachingdashboard', 'UserController@coachingDashboard')->name('coachingdashboard');
     Route::get('/editcoaching', 'UserController@editCoaching')->name('editcoaching');
     Route::post('/coachingupdate', 'UserController@updateCoaching')->name('coachingupdate');
