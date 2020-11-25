@@ -79,7 +79,8 @@ class UserController extends Controller
         $id = Auth::id();
         $user = User::findOrFail($id);
         $data = Coaching::where('userid', $id)->first();
-        return view('coaching.editcoaching', compact('user', 'data'));
+        $levels = Level::all();
+        return view('coaching.editcoaching', compact('user', 'data', 'levels'));
     }
     public function editTeacher()
     {
@@ -107,14 +108,19 @@ class UserController extends Controller
             'level' => 'required',
             'address1' => 'required|max:255',
             'address2' => 'required|max:255',
+            'image' => 'required',
             'directorname' => 'required|max:255',
             'landmark' => 'required|max:255',
             'city' => 'required|max:255',
             'state' => 'required|max:255',
         ]);
+        if(($request->input('image')) != null){
+            $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+            $data->imgpath = $img;
+        }
         $user->name = $request->input('name');
+        $user->phone = $request->input('phone');
         $user->update();
-        $data->phone = $request->input('phone');
         $data->altphone = $request->input('altphone');
         $data->directorname = $request->input('directorname');
         $data->level = $request->input('level');
@@ -137,7 +143,7 @@ class UserController extends Controller
             'name' => 'required|max:255|min:3',
             'gender' => 'required|max:6|min:3',
             'phone' => 'required|regex:/[0-9]{10}/',
-            'image' => 'mimes:jpeg,jpg',
+            'image' => 'required',
             'specialization' => 'required|max:255|min:3',
             'level' => 'required',
             'state' => 'required|max:255|min:3',
@@ -148,8 +154,8 @@ class UserController extends Controller
             $data->imgpath = $img;
         }
         $user->name = $request->input('name');
+        $user->phone = $request->input('phone');
         $user->update();
-        $data->phone = $request->input('phone');
         $data->altphone = $request->input('altphone');
         $data->level = $request->input('level');
         $data->specialization = $request->input('specialization');
@@ -190,8 +196,8 @@ class UserController extends Controller
             'state' => 'required|max:255',
         ]);
         $user->name = $request->input('name');
+        $user->phone = $request->input('phone');
         $user->update();
-        $data->phone = $request->input('phone');
         $data->level = $request->input('level');
         $data->description = $request->input('description');
         $data->city = $request->input('city');

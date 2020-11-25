@@ -54,7 +54,7 @@
                     {{ method_field('POST') }}
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <input id="name" type="text" placeholder="Enter Your Name" style="font-size: 12px;" class="form-control @error('name') is-invalid @enderror" name="name" autocomplete="name" autofocus>
+                            <input id="name" type="text" value="{{ old('name') }}" placeholder="Enter Your Name" style="font-size: 12px;" class="form-control @error('name') is-invalid @enderror" name="name" autocomplete="name" autofocus>
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <input id="phone" type="text" placeholder="Enter Your Mobile No." style="font-size: 12px;" class="form-control @error('phone') is-invalid @enderror" name="phone" autocomplete="phone" autofocus>
+                            <input id="phone" type="tel" pattern="^\d{10}$" value="{{ old('phone') }}" placeholder="Enter Your Mobile No." style="font-size: 12px;" class="form-control @error('phone') is-invalid @enderror" name="phone" autocomplete="phone" autofocus>
                             @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -73,7 +73,7 @@
 
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <input id="email" type="email" placeholder="Enter Your Email Id" style="font-size: 12px;" class="form-control @error('email') is-invalid @enderror" name="email" autocomplete="email">
+                            <input id="email" type="email" value="{{ old('email') }}" placeholder="Enter Your Email Id" style="font-size: 12px;" class="form-control @error('email') is-invalid @enderror" name="email" autocomplete="email">
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
 
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <input id="subject" type="text" placeholder="Enter Subject" style="font-size: 12px;" class="form-control @error('subject') is-invalid @enderror" name="subject" autocomplete="subject">
+                            <input id="subject" type="text" value="{{ old('subject') }}" placeholder="Enter Subject" style="font-size: 12px;" class="form-control @error('subject') is-invalid @enderror" name="subject" autocomplete="subject">
 
                             @error('subject')
                             <span class="invalid-feedback" role="alert">

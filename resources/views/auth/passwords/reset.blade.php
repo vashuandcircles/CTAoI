@@ -1,7 +1,6 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
+@include('partials.header')
+<div style="background: url(../img/banner/register.jpg) no-repeat center; background-size: cover;">
+<div class="container" style="padding-top: 120px; height: 80vh;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -51,7 +50,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="primary-btn2">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
@@ -62,4 +61,4 @@
         </div>
     </div>
 </div>
-@endsection
+@include('partials.footer')

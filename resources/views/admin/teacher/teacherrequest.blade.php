@@ -33,7 +33,7 @@
                             <tr>
                                 <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
                                 <td>{{ $user[$key]->name }}</td>
-                                <td>{{ $row->phone}}, {{ $row->altphone}}</td>
+                                <td>{{ $user[$key]->phone }}, {{ $row->altphone}}</td>
                                 <td>{{ $user[$key]->email }}</td>
                                 <td>{{ $row->specialization}}</td>
                                 <td>{{ $row->gender}}</td>
@@ -41,12 +41,12 @@
                                 <td>{{ $row->description}}</td>
                                 <td>
                                     <div class="row">
-                                        <form action="/teacher-accept/{{ $row->id }}" method="POST">
+                                        <form action="/teacher-accept/{{ $row->userid }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('PUT') }}
                                             <button type="submit" href="" class="btn btn-success m-1">Accept</button>
                                         </form>
-                                        <form action="/teacher-delete/{{ $row->id }}" method="POST">
+                                        <form action="/teacher-delete/{{ $row->userid }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" href="" class="btn btn-danger m-1">Decline</button>

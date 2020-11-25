@@ -41,59 +41,58 @@
                 <div class="col-lg-4 right-contents">
                     <ul>
                         <li>
-                            <a class="justify-content-between d-flex" href="">
-                                <p>Coaching Name</p>
+                            <a class="justify-content-between" href="">
                                 <span class="or">{{ $user->name }}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Director’s Name</p>
-                                <span>{{ $data->directorname }}</span>
+                                <span style="text-align: right;"> {{ $data->directorname }}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Level </p>
-                                <span>{{ $data->level }}</span>
+                                <span style="text-align: right;">{{ $data->level }}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Email </p>
-                                <span>{{ $user->email }}</span>
+                                <span style="text-align: right;">{{ $user->email }}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Specialization </p>
-                                <span>{{ $data->specialization }}</span>
+                                <span style="text-align: right;">{{ $data->specialization }}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Phone </p>
-                                <span> +91 {{ $user->phone }}</span>
+                                <span style="text-align: right;"> +91 {{ $user->phone }}</span>
                             </a>
                         </li>
                         @if($data->altphone)
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Alternative Phone </p>
-                                <span>{{ $data->altphone }}</span>
+                                <span style="text-align: right;">{{ $data->altphone }}</span>
                             </a>
                         </li>
                         @endif
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>City & State</p>
-                                <span>{{ $data->city }}, {{ $data->state }}</span>
+                                <span style="text-align: right;">{{ $data->city }}, {{ $data->state }}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Landmark </p>
-                                <span>{{ $data->landmark }}</span>
+                                <span style="text-align: right;">{{ $data->landmark }}</span>
                             </a>
                         </li>
                     </ul>

@@ -32,12 +32,12 @@
                         @foreach ($teachers as $key => $row)
                         <?php if ($row->verified) { ?>
                             <tr>
-                                <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
+                                <td><img src="@if($row->imgpath != NULL){{ $row->imgpath}}@else ../img/elements/no-image.png  @endif" style="width: 50px; height: 75px; object-fit: cover;"> </td>
                                 <td>{{ $user[$key]->name }}</td>
-                                <td>{{ $row->phone}} <br> {{ $row->altphone}} </td>
+                                <td>{{ $user[$key]->phone }} <br> {{ $row->altphone}} </td>
                                 <td>{{ $user[$key]->email }}</td>
                                 <td>{{ $row->gender}}</td>
-                                <td>{{ $row->city}}, {{ $row->state}}</td>
+                                <td>{{ $row->city}} @if($row->state != NULL) , @endif {{ $row->state}}</td>
                                 <td>
                                     <div class="row">
                                         <?php if (!$row->is_featured) { ?>

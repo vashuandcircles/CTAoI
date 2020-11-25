@@ -252,7 +252,7 @@
                                 <button type="submit" id="create" class="btn btn-primary">
                                     Create
                                 </button>
-                                <a href="{{ url('/adminrole-register') }}" class="btn btn-danger text-white">
+                                <a href="{{ url('/coaching-page') }}" class="btn btn-danger text-white">
                                     Cancel
                                 </a>
                             </div>
