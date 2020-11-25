@@ -1,6 +1,6 @@
 @include('partials.header')
 <div style="background: url(../img/banner/register.jpg) no-repeat center; background-size: cover;">
-<div class="container" style="padding-top: 120px; padding-top: 100px;">
+<div class="container" style="padding-top: 100px; padding-bottom: 20px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card m-4">
@@ -27,7 +27,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone" autofocus>
+                                <input id="phone" type="tel" pattern="^\d{10}$" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone" autofocus>
 
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -40,7 +40,7 @@
                             <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
                             <div class="col-md-6">
                             <select id="type" type="text" class="form-control @error('type') is-invalid @enderror" name="type" autocomplete="type" autofocus>
-                                <option value="{{ old('type') }}">@if(old('type') == 1) Coaching @elseif(old('type') == 0) Teacher @else Student @endif</option>
+                                <option value="{{ old('type') }}">Please Select</option>
                                 <option value="1">Coaching</option>
                                 <option value="0">Teacher</option>
                                 <option value="2">Student</option>

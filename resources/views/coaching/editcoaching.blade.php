@@ -63,13 +63,34 @@
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
 
                             <div class="col-md-6">
-                                <input id="level" value="{{ $data->level }}" type="text" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level') }}" autocomplete="level">
+                            <select id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" autocomplete="level" autofocus>
+                                    <option value="{{ $data->level }}">{{ $data->level }}</option>
+                                    @foreach($levels as $level)
+                                    <option value="{{ $level->name }}">{{ $level->name }}</option>
+                                    @endforeach
+                                </select>
 
                                 @error('level')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
+
+                            <div class="col-md-3">
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" autocomplete="image">
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-3">
+                            <img src="{{ $data->imgpath }}" style="height: 75px; object-fit: cover;">
                             </div>
                         </div>
                         <div class="form-group row">

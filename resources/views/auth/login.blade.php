@@ -1,6 +1,6 @@
 @include('partials.header')
 <div style="background: url(../img/banner/register.jpg) no-repeat center; background-size: cover;">
-<div class="container" style="padding-top: 120px; padding-top: 100px;">
+<div class="container" style="padding-top: 120px; height: 90vh;">
     <div class="row justify-content-center">
         <div class="col-md-8">
         @if (session('error'))
@@ -57,12 +57,12 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="primary-btn2">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="primary-btn" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                                 @endif

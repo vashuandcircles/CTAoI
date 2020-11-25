@@ -57,9 +57,14 @@
                             </li>
                             <li class="nav-item {{ (request()->is('login')) ? 'active' : '' }}">
                                 @if(Auth::check())
-                                <a class="nav-link" href="{{url('/login')}}">Home</a>
+                                <a class="nav-link" href="{{url('/home')}}">{{ Auth::user()->name }} Dashboard</a>
                                 @else
                                 <a class="nav-link" href="{{url('/login')}}">Login</a>
+                                @endif
+                            </li>
+                            <li class="nav-item {{ (request()->is('register')) ? 'active' : '' }}">
+                                @if(!Auth::check())
+                                <a href="{{url('/register')}}" class="primary-btn m-2">Free Registration</a>
                                 @endif
                             </li>
                             <!-- <li class="nav-item {{ (request()->is('search')) ? 'active' : '' }}">
