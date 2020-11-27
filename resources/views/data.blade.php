@@ -1,5 +1,6 @@
 @foreach ($coachings as $key => $row)
     @if ($row->verified && $row->active)
+        @dd('??')
         <div class="single_course col-lg-4 col-sm-12 col-md-6 p-4">
             <div class="course_head">
                 <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;"

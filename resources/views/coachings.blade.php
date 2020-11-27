@@ -17,39 +17,39 @@
         </div>
     </div>
     <div class="ajax-load text-center" style="display: none">
-        <p><img src="{{asset('img/loading.gif')}}"/> Loading more data.....</p>
+{{--        <p><img src="{{asset('img/loading.gif')}}"/> Loading more data.....</p>--}}
     </div>
 </section>
-<script>
+{{--<script>--}}
 
-    function loadMoreData(page) {
-        $.ajax({
-            url: '?page=' + page,
-            type: 'get',
-            datatype: "html",
-            beforeSend: function () {
-                $(".ajax-load").show();
-            }
-        }).done(function (data) {
-            if (data.html === "") {
-                $('.ajax-load').html("No more records found");
-                return;
-            }
-            $('.ajax-load').hide();
-            $('#coaching-data').append(data.html);
-        })
-            .fail(function (jqXHR, ajaxOptions, thrownError) {
-                alert('No response from server');
-            });
-    }
+{{--    function loadMoreData(page) {--}}
+{{--        $.ajax({--}}
+{{--            url: '?page=' + page,--}}
+{{--            type: 'get',--}}
+{{--            datatype: "html",--}}
+{{--            beforeSend: function () {--}}
+{{--                $(".ajax-load").show();--}}
+{{--            }--}}
+{{--        }).done(function (data) {--}}
+{{--            if (data.html === "") {--}}
+{{--                $('.ajax-load').html("No more records found");--}}
+{{--                return;--}}
+{{--            }--}}
+{{--            $('.ajax-load').hide();--}}
+{{--            $('#coaching-data').append(data.html);--}}
+{{--        })--}}
+{{--            .fail(function (jqXHR, ajaxOptions, thrownError) {--}}
+{{--                alert('No response from server');--}}
+{{--            });--}}
+{{--    }--}}
 
-    var page = 1;
-    $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            page++;
-            loadMoreData(page);
-        }
-    });
-</script>
+{{--    var page = 1;--}}
+{{--    $(window).scroll(function () {--}}
+{{--        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {--}}
+{{--            page++;--}}
+{{--            loadMoreData(page);--}}
+{{--        }--}}
+{{--    });--}}
+{{--</script>--}}
 
 @include('partials.footer')
