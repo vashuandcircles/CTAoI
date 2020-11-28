@@ -52,11 +52,11 @@
                     <span>Teachers</span></a>
             </li>
             <li class="nav-item {{ (request()->is('coaching-page')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{url('/coaching-page')}}">
+                <a class="nav-link" href="{{route('coachings.index')}}">
                     <i class="fas fa-fw fa-chalkboard-teacher"></i>
                     <span>Coaching</span></a>
             </li>
- 
+
             <li class="nav-item {{ (request()->is('coaching-request')) ? 'active' : '' }} {{ (request()->is('teacher-request')) ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>

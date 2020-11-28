@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Entities;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Coaching extends Model
@@ -26,5 +27,10 @@ class Coaching extends Model
         'verified'
     ];
     protected $dates = ['created_at', 'updated_at'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'userid');
+    }
 
 }

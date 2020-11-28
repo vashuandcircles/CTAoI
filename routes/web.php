@@ -4,21 +4,33 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['verify' => true]);
-
 Route::get('/', 'PageController@index');
+Route::get('/welcome', 'PageController@welcome');
 Route::post('/subscribe', 'PageController@subscribe');
+Route::get('/search', 'PageController@search');
+Route::get('/search/action', 'PageController@action')->name('live_search.action');
 Route::get('/about', 'PageController@about');
 Route::get('/coachings', 'PageController@coachings');
+Route::get('/featuredcoachings', 'PageController@featureCoachings');
 Route::get('/teachers', 'PageController@teachers');
+Route::get('/featuredteachers', 'PageController@featureTeachers');
+Route::post('/addcoachinguser', 'PageController@addCoachingUser');
+Route::post('/addteacheruser', 'PageController@addTeacherUser');
+Route::post('/addstudentuser', 'PageController@addStudentUser');
 Route::get('/contact', 'PageController@contact');
 Route::post('/sendquery', 'PageController@sendQuery');
 
 Route::get('/coachingdetail/{id}', 'PageController@coachingDetail');
 Route::get('/teacherdetail/{id}', 'PageController@teacherDetail');
 
-Route::group(['middleware' => ['auth', ]], function () {
-    
-    Route::get('/payment', 'PageController@payment')->name('payment');
+Route::get('payment-razorpay', 'PaymentController@create')->name('paywithrazorpay');
+Route::post('payment', 'PaymentController@payment')->name('payment');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'dashboard'], function () {
+        Route::resource('coachings', 'CoachingController');
+        Route::put('feature/{id}', 'CoachingController@feature')->name('coachings.feature');
+    });
     Route::get('/coachingdashboard', 'UserController@coachingDashboard')->name('coachingdashboard');
     Route::get('/editcoaching', 'UserController@editCoaching')->name('editcoaching');
     Route::post('/coachingupdate', 'UserController@updateCoaching')->name('coachingupdate');
@@ -89,3 +101,11 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
     Route::put('/coaching-unfeature/{id}', 'HomeController@unfeatureCoaching');
 });
 
+//Route::get('laravel-logs', function () {
+//    if (\Illuminate\Support\Facades\Auth::user()->isSuper()) {
+//        $controller = new \Rap2hpoutre\LaravelLogViewer\LogViewerController();
+//        return $controller->index();
+//    } else {
+//        abort(404);
+//    }
+//})->name('laravel.logs')->middleware('auth');
