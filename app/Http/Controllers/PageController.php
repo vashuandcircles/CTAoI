@@ -35,8 +35,8 @@ class PageController extends Controller
 
     public function coachings(Request $request)
     {
-        $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(9);
-        $coachings = Coaching::orderBy('userid', 'desc')->paginate(9);
+        $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(12);
+        $coachings = Coaching::orderBy('userid', 'desc')->paginate(12);
         if ($request->ajax()) {
             $view = view('data')->with(compact('user', 'coachings'))->render();
             return response()->json(['html' => $view]);

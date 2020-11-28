@@ -67,10 +67,8 @@ class CoachingController extends Controller
             $secondaryid = $user->id;
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
-                $fileName = 'Coachings' . '/image/' . Carbon::now()->format('Y_m_d') . time();
                 $filePath = $file->getPathName();
-                $extension = $file->getClientOriginalExtension();
-                $img = Cloudder::upload($filePath, $fileName, array("format" => $extension));
+                $img = cloudinary()->upload($filePath)->getSecurePath();
             } else $img = null;
             Coaching::create([
                 'name' => ucwords(strtolower($request->name)),
