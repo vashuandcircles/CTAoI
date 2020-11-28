@@ -36,6 +36,10 @@ class CoachingController extends Controller
     {
         $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(10);
         $coachings = Coaching::orderBy('userid', 'desc')->paginate(10);
+        if ($request->ajax()) {
+            $view = view('data')->with(compact('user', 'coachings'))->render();
+            return response()->json(['html' => $view]);
+        }
         return view('coachings.index', compact('coachings', 'user'));
 
     }

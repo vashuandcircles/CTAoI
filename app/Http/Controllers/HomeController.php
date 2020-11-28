@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Coaching;
+use App\Event;
+use App\Level;
+use App\place;
 use App\Query;
 use App\Subscription;
-use App\Event;
-use App\User;
-use App\Level;
-use App\Mail\ApprovedMail;
-use App\place;
 use App\Teacher;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth']);
     }
 
     public function index()
@@ -31,17 +29,20 @@ class HomeController extends Controller
         $pendingteacher = Teacher::where('verified', 'LIKE', '0')->count();
         $subscriptions = Subscription::all()->count();
         $enquiry = Query::all()->count();
-        return view('admin.dashboard', compact('registeredcoaching','featuredcoaching', 'pendingcoaching', 'registeredteacher', 'featuredteacher', 'pendingteacher', 'subscriptions', 'enquiry'));
+        return view('admin.dashboard', compact('registeredcoaching', 'featuredcoaching', 'pendingcoaching', 'registeredteacher', 'featuredteacher', 'pendingteacher', 'subscriptions', 'enquiry'));
     }
+
     public function event()
     {
         $queries = Event::all();
         return view('admin/event/events', compact('queries'));
     }
+
     public function addEventPage()
     {
         return view('admin/event/addeventpage');
     }
+
     public function addEvent(Request $request)
     {
         $request->validate([
@@ -70,15 +71,18 @@ class HomeController extends Controller
         ]);
         return redirect('/teacher-page')->with('status', 'Teacher created successfully');
     }
+
     public function level()
     {
         $levels = Level::orderBy('name', 'asc')->get();
         return view('admin/level/levels', compact('levels'));
     }
+
     public function addLevelPage()
     {
         return view('admin/level/addlevelpage');
     }
+
     public function addLevel(Request $request)
     {
         $request->validate([
@@ -89,58 +93,68 @@ class HomeController extends Controller
         ]);
         return redirect('/level')->with('status', 'Level created successfully');
     }
+
     public function deleteLevel(Request $request, $id)
     {
         $level = Level::findOrFail($id);
         $level->delete();
         return redirect('/level')->with('status', 'Your data is deleted successfully');
     }
+
     public function teacherPage()
     {
         $user = User::where('type', 0)->orderBy('id', 'desc')->paginate(10);
         $teachers = Teacher::orderBy('userid', 'asc')->paginate(10);
         return view('admin/teacher/teacherpage', compact('teachers', 'user'));
     }
+
     public function coachingPage()
     {
         $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(10);
         $coachings = Coaching::orderBy('userid', 'desc')->paginate(10);
         return view('admin/coaching/coachingpage', compact('coachings', 'user'));
     }
+
     public function featuredTeacherPage()
     {
         $teachers = Teacher::all();
         return view('admin/teacher/featuredteachers', compact('teachers'));
     }
+
     public function featuredCoachingPage()
     {
         $coachings = Coaching::all();
         return view('admin/coaching/featuredcoachings', compact('coachings'));
     }
+
     public function teacherRequestPage()
     {
         $user = User::where('type', 0)->get();
         $teachers = Teacher::all();
         return view('admin/teacher/teacherrequest', compact('teachers', 'user'));
     }
+
     public function coachingRequestPage()
     {
         $user = User::where('type', 1)->get();
         $coachings = Coaching::all();
         return view('admin/coaching/coachingrequest', compact('coachings', 'user'));
     }
+
     public function addTeacherPage()
     {
         $places = place::all();
         $levels = Level::orderBy('name', 'asc')->get();
         return view('admin/teacher/addteacherpage', compact('places', 'levels'));
     }
+
     public function addCoachingPage()
     {
         $places = place::all();
         $levels = Level::orderBy('name', 'asc')->get();
         return view('admin/coaching/addcoachingpage', compact('places', 'levels'));
     }
+
     public function addTeacher(Request $request)
     {
         $request->validate([
@@ -177,6 +191,7 @@ class HomeController extends Controller
         ]);
         return redirect('/teacher-page')->with('status', 'Teacher created successfully');
     }
+
     public function addCoaching(Request $request)
     {
         $request->validate([
@@ -199,8 +214,8 @@ class HomeController extends Controller
             'password' => bcrypt($request->password),
             'phone' => $request->phone,
             'type' => 1,
-            ]);
-            $secondaryid = $user->id;
+        ]);
+        $secondaryid = $user->id;
         $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         Coaching::create([
             'name' => ucwords(strtolower($request->name)),
@@ -220,6 +235,7 @@ class HomeController extends Controller
         ]);
         return redirect('/coaching-page')->with('status', 'Coaching created successfully');
     }
+
     public function editTeacherPage(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -227,6 +243,7 @@ class HomeController extends Controller
         $levels = Level::orderBy('name', 'asc')->get();
         return view('admin.teacher.editteacherpage', compact('teachers', 'levels', 'user'));
     }
+
     public function editCoachingPage(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -234,6 +251,7 @@ class HomeController extends Controller
         $levels = Level::orderBy('name', 'asc')->get();
         return view('admin.coaching.editcoachingpage', compact('coachings', 'levels', 'user'));
     }
+
     public function updateTeacher(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -248,7 +266,7 @@ class HomeController extends Controller
             'city' => 'required|min:4',
         ]);
 
-        if(($request->input('image')) != null){
+        if (($request->input('image')) != null) {
             $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
             $data->imgpath = $img;
         }
@@ -265,6 +283,7 @@ class HomeController extends Controller
         $data->update();
         return redirect('/teacher-page')->with('status', 'Your data is updated');
     }
+
     public function updateCoaching(Request $request, $id)
     {
         $data = User::findOrFail($id);
@@ -280,7 +299,7 @@ class HomeController extends Controller
             'state' => 'required|max:255|min:4',
             'city' => 'required|min:4',
         ]);
-        if(($request->input('image')) != null){
+        if (($request->input('image')) != null) {
             $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
             $coachings->imgpath = $img;
         }
@@ -299,6 +318,7 @@ class HomeController extends Controller
         $coachings->update();
         return redirect('/coaching-page')->with('status', 'Your data is updated');
     }
+
     public function deleteTeacher(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -307,6 +327,7 @@ class HomeController extends Controller
         $teachers->delete();
         return back()->with('status', 'Your data is deleted successfully');
     }
+
     public function deleteCoaching(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -317,6 +338,7 @@ class HomeController extends Controller
         $user->delete();
         return back()->with('status', 'Your data is deleted successfully');
     }
+
     public function featureTeacher(Request $request, $id)
     {
         $teachers = Teacher::findOrFail($id);
@@ -324,6 +346,7 @@ class HomeController extends Controller
         $teachers->update();
         return redirect('/teacher-page')->with('status', 'Teacher is featured now');
     }
+
     public function featureCoaching(Request $request, $id)
     {
         $coachings = Coaching::findOrFail($id);
@@ -331,6 +354,7 @@ class HomeController extends Controller
         $coachings->update();
         return redirect('/coaching-page')->with('status', 'Coaching is featured now');
     }
+
     public function unfeatureTeacher(Request $request, $id)
     {
         $teachers = Teacher::findOrFail($id);
@@ -338,6 +362,7 @@ class HomeController extends Controller
         $teachers->update();
         return redirect('/featured-teacher-page')->with('status', 'Teacher is unfeatured now');
     }
+
     public function unfeatureCoaching(Request $request, $id)
     {
         $coachings = Coaching::findOrFail($id);
@@ -345,16 +370,19 @@ class HomeController extends Controller
         $coachings->update();
         return redirect('/featured-coaching-page')->with('status', 'Teacher is unfeatured now');
     }
+
     public function subscription()
     {
         $subscriptions = Subscription::all();
         return view('admin/subscription', compact('subscriptions'));
     }
+
     public function enquiry()
     {
         $queries = Query::all();
         return view('admin/query', compact('queries'));
     }
+
     public function acceptTeacher(Request $request, $id)
     {
         $teachers = Teacher::findOrFail($id);
@@ -362,6 +390,7 @@ class HomeController extends Controller
         $teachers->update();
         return redirect('/teacher-request')->with('status', 'Teacher is verified now');
     }
+
     public function acceptCoaching(Request $request, $id)
     {
         $coachings = Coaching::findOrFail($id);
