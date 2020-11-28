@@ -102,11 +102,11 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
     Route::put('/coaching-unfeature/{id}', 'HomeController@unfeatureCoaching');
 });
 
-Route::get('laravel-logs', function () {
-    if (\Illuminate\Support\Facades\Auth::user()->isSuper()) {
-        $controller = new \Rap2hpoutre\LaravelLogViewer\LogViewerController();
-        return $controller->index();
-    } else {
-        abort(404);
-    }
-})->name('laravel.logs')->middleware('auth');
+//Route::get('laravel-logs', function () {
+//    if (\Illuminate\Support\Facades\Auth::user()->isSuper()) {
+//        $controller = new \Rap2hpoutre\LaravelLogViewer\LogViewerController();
+//        return $controller->index();
+//    } else {
+//        abort(404);
+//    }
+//})->name('laravel.logs')->middleware('auth');
