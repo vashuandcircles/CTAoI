@@ -52,10 +52,11 @@
                                         @endif
                                         <a href="{{ route('coachings.edit',$row->id) }}"
                                            class="btn btn-secondary m-1">Edit</a>
-                                        <form action="{{ route('coachings.destroy',$row->id) }}" method="POST">
+                                        <form action="{{ route('coachings.destroy',$row->id) }}" method="POST"
+                                              onclick="return confirm('Are you sure to delete this item?')">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" href=""  class="btn btn-danger m-1">Delete</button>
+                                            <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
                                         </form>
                                     </div>
                                 </td>
