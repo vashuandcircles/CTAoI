@@ -21,4 +21,8 @@ class Teacher extends Model
         'active',
         'verified'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class,'userid');
+    }
 }
