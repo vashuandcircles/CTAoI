@@ -22,8 +22,10 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-text mx-3">CTAoI Admin</div>
+            <a class="align-items-center justify-content-center" href="/">
+                <div class="text-center sidebar-brand-text mx-3">
+                    <img class="m-2" src="img/favicon.png" height="50px">
+                </div>
             </a>
 
             <!-- Divider -->
@@ -52,11 +54,11 @@
                     <span>Teachers</span></a>
             </li>
             <li class="nav-item {{ (request()->is('coaching-page')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('coachings.index')}}">
+                <a class="nav-link" href="{{url('/coaching-page')}}">
                     <i class="fas fa-fw fa-chalkboard-teacher"></i>
                     <span>Coaching</span></a>
             </li>
-
+ 
             <li class="nav-item {{ (request()->is('coaching-request')) ? 'active' : '' }} {{ (request()->is('teacher-request')) ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
@@ -155,12 +157,12 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="modal" data-target="#logoutModal" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                <span class="mr-2 d-lg-inline text-gray-600 small">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ Auth::user()->name }} Logout</span>
                             </a>
