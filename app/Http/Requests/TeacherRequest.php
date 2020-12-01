@@ -13,7 +13,7 @@ class TeacherRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route()->parameter('coaching');
+        $id = $this->route()->parameter('teacher');
         return [
             'email' => 'required|max:255|email|unique:users,name,' . $id,
             'name' => 'required|max:255|min:3',
@@ -21,8 +21,9 @@ class TeacherRequest extends FormRequest
             'email' => 'required|unique:users|max:255|email',
             'gender' => 'required|max:6|min:3',
             'phone' => 'required|regex:/[0-9]{10}/|unique:users',
+            'altphone' => 'nullable',
             'specialization' => 'required|max:255|min:3',
-            'image' => 'required|mimes:jpeg,jpg,png',
+            'image' => 'nullable|mimes:jpeg,jpg,png',
             'level' => 'required|max:255',
             'state' => 'required|max:255|min:4',
             'city' => 'required|min:4',

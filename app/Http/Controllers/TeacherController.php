@@ -77,6 +77,7 @@ class TeacherController extends Controller
             return redirect()->route('teachers.index')->with('status', 'Teacher created successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
+            dd($exception);
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->route('teachers.index')->with('status', 'Failed to create teacher.');
 
@@ -91,7 +92,7 @@ class TeacherController extends Controller
             $teachers = $this->repo->getById($id);
             $user = $teachers->user;
             $attributes = $request->only([
-                'altphone', 'level', 'description', 'specialization', 'city', 'state', 'userid', 'phone', 'gender'
+                'altphone', 'level', 'description', 'specialization', 'city', 'state', 'userid', 'gender'
             ]);
             if ($request->hasFile('image')) {
                 $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();

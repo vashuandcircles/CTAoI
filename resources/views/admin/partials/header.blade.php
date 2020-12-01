@@ -49,7 +49,7 @@
             <!-- Nav Item - Pages Collapse Menu -->
 
             <li class="nav-item {{ (request()->is('teacher-page')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{url('/teacher-page')}}">
+                <a class="nav-link" href="{{route('teachers.index')}}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Teachers</span></a>
             </li>

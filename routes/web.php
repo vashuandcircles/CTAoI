@@ -28,10 +28,12 @@ Route::post('payment', 'PaymentController@payment')->name('payment');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'dashboard'], function () {
-        Route::resource('coachings', 'CoachingController');
-        Route::resource('teachers', 'TeacherController');
         Route::put('feature/{id}', 'CoachingController@feature')->name('coachings.feature');
         Route::put('feature/{id}', 'TeacherController@feature')->name('teachers.feature');
+        Route::resource('coachings', 'CoachingController');
+        Route::resource('teachers', 'TeacherController');
+
+
     });
     Route::get('/coachingdashboard', 'UserController@coachingDashboard')->name('coachingdashboard');
     Route::get('/editcoaching', 'UserController@editCoaching')->name('editcoaching');

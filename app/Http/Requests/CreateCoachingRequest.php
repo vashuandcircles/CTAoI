@@ -24,11 +24,11 @@ class CreateCoachingRequest extends FormRequest
             'state' => 'max:255|min:4',
             'password' => 'max:255|min:4',
             'landmark' => 'max:255|min:4',
-            'description' => 'max:255|min:4',
+            'description' => 'nullable|max:255',
             'level' => 'max:255',
             'image' => 'mimes:jpeg,jpg,png',
             'address1' => 'required|max:255|min:4',
-            'address2' => 'required|max:255|min:4',
+            'address2' => 'nullable|max:255',
             'city' => 'required|min:4',
         ];
     }
