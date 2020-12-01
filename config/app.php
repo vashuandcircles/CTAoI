@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-//        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         JD\Cloudder\CloudderServiceProvider::class,
 
 

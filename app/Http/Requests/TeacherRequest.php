@@ -20,7 +20,7 @@ class TeacherRequest extends FormRequest
             'password' => 'required|confirmed',
             'email' => 'required|unique:users|max:255|email',
             'gender' => 'required|max:6|min:3',
-            'phone' => 'required|regex:/[0-9]{10}/|unique:users',
+            'phone' => 'required|regex:/[0-9]{10}/|unique:users,phone',
             'altphone' => 'nullable',
             'specialization' => 'required|max:255|min:3',
             'image' => 'nullable|mimes:jpeg,jpg,png',
