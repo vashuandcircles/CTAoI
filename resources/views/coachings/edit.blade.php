@@ -59,7 +59,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" value="{{ $coachings->phone }}"
+                                <input id="phone" type="text" value="{{ $user->phone }}"
                                        class="form-control @error('phone') is-invalid @enderror" name="phone"
                                        autocomplete="phone">
 
