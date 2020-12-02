@@ -19,12 +19,12 @@ Route::post('/addteacheruser', 'PageController@addTeacherUser');
 Route::post('/addstudentuser', 'PageController@addStudentUser');
 Route::get('/contact', 'PageController@contact');
 Route::post('/sendquery', 'PageController@sendQuery');
+Route::get('/coachingpayment', 'PageController@coachingpayment');
+Route::get('/teacherpayment', 'PageController@teacherpayment');
 
 Route::get('/coachingdetail/{id}', 'PageController@coachingDetail');
 Route::get('/teacherdetail/{id}', 'PageController@teacherDetail');
 
-Route::get('payment-razorpay', 'PaymentController@create')->name('paywithrazorpay');
-Route::post('payment', 'PaymentController@payment')->name('payment');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'dashboard'], function () {

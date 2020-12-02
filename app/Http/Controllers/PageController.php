@@ -55,9 +55,13 @@ class PageController extends Controller
     {
         return view('contact');
     }
-    public function payment()
+    public function coachingpayment()
     {
-        return view('payment');
+        return view('coaching.payment');
+    }
+    public function teacherpayment()
+    {
+        return view('teacher.payment');
     }
     public function about()
     {

@@ -1,4 +1,4 @@
-@include('partials.header')
+@include('teacher.partials.header')
     <!--================Blog Area =================-->
     <section class="blog_area single-post-area section_gap">
         <div class="container">
@@ -73,4 +73,4 @@
         </div>
     </section>
     <!--================Blog Area =================-->
-@include('partials.footer')
+@include('teacher.partials.footer')
