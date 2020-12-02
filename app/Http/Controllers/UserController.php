@@ -114,10 +114,9 @@ class UserController extends Controller
             'city' => 'required|max:255',
             'state' => 'required|max:255',
         ]);
-        if(($request->input('image')) != null){
+        dd($request->file('image'));
             $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
             $data->imgpath = $img;
-        }
         $user->name = $request->input('name');
         $user->phone = $request->input('phone');
         $user->update();
