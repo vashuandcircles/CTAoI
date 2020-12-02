@@ -18,7 +18,7 @@ class CreateCoachingRequest extends FormRequest
             'name' => 'required|max:255|min:3',
             'directorname' => 'required|max:255|min:2',
             'email' => 'required|max:255|email|unique:users,name,' . $id,
-            'phone' => 'required|regex:/[0-9]{10}/',
+            'phone' => 'required|regex:/[0-9]{10}/|unique:users,phone,' . $id,
             'altphone' => 'nullable|regex:/[0-9]{10}/',
             'specialization' => 'required|max:255|min:3',
             'state' => 'max:255|min:4',

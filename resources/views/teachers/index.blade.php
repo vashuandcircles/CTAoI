@@ -32,7 +32,8 @@
                     @foreach ($teachers as $key => $row)
                         <?php if ($row->verified) { ?>
                         <tr>
-                            <td><img
+                            <td>
+                                <img
                                     src="@if($row->imgpath != NULL){{ $row->imgpath}}@else ../img/elements/no-image.png  @endif"
                                     style="width: 50px; height: 75px; object-fit: cover;"></td>
                             <td>{{ $user[$key]->name }}</td>
@@ -43,17 +44,20 @@
                             <td>
                                 <div class="row">
                                     <?php if (!$row->is_featured) { ?>
-                                    <form action="/teacher-feature/{{ $row->id }}" method="POST">
+                                    <form action="{{route('teachers.feature', $row->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
                                         <button type="submit" href="" class="btn btn-success m-1">Feature</button>
                                     </form>
                                     <?php } ?>
-                                    <a href="/teacher-edit/{{ $user[$key]->id }}" class="btn btn-secondary m-1">Edit</a>
-                                    <form action="/teacher-delete/{{ $user[$key]->id }}" method="POST">
+                                    <a href="{{route('teachers.edit', $row->id) }}"
+                                       class="btn btn-secondary m-1">Edit</a>
+                                    <form action="{{route('teachers.destroy', $row->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
-                                        <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
+                                        <button type="submit" href="" class="btn btn-danger m-1"
+                                                onclick="return confirm('Are you sure to delete this item?')">Delete
+                                        </button>
                                     </form>
                                 </div>
                             </td>

@@ -4,11 +4,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Entities\Teacher;
 use App\Http\Requests\TeacherRequest;
 use App\Level;
 use App\place;
 use App\Repositories\TeacherRepository;
-use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +53,7 @@ class TeacherController extends Controller
                 'name' => ucwords(strtolower($request->name)),
                 'email' => mb_strtolower($request->email),
                 'password' => bcrypt($request->password),
+                'phone' => $request->phone,
                 'type' => 0,
             ]);
             if ($request->hasFile('image')) {
@@ -64,7 +65,6 @@ class TeacherController extends Controller
                 'userid' => $user->id,
                 'level' => ucwords(strtolower($request->level)),
                 'gender' => ucwords(strtolower($request->gender)),
-                'phone' => $request->phone,
                 'altphone' => $request->altphone,
                 'specialization' => ucwords(strtolower($request->specialization)),
                 'description' => ucwords(strtolower($request->description)),
@@ -77,7 +77,6 @@ class TeacherController extends Controller
             return redirect()->route('teachers.index')->with('status', 'Teacher created successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->route('teachers.index')->with('status', 'Failed to create teacher.');
 
@@ -109,7 +108,7 @@ class TeacherController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
-            return redirect()->route('teachers.index')->with('status', 'Failed to update Data');
+            return redirect()->route('teachers.index')->with('status', 'Failed to update Teacher');
 
         }
     }

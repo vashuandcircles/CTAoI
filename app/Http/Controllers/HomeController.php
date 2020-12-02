@@ -332,8 +332,6 @@ class HomeController extends Controller
     {
         $user = User::findOrFail($id);
         $coachings = Coaching::where('userid', $id)->first();
-        dd($user);
-        dd($coachings);
         $coachings->delete();
         $user->delete();
         return back()->with('status', 'Your data is deleted successfully');

@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">Edit Teacher</div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('teachers.update',$teachers->userid)}}"
+                    <form method="POST" action="{{route('teachers.update',$teachers->id)}}"
                           enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}

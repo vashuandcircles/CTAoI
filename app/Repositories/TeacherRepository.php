@@ -10,7 +10,7 @@ namespace App\Repositories;
 
 
 use App\Repositories\Contracts\Repository;
-use App\Teacher;
+use App\Entities\Teacher;
 
 class TeacherRepository extends Repository
 {
