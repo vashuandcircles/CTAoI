@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Coaching;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
-use App\Coaching;
-use App\Teacher;
 use App\Student;
+use App\Teacher;
+use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,30 +35,38 @@ class RegisterController extends Controller
             'type' => 'required',
         ]);
     }
+
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'type' => $data['type'],
-            'password' => Hash::make($data['password']),
-        ]);
-        if($data['type'] == 0){
-            Teacher::create([
-                'userid' => $user->id,
+        try {
+            DB::beginTransaction();
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'type' => $data['type'],
+                'password' => Hash::make($data['password']),
             ]);
+            if ($data['type'] == 0) {
+                Teacher::create([
+                    'userid' => $user->id,
+                ]);
+            } elseif ($data['type'] == 1) {
+                Coaching::create([
+                    'userid' => $user->id,
+                ]);
+            } elseif ($data['type'] == 2) {
+                Student::create([
+                    'userid' => $user->id,
+                ]);
+            }
+            DB::commit();
+            return $user;
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->with('failed', 'oops something went wrong');
         }
-        elseif($data['type'] == 1){
-            Coaching::create([
-                'userid' => $user->id,
-            ]);
-        }
-        elseif($data['type'] == 2){
-            Student::create([
-                'userid' => $user->id,
-            ]);
-        }
-        return $user;
+
     }
 }

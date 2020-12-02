@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-5">
                 <div class="main_title">
-                    <h2 class="mb-3">Our Popular Coachings</h2>
+                    <h2 class="mb-3">Our Popular Coaching</h2>
                     <p>
                         Replenish man have thing gathering lights yielding shall you
                     </p>
