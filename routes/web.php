@@ -13,7 +13,7 @@ Route::get('/about', 'PageController@about');
 Route::get('/coachings', 'PageController@coachings');
 Route::get('/featuredcoachings', 'PageController@featureCoachings');
 Route::get('/teachers', 'PageController@teachers');
-Route::get('/featuredteachers', 'PageController@featureTeachers');
+Route::get('/featuredteachers', 'PagcoachingdashboardeController@featureTeachers');
 Route::post('/addcoachinguser', 'PageController@addCoachingUser');
 Route::post('/addteacheruser', 'PageController@addTeacherUser');
 Route::post('/addstudentuser', 'PageController@addStudentUser');
@@ -32,8 +32,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('teachers', 'TeacherController');
         Route::put('feature/{id}', 'CoachingController@feature')->name('coachings.feature');
         Route::put('tfeature/{id}', 'TeacherController@feature')->name('teachers.feature');
-
-
     });
     Route::get('/coachingdashboard', 'UserController@coachingDashboard')->name('coachingdashboard');
     Route::get('/editcoaching', 'UserController@editCoaching')->name('editcoaching');

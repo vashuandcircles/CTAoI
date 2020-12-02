@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header">Edit Profile</div>
                 <div class="card-body">
-                    <form method="POST" action="/coachingupdate">
+                    <form method="POST" action="/coachingupdate" enctype="multipart/form-data">
                         {{ method_field('POST') }}
                         {{ csrf_field() }}
                         <div class="form-group row">
@@ -77,7 +77,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
 

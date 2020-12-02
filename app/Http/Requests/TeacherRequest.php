@@ -18,7 +18,7 @@ class TeacherRequest extends FormRequest
             'email' => 'required|max:255|email|unique:users,name,' . $id,
             'name' => 'required|max:255|min:3',
             'gender' => 'required|max:6|min:3',
-            'phone' => 'required|regex:/[0-9]{10}/|unique:users,phone,' . $id,
+            'phone' => 'required|regex:/[0-9]{10}/',
             'altphone' => 'nullable|regex:/[0-9]{10}/',
             'specialization' => 'required|max:255|min:3',
             'image' => 'nullable|mimes:jpeg,jpg,png',
