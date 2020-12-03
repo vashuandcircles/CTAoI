@@ -166,22 +166,22 @@
                             <h4 class="mb-3" style="height: 40px;">
                                 <a>{{ $user[$key]->name }}</a>
                             </h4>
-                            <h6 style="height: 30px;">
+                            <h6>
                                 Expert in : {{ $row['specialization'] }}
                             </h6>
-                            <h6 style="height: 30px;">
+                            <h6>
                                 Level : {{ $row->level}}
                             </h6>
-                            <h6 style="height: 30px;">
+                            <h6>
                                 Contact : {{ $row->phone}}
                             </h6>
                             <h6 style="height: 30px; word-wrap: break-word;">
                                 Email : {{ $user[$key]->email }}
                             </h6>
-                            <h6 style="height: 30px;">
+                            <h6>
                                 Director : {{ $row->directorname}}
                             </h6>
-                            <h6 style="height: 70px;">
+                            <h6>
                                 Address : @if($row->address1 != $row->city) {{ $row->address1}}, @endif @if($row->address2) {{ $row->address2}}, @endif {{ $row->city}}, {{ $row->state}}
                             </h6>
                             <div class="col-12 text-center">
