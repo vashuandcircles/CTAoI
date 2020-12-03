@@ -107,7 +107,8 @@ class UserController extends Controller
         $id = Auth::id();
         $user = User::findOrFail($id);
         $data = Student::where('userid', $id)->first();
-        return view('student.editstudent', compact('user', 'data'));
+        $levels = Level::all();
+        return view('student.editstudent', compact('user', 'data', 'levels'));
     }
 
     public function updateCoaching(Request $request)
@@ -241,6 +242,7 @@ class UserController extends Controller
             $user->name = $request->input('name');
             $user->phone = $request->input('phone');
             $user->update();
+            $data->gender = $request->input('gender');
             $data->level = $request->input('level');
             $data->description = $request->input('description');
             $data->city = $request->input('city');
