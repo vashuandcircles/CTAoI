@@ -3,6 +3,7 @@
     <!--================ Start Course Details Area =================-->
     <section class="course_details_area section_gap">
         <div class="container">
+            <a href="{{url('/coachings')}}" class="primary-btn mb-3"><i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp; Back</a>
             <div class="row">
                 <div class="col-lg-8 course_details_left">
                     <div class="main_image text-center">
