@@ -12,7 +12,8 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" value="{{ $user->name }}"
+                                <input id="name" type="text"
+                                       value="{{old('name', $user->name )}}"
                                        class="form-control @error('name') is-invalid @enderror" name="name"
                                        autocomplete="name" autofocus>
                                 @error('name')
@@ -27,8 +28,9 @@
                             <label for="directorname" class="col-md-4 col-form-label text-md-right">Director's
                                 Name</label>
                             <div class="col-md-6">
-                                <input id="directorname" type="text" value="{{ $coachings->directorname }}"
+                                <input id="directorname" type="text"
                                        class="form-control @error('directorname') is-invalid @enderror"
+                                       value="{{old('directorname', $user->directorname )}}"
                                        name="directorname" autocomplete="directorname" autofocus>
                                 @error('directorname')
                                 <span class="invalid-feedback" role="alert">
@@ -37,13 +39,12 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="email"
                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" value="{{ $user->email }}"
+                                <input id="email" type="email" value="{{old('email', $user->email )}}"
                                        class="form-control @error('email') is-invalid @enderror" name="email"
                                        autocomplete="email">
 
@@ -59,7 +60,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" value="{{ $user->phone }}"
+                                <input id="phone" type="text" value="{{old('phone', $user->phone) }}"
                                        class="form-control @error('phone') is-invalid @enderror" name="phone"
                                        autocomplete="phone">
 
@@ -75,8 +76,9 @@
                                 Phone</label>
 
                             <div class="col-md-6">
-                                <input id="altphone" type="text" value="{{ $coachings->altphone }}"
-                                       class="form-control @error('altphone') is-invalid @enderror" name="altphone"
+                                <input id="altphone" type="text" value="{{old('altphone', $user->altphone) }}"
+                                       class="form-control @error('altphone') is-invalid @enderror"
+                                       name="altphone"
                                        autocomplete="altphone">
 
                                 @error('altphone')
@@ -90,10 +92,15 @@
                         <div class="form-group row">
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
 
-                            <div class="col-md-6"><select id="level" type="text"
-                                                          class="form-control @error('level') is-invalid @enderror"
-                                                          name="level" autocomplete="level" autofocus>
-                                    <option value="{{ $coachings->level }}">{{ $coachings->level }}</option>
+                            <div class="col-md-6">
+                                <select id="level" type="text"
+                                        class="form-control @error('level') is-invalid @enderror"
+                                        name="level" autocomplete="level" autofocus>
+                                    @if( old('level'))
+                                        <option value="{{old('level') }}">{{  old('level') }}</option>
+                                    @endif
+                                    @if($coachings->level)
+                                        <option value="{{ $coachings->level }}">{{ $coachings->level }}</option> @endif
                                     @foreach($levels as $level)
                                         <option value="{{ $level->name }}">{{ $level->name }}</option>
                                     @endforeach
@@ -112,7 +119,8 @@
                                    class="col-md-4 col-form-label text-md-right">Specialization</label>
 
                             <div class="col-md-6">
-                                <input id="specialization" type="text" value="{{ $coachings->specialization }}"
+                                <input id="specialization" type="text"
+                                       value="{{old('specialization', $user->specialization )}}"
                                        class="form-control @error('specialization') is-invalid @enderror"
                                        name="specialization" autocomplete="specialization">
 
@@ -143,7 +151,7 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" value="{{ $coachings->description }}"
+                                <input id="description" type="text" value="{{old('description', $user->description )}}"
                                        class="form-control @error('description') is-invalid @enderror"
                                        name="description" autocomplete="description">
 
@@ -158,8 +166,9 @@
                             <label for="address1" class="col-md-4 col-form-label text-md-right">Street Address 1</label>
 
                             <div class="col-md-6">
-                                <input id="address1" type="text" value="{{ $coachings->address1 }}"
-                                       class="form-control @error('address1') is-invalid @enderror" name="address1">
+                                <input id="address1" type="text" value="{{old('address1', $user->address1 )}}"
+                                       class="form-control @error('address1') is-invalid @enderror"
+                                       name="address1">
 
                                 @error('address1')
                                 <span class="invalid-feedback" role="alert">
@@ -172,8 +181,9 @@
                             <label for="address2" class="col-md-4 col-form-label text-md-right">Street Address 2</label>
 
                             <div class="col-md-6">
-                                <input id="address2" type="text" value="{{ $coachings->address2 }}"
-                                       class="form-control @error('address2') is-invalid @enderror" name="address2">
+                                <input id="address2" type="text" value="{{old('address2', $user->address2 )}}"
+                                       class="form-control @error('address2') is-invalid @enderror"
+                                       name="address2">
 
                                 @error('address2')
                                 <span class="invalid-feedback" role="alert">
@@ -186,8 +196,9 @@
                             <label for="landmark" class="col-md-4 col-form-label text-md-right">Landmark</label>
 
                             <div class="col-md-6">
-                                <input id="landmark" type="text" value="{{ $coachings->landmark }}"
-                                       class="form-control @error('landmark') is-invalid @enderror" name="landmark">
+                                <input id="landmark" type="text" value="{{old('landmark', $user->landmark )}}"
+                                       class="form-control @error('landmark') is-invalid @enderror"
+                                       name="landmark">
 
                                 @error('landmark')
                                 <span class="invalid-feedback" role="alert">
@@ -202,7 +213,11 @@
                             <div class="col-md-6">
                                 <select id="state" type="text" class="form-control @error('state') is-invalid @enderror"
                                         name="state" autocomplete="state" autofocus>
-                                    <option value="{{ $coachings->state }}">{{ $coachings->state }}</option>
+                                    @if( old('state'))
+                                        <option value="{{old('state') }}">{{  old('state') }}</option>
+                                    @endif
+                                    @if($coachings->state)
+                                        <option value="{{ $coachings->state }}">{{ $coachings->state }}</option> @endif
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>
@@ -256,9 +271,9 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" value="{{ $coachings->city }}"
-                                       class="form-control @error('city') is-invalid @enderror" name="city">
-
+                                <input id="city" type="text" value="{{old('city', $user->city )}}"
+                                       class="form-control @error('city') is-invalid @enderror"
+                                       name="city">
                                 @error('city')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

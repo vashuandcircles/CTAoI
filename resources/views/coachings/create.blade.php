@@ -101,13 +101,15 @@
 
                         <div class="form-group row">
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
-
                             <div class="col-md-6">
                                 <select id="level" type="text" class="form-control @error('level') is-invalid @enderror"
                                         name="level" autocomplete="level" autofocus>
                                     <option value="">Select</option>
                                     @foreach($levels as $level)
-                                        <option value="{{ $level->name }}">{{ $level->name }}</option>
+                                        <option value="{{ $level->name }}"
+                                                @if (old('level') == $level->name) selected="selected"
+                                            @endif>
+                                            {{ $level->name }}</option>
                                     @endforeach
                                 </select>
 

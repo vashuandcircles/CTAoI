@@ -43,8 +43,11 @@
                             <div class="col-md-6">
                                 <select id="gender" type="text"
                                         class="form-control @error('gender') is-invalid @enderror"
-                                        value="{{ old('gender') }}" name="gender" autocomplete="gender" autofocus>
-                                    <option value="">Select</option>
+                                        name="gender" autocomplete="gender" autofocus>
+                                    @if(old('gender'))
+                                        <option value="{{ old('gender') }}">{{ old('gender') }}</option>
+                                    @endif
+                                    <option value="">Select Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Others">Others</option>
@@ -110,8 +113,10 @@
                             <div class="col-md-6">
                                 <select id="level" type="text" class="form-control @error('level') is-invalid @enderror"
                                         name="level" autocomplete="level" autofocus>
-                                    <option value="">Select</option>
                                     @foreach($levels as $level)
+                                        @if(old('level'))
+                                            <option value="{{ old('level') }}">{{ old('level') }}</option> @endif
+                                        <option value="">Select Level</option>
                                         <option value="{{ $level->name }}">{{ $level->name }}</option>
                                     @endforeach
                                 </select>
@@ -129,8 +134,7 @@
                             <div class="col-md-6">
                                 <textarea id="description"
                                           class="form-control @error('description') is-invalid @enderror"
-                                          value="{{ old('description') }}" name="description"></textarea>
-
+                                       name="description">{{ old('description') }}</textarea>
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -172,7 +176,10 @@
                             <div class="col-md-6">
                                 <select id="state" type="text" class="form-control @error('state') is-invalid @enderror"
                                         name="state" autocomplete="state" autofocus>
-                                    <option value="{{ old('state') }}">{{ old('state') }}</option>
+                                    @if(old('state'))
+                                        <option value="{{ old('state') }}">{{ old('state') }}</option>
+                                    @endif
+                                    <option value="">Select State</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>

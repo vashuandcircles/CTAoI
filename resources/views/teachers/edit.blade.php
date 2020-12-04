@@ -13,7 +13,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" value="{{ $user->name }}"
+                                <input id="name" type="text" value="{{old('name', $user->name )}}"
                                        class="form-control @error('name') is-invalid @enderror" name="name"
                                        autocomplete="name" autofocus>
                                 @error('name')
@@ -29,10 +29,9 @@
                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" value="{{ $user->email }}"
+                                <input id="email" type="email" value="{{old('email', $user->email )}}"
                                        class="form-control @error('email') is-invalid @enderror" name="email"
                                        autocomplete="email">
-
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -47,7 +46,11 @@
                                 <select id="gender" type="text"
                                         class="form-control @error('gender') is-invalid @enderror" name="gender"
                                         autocomplete="gender" autofocus>
-                                    <option value="{{ $teachers->gender }}">{{ $teachers->gender }}</option>
+                                    @if(old('gender'))
+                                        <option value="{{ old('gender') }}">{{ old('gender') }}</option> @endif
+                                    @if($teachers->gender )
+                                        <option value="{{ $teachers->gender }}">{{ $teachers->gender }}</option> @endif
+                                    <option value="Andhra Pradesh">Select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Others">Others</option>
@@ -64,7 +67,8 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" value="{{ $user->phone }}"
+                                <input id="phone" type="text"
+                                       value="{{old('phone', $user->phone )}}"
                                        class="form-control @error('phone') is-invalid @enderror" name="phone"
                                        autocomplete="phone">
 
@@ -80,7 +84,7 @@
                                 Phone</label>
 
                             <div class="col-md-6">
-                                <input id="altphone" type="text" value="{{ $teachers->altphone }}"
+                                <input id="altphone" type="text" value="{{old('altphone', $user->altphone )}}"
                                        class="form-control @error('altphone') is-invalid @enderror" name="altphone"
                                        autocomplete="altphone">
 
@@ -97,7 +101,8 @@
                                    class="col-md-4 col-form-label text-md-right">Specialization</label>
 
                             <div class="col-md-6">
-                                <input id="specialization" type="text" value="{{ $teachers->specialization }}"
+                                <input id="specialization" type="text"
+                                       value="{{old('specialization', $user->specialization )}}"
                                        class="form-control @error('specialization') is-invalid @enderror"
                                        name="specialization" autocomplete="specialization">
 
@@ -131,7 +136,12 @@
                             <div class="col-md-6"><select id="level" type="text"
                                                           class="form-control @error('level') is-invalid @enderror"
                                                           name="level" autocomplete="level" autofocus>
-                                    <option value="{{ $teachers->level }}">{{ $teachers->level }}</option>
+                                    @if(old('level') )
+                                        <option
+                                            value="{{ old('level') }}">{{ old('level') }}</option> @endif
+                                    @if($teachers->level )
+                                        <option value="{{ $teachers->level }}">{{ $teachers->level }}</option> @endif
+                                    <option value="Andhra Pradesh">Select level</option>
                                     @foreach($levels as $level)
                                         <option value="{{ $level->name }}">{{ $level->name }}</option>
                                     @endforeach
@@ -146,12 +156,10 @@
                         </div>
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
-
                             <div class="col-md-6">
-                                <input id="description" type="text" value="{{ $teachers->description }}"
+                                <input id="description" type="text" value="{{old('description', $user->description )}}"
                                        class="form-control @error('description') is-invalid @enderror"
                                        name="description" autocomplete="description">
-
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -163,7 +171,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" value="{{ $teachers->city }}"
+                                <input id="city" type="text" value="{{old('city', $user->city )}}"
                                        class="form-control @error('city') is-invalid @enderror" name="city">
 
                                 @error('city')
@@ -175,11 +183,16 @@
                         </div>
                         <div class="form-group row">
                             <label for="state" class="col-md-4 col-form-label text-md-right">State</label>
-
                             <div class="col-md-6">
                                 <select id="state" type="text" class="form-control @error('state') is-invalid @enderror"
                                         name="state" autocomplete="state" autofocus>
-                                    <option value="{{ $teachers->state }}">{{ $teachers->state }}</option>
+                                    @if(old('state') )
+                                        <option value="{{ old('state') }}">{{ old('state') }}</option>
+                                    @endif
+                                    @if($teachers->state )
+                                        <option value="{{ $teachers->state }}">{{ $teachers->state }}</option>
+                                    @endif
+                                    <option value="Andhra Pradesh">Select state</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>
