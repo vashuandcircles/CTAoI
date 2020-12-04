@@ -12,6 +12,7 @@ use App\Event;
 use App\Level;
 use App\place;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -57,11 +58,18 @@ class PageController extends Controller
     }
     public function coachingpayment()
     {
-        return view('coaching.payment');
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+        $data = Coaching::where('userid', $id)->first();
+        return view('coaching.payment', compact('user', 'data'));
     }
     public function teacherpayment()
     {
-        return view('teacher.payment');
+        $id = Auth::id();
+        $courses = Courses::where('userid', $id);
+        $user = User::findOrFail($id);
+        $data = Teacher::where('userid', $id)->first();
+        return view('teacher.payment', compact('user', 'data', 'courses'));
     }
     public function about()
     {
