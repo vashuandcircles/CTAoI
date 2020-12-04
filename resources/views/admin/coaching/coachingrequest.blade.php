@@ -4,7 +4,7 @@
         <div class="card-header py-3">
             <div class="row">
                 <h6 class="m-3 font-weight-bold text-primary">Coachings</h6>
-                <a href="{{ url('/addcoachingpage') }}" class="m-2 ml-auto btn btn-primary text-white">
+                <a href="{{ route('coachings.create') }}" class="m-2 ml-auto btn btn-primary text-white">
                     Add Coaching
                 </a>
             </div>

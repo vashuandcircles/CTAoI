@@ -11,6 +11,7 @@ use App\Subscription;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -383,18 +384,35 @@ class HomeController extends Controller
 
     public function acceptTeacher(Request $request, $id)
     {
-        $teachers = Teacher::findOrFail($id);
-        $teachers->verified = 1;
-        $teachers->update();
-        return redirect('/teacher-request')->with('status', 'Teacher is verified now');
+//        $teachers = Teacher::findOrFail($id);
+//        $teachers->verified = 1;
+//        $teachers->update();
+//        return redirect('/teacher-request')->with('status', 'Teacher is verified now');
+
+        try {
+            $teachers = Teacher::where('userid', $id)->first();
+            $teachers->verified = 1;
+            $teachers->update();
+            return redirect('/teacher-request')->with('status', 'Teacher is verified now');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return redirect('/teacher-request')->with('status', ' Failed to varify Teacher');
+        }
     }
 
     public function acceptCoaching(Request $request, $id)
     {
-        $coachings = Coaching::findOrFail($id);
-        $coachings->verified = 1;
-        $coachings->update();
-        $data = $coachings->directorname;
-        return redirect('/coaching-request')->with('status', 'Coaching is verified now');
+        try {
+            $coachings = Coaching::where('userid', $id)->first();
+            $coachings->verified = 1;
+            $coachings->update();
+//            $data = $coachings->directorname;
+            return redirect('/coaching-request')->with('status', 'Coaching is verified now');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return redirect('/coaching-request')->with('status', 'Failed to varify Coaching');
+
+        }
+
     }
 }
