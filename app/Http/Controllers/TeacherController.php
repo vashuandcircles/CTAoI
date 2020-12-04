@@ -8,6 +8,7 @@ use App\Entities\Teacher;
 use App\Http\Requests\TeacherRequest;
 use App\Level;
 use App\place;
+use App\Repositories\CustomRepository;
 use App\Repositories\TeacherRepository;
 use App\User;
 use Illuminate\Http\Request;
@@ -56,11 +57,7 @@ class TeacherController extends Controller
                 'phone' => $request->phone,
                 'type' => 0,
             ]);
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $filePath = $file->getPathName();
-                $img = cloudinary()->upload($filePath)->getSecurePath();
-            } else $img = null;
+            $img = (new CustomRepository())->upload($request);
             Teacher::create([
                 'userid' => $user->id,
                 'level' => ucwords(strtolower($request->level)),
@@ -94,7 +91,7 @@ class TeacherController extends Controller
                 'altphone', 'level', 'description', 'specialization', 'city', 'state', 'userid', 'gender'
             ]);
             if ($request->hasFile('image')) {
-                $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                $img = (new CustomRepository())->upload($request);
                 $attributes['imgpath'] = $img;
             }
             DB::beginTransaction();

@@ -9,12 +9,11 @@ use App\Http\Requests\CreateCoachingRequest;
 use App\Level;
 use App\place;
 use App\Repositories\CoachingRepository;
+use App\Repositories\CustomRepository;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use JD\Cloudder\Facades\Cloudder;
 
 
 class CoachingController extends Controller
@@ -65,11 +64,7 @@ class CoachingController extends Controller
                 'type' => 1,
             ]);
             $secondaryid = $user->id;
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $filePath = $file->getPathName();
-                $img = cloudinary()->upload($filePath)->getSecurePath();
-            } else $img = null;
+            $img = (new CustomRepository())->upload($request);
             Coaching::create([
                 'name' => ucwords(strtolower($request->name)),
                 'directorname' => ucwords(strtolower($request->directorname)),
@@ -103,18 +98,18 @@ class CoachingController extends Controller
         try {
             $coachings = $this->repo->getById($id);
             $user = $coachings->user;
+            $attributes = $request->only([
+                'directorname', 'description', 'altphone', 'specialization', 'address2', 'address1'
+                , 'state', 'landmark', 'city', 'level'
+            ]);
             if ($request->hasFile('image')) {
-                $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-                $coachings->imgpath = $img;
+                $img = (new CustomRepository())->upload($request);
+                $attributes['imgpath'] = $img;
             }
             DB::beginTransaction();
             $user->name = ucwords(strtolower($request->input('name')));
             $user->email = mb_strtolower($request->input('email'));
             $user->phone = ($request->input('phone'));
-            $attributes = $request->only([
-                'directorname', 'description', 'altphone', 'specialization', 'address2', 'address1'
-                , 'state', 'landmark', 'city', 'level'
-            ]);
             $this->repo->update($id, $attributes);
             $user->save();
             DB::commit();
