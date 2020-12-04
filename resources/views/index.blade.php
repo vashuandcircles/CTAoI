@@ -9,7 +9,7 @@
     <div class="carousel-item active">
       <img src="../img/banner/banner1.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
       <div class="carousel-caption">
-        <h5 style="color: #FFFFFF;">As an Institution</h5>
+        <h3 style="color: #FFFFFF;">As an Institution</h3>
         <p>You will find the large set of teachers and students.</p>
         <div>
             <a href="{{url('/register')}}" class="primary-btn mb-3">Free Registration</a>
@@ -19,7 +19,7 @@
     <div class="carousel-item">
       <img src="../img/banner/banner2.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
       <div class="carousel-caption">
-        <h5>As a Teacher</h5>
+        <h3>As a Teacher</h3>
         <p style="color: #002347;">You we get chance to connect with students and institutions.</p>
         <div>
             <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
@@ -29,7 +29,7 @@
     <div class="carousel-item">
       <img src="../img/banner/banner3.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
       <div class="carousel-caption">
-        <h5>As a Student</h5>
+        <h3>As a Student</h3>
         <p style="color: #002347;">You will choose from wide range of teachers and institutions.</p>
         <div>
             <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
