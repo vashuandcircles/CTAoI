@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Coaching;
 use App\Courses;
 use App\Level;
+use App\Repositories\CustomRepository;
 use App\Student;
 use App\Teacher;
 use App\User;
@@ -127,14 +128,21 @@ class UserController extends Controller
             'landmark' => 'max:255|min:4',
             'description' => 'nullable|max:255',
             'level' => 'max:255',
-            'image' => 'required|mimes:jpeg,jpg,png',
+            'image' => 'mimes:jpeg,jpg,png',
             'address1' => 'required|max:255|min:4',
             'address2' => 'nullable|max:255',
             'city' => 'required|min:4',
         ]);
+        if ($this->notHavingImageInDb($coachings)) {
+            $request->validate([
+                'image' => 'required|mimes:jpeg,jpg,png',
+            ]);
+        }
         try {
             if ($request->hasFile('image')) {
-                $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+//                $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+//                $coachings->imgpath = $img;
+                $img = (new CustomRepository())->upload($request);
                 $coachings->imgpath = $img;
             }
             DB::beginTransaction();
@@ -159,26 +167,37 @@ class UserController extends Controller
 
     }
 
+    public function notHavingImageInDb($data)
+    {
+        return (empty($data->imgpath)) ? true : false;
+    }
+
     public function updateTeacher(Request $request)
     {
-
         $request->validate([
             'name' => 'required|max:255|min:3',
             'gender' => 'required|max:6|min:3',
             'phone' => 'required|regex:/[0-9]{10}/',
-            'image' => 'required|mimes:jpeg,jpg,png',
+            'image' => 'image|mimes:jpeg,jpg,png',
             'specialization' => 'required|max:255|min:3',
             'level' => 'required',
             'state' => 'required|max:255|min:3',
             'city' => 'required|min:4',
         ]);
+
+
         try {
             $id = Auth::id();
             $user = User::findOrFail($id);
             $data = Teacher::where('userid', $id)->first();
+            if ($this->notHavingImageInDb($data)) {
+                $request->validate([
+                    'image' => 'required|mimes:jpeg,jpg,png',
+                ]);
+            }
             DB::beginTransaction();
             if ($request->hasFile('image')) {
-                $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                $img = (new CustomRepository())->upload($request);
                 $data->imgpath = $img;
             }
             $user->name = $request->input('name');
@@ -197,7 +216,6 @@ class UserController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             return redirect('/teacherdashboard')->with('status', 'Failed to update teacher');
 
         }

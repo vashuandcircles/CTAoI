@@ -46,7 +46,7 @@
         </li>
 
         @if($data->is_featured != '1')
-            <a href="{{ url('/payment') }}" class="m-3 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <a href="{{ url('/teacherpayment') }}" class="m-3 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-star fa-sm text-white-50"></i> Upgrade to Pro</a>
         @endif
         <hr class="sidebar-divider d-none d-md-block">

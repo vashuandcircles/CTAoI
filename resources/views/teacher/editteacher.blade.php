@@ -12,7 +12,9 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" value="{{ $user->name }}" class="form-control @error('name') is-invalid @enderror" name="name" autocomplete="name" autofocus>
+                                <input id="name" type="text" value="{{old('name', $user->name) }}"
+                                       class="form-control @error('name') is-invalid @enderror" name="name"
+                                       autocomplete="name" autofocus>
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -24,8 +26,16 @@
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">Gender</label>
                             <div class="col-md-6">
-                                <select id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" autocomplete="gender" autofocus>
-                                    <option value="{{ $data->gender }}">{{ $data->gender }}</option>
+                                <select id="gender" type="text"
+                                        class="form-control @error('gender') is-invalid @enderror" name="gender"
+                                        autocomplete="gender" autofocus>
+                                    @if( old('gender'))
+                                        <option value="{{ old('gender') }}">{{ old('gender') }}</option>
+                                    @endif
+                                    @if( $data->gender)
+                                        <option value="{{ $data->gender }}">{{ $data->gender }}</option>
+                                    @endif
+                                    <option value="">Select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Others">Others</option>
@@ -42,7 +52,9 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" value="{{ $user->phone }}" class="form-control @error('phone') is-invalid @enderror" name="phone" autocomplete="phone">
+                                <input id="phone" type="text" value="{{old('phone', $user->phone) }}"
+                                       class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                       autocomplete="phone">
 
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -52,10 +64,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="altphone" class="col-md-4 col-form-label text-md-right">Alternative Phone</label>
+                            <label for="altphone" class="col-md-4 col-form-label text-md-right">Alternative
+                                Phone</label>
 
                             <div class="col-md-6">
-                                <input id="altphone" type="text" value="{{ $data->altphone }}" class="form-control @error('altphone') is-invalid @enderror" name="altphone" autocomplete="altphone">
+                                <input id="altphone" type="text" value="{{old('altphone', $data->altphone)}}"
+                                       class="form-control @error('altphone') is-invalid @enderror" name="altphone"
+                                       autocomplete="altphone">
 
                                 @error('altphone')
                                 <span class="invalid-feedback" role="alert">
@@ -66,10 +81,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="specialization" class="col-md-4 col-form-label text-md-right">Specialization</label>
+                            <label for="specialization"
+                                   class="col-md-4 col-form-label text-md-right">Specialization</label>
 
                             <div class="col-md-6">
-                                <input id="specialization" type="text" value="{{ $data->specialization }}" class="form-control @error('specialization') is-invalid @enderror" name="specialization" autocomplete="specialization">
+                                <input id="specialization" type="text"
+                                       value="{{old('specialization', $data->specialization) }}"
+                                       class="form-control @error('specialization') is-invalid @enderror"
+                                       name="specialization" autocomplete="specialization">
 
                                 @error('specialization')
                                 <span class="invalid-feedback" role="alert">
@@ -83,7 +102,9 @@
                             <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
 
                             <div class="col-md-3">
-                                <input id="image" type="file" value="{{ old('image') }}" class="form-control @error('image') is-invalid @enderror" name="image" autocomplete="image">
+                                <input id="image" type="file" value="{{ old('image') }}"
+                                       class="form-control @error('image') is-invalid @enderror" name="image"
+                                       autocomplete="image">
                                 @error('image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -91,19 +112,26 @@
                                 @enderror
                             </div>
                             <div class="col-md-3">
-                            <img src="{{ $data->imgpath }}" style="height: 75px; object-fit: cover;">
+                                <img src="{{ $data->imgpath }}" style="height: 75px; object-fit: cover;">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
 
                             <div class="col-md-6">
-                            <select id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" autocomplete="level" autofocus>
-                                    <option value="{{ $data->level }}">{{ $data->level }}</option>
+                                <select id="level" type="text" class="form-control @error('level') is-invalid @enderror"
+                                        name="level" autocomplete="level" autofocus>
+                                    @if(old('level'))
+                                        <option value="{{ old('level') }}">{{ old('level') }}</option>
+                                    @endif
+                                    @if($data->level)
+                                        <option value="{{ $data->level }}">{{ $data->level }}</option>
+                                    @endif
+                                    <option value="">Select level</option>
                                     @foreach($levels as $level)
-                                    <option value="{{ $level->name }}">{{ $level->name }}</option>
+                                        <option value="{{ $level->name }}">{{ $level->name }}</option>
                                     @endforeach
-                            </select>
+                                </select>
 
                                 @error('level')
                                 <span class="invalid-feedback" role="alert">
@@ -116,7 +144,9 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" value="{{ $data->description }}" class="form-control @error('description') is-invalid @enderror" name="description" autocomplete="description">
+                                <input id="description" type="text" value="{{old('description', $data->description) }}"
+                                       class="form-control @error('description') is-invalid @enderror"
+                                       name="description" autocomplete="description">
 
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -129,7 +159,8 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" value="{{ $data->city }}" class="form-control @error('city') is-invalid @enderror" name="city">
+                                <input id="city" type="text" value="{{old('city', $data->city) }}"
+                                       class="form-control @error('city') is-invalid @enderror" name="city">
 
                                 @error('city')
                                 <span class="invalid-feedback" role="alert">
@@ -142,8 +173,15 @@
                             <label for="state" class="col-md-4 col-form-label text-md-right">State</label>
 
                             <div class="col-md-6">
-                                <select id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" autocomplete="state" autofocus>
-                                    <option value="{{ $data->state }}">{{ $data->state }}</option>
+                                <select id="state" type="text" class="form-control @error('state') is-invalid @enderror"
+                                        name="state" autocomplete="state" autofocus>
+                                    @if( old('state') )
+                                        <option value="{{ old('state') }}">{{ old('state') }}</option>
+                                    @endif
+                                    @if( $data->state)
+                                        <option value="{{ $data->state }}">{{ $data->state }}</option>
+                                    @endif
+                                    <option value="">Select State</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>
@@ -174,11 +212,15 @@
                                     <option value="West Bengal">West Bengal</option>
                                     <option value="Andaman and Nicobar">Andaman and Nicobar</option>
                                     <option value="Chandigarh">Chandigarh</option>
-                                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and
+                                        Daman and Diu
+                                    </option>
                                     <option value="Jammu and Kashmir">Jammu and Kashmir</option>
                                     <option value="Ladakh">Ladakh</option>
                                     <option value="Lakshadweep">Lakshadweep</option>
-                                    <option value="National Capital Territory of Delhi">National Capital Territory of Delhi</option>
+                                    <option value="National Capital Territory of Delhi">National Capital Territory of
+                                        Delhi
+                                    </option>
                                     <option value="Puducherry">Puducherry</option>
                                 </select>
 

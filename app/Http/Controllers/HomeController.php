@@ -7,6 +7,7 @@ use App\Event;
 use App\Level;
 use App\place;
 use App\Query;
+use App\Repositories\CustomRepository;
 use App\Subscription;
 use App\Teacher;
 use App\User;
@@ -268,7 +269,9 @@ class HomeController extends Controller
         ]);
 
         if (($request->input('image')) != null) {
-            $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+//            $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+//            $data->imgpath = $img;
+            $img = (new CustomRepository())->upload($request);
             $data->imgpath = $img;
         }
         $user->name = $request->input('name');

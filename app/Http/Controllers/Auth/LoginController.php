@@ -38,9 +38,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     public function login(Request $request)
 
-    {   
+    {
         $input = $request->all();
         $this->validate($request, [
 
@@ -48,23 +49,21 @@ class LoginController extends Controller
             'password' => 'required',
 
         ]);
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
+        $remember_me = $request->has('remember');
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']), $remember_me)) {
             if (!auth()->user()->is_admin == 1) {
                 if (auth()->user()->type == 1) {
-                return redirect()->route('coachingdashboard');
-                }
-                elseif (auth()->user()->type == 0) {
+                    return redirect()->route('coachingdashboard');
+                } elseif (auth()->user()->type == 0) {
                     return redirect()->route('teacherdashboard');
-                }
-                elseif (auth()->user()->type == 2) {
+                } elseif (auth()->user()->type == 2) {
                     return redirect()->route('studentdashboard');
                 }
-            }else{
+            } else {
                 return redirect()->route('home');
             }
-        }else{
-            return redirect()->route('login')->with('error','Invalid or Wrong Credentials! ');
+        } else {
+            return redirect()->route('login')->with('error', 'Invalid or Wrong Credentials! ');
         }
     }
 }
