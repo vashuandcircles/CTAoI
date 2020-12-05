@@ -139,21 +139,22 @@ class UserController extends Controller
             ]);
         }
         try {
+            $attributes = $request->only([
+                'directorname', 'description', 'altphone', 'specialization', 'address2', 'address1'
+                , 'state', 'landmark', 'city', 'level'
+            ]);
             if ($request->hasFile('image')) {
 //                $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
 //                $coachings->imgpath = $img;
                 $img = (new CustomRepository())->upload($request);
-                $coachings->imgpath = $img;
+                $attributes['imgpath'] = $img;
             }
             DB::beginTransaction();
             $user->name = ucwords(strtolower($request->input('name')));
             $user->email = mb_strtolower($request->input('email'));
             $user->phone = ($request->input('phone'));
             $user->save();
-            $attributes = $request->only([
-                'directorname', 'description', 'altphone', 'specialization', 'address2', 'address1'
-                , 'state', 'landmark', 'city', 'level'
-            ]);
+
             $coachings->update($attributes);
             DB::commit();
             return redirect()->route('coachingdashboard')->with('status', 'Coaching Updated Successfully');
