@@ -1,50 +1,53 @@
 @include('partials.header')
 @if (session('status'))
-<div class="alert alert-success mt-2 ml-2 mr-2" role="alert">
-    {{ session('status') }}
-</div>
+    <div class="alert alert-success mt-2 ml-2 mr-2" role="alert">
+        {{ session('status') }}
+    </div>
 @endif
 <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="../img/banner/banner1.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
-      <div class="carousel-caption">
-        <h3 style="color: #FFFFFF;">As an Institution</h3>
-        <p>You will find the large set of teachers and students.</p>
-        <div>
-            <a href="{{url('/register')}}" class="primary-btn mb-3">Free Registration</a>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../img/banner/banner1.jpg"
+                 style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
+            <div class="carousel-caption">
+                <h3 style="color: #FFFFFF;">As an Institution</h3>
+                <p>You will find the large set of teachers and students.</p>
+                <div>
+                    <a href="{{url('/register')}}" class="primary-btn mb-3">Free Registration</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="../img/banner/banner2.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
-      <div class="carousel-caption">
-        <h3>As a Teacher</h3>
-        <p style="color: #002347;">You we get chance to connect with students and institutions.</p>
-        <div>
-            <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
+        <div class="carousel-item">
+            <img src="../img/banner/banner2.jpg"
+                 style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
+            <div class="carousel-caption">
+                <h3>As a Teacher</h3>
+                <p style="color: #002347;">You we get chance to connect with students and institutions.</p>
+                <div>
+                    <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="../img/banner/banner3.jpg" style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
-      <div class="carousel-caption">
-        <h3>As a Student</h3>
-        <p style="color: #002347;">You will choose from wide range of teachers and institutions.</p>
-        <div>
-            <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
+        <div class="carousel-item">
+            <img src="../img/banner/banner3.jpg"
+                 style="max-height:100vh; z-index: 1; position: relative; object-fit: cover;" class="w-100" alt="...">
+            <div class="carousel-caption">
+                <h3>As a Student</h3>
+                <p style="color: #002347;">You will choose from wide range of teachers and institutions.</p>
+                <div>
+                    <a href="{{url('/register')}}" class="primary-btn2 mb-3">Free Registration</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselFade" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselFade" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+    <a class="carousel-control-prev" href="#carouselFade" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselFade" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
 <!--================ Start Feature Area =================-->
 <section class="feature_area section_gap_top">
@@ -54,7 +57,7 @@
                 <div class="main_title">
                     <h2 class="mb-3">Features</h2>
                     <p>
-                    An investment in knowledge pays the best interest
+                        An investment in knowledge pays the best interest
                     </p>
                 </div>
             </div>
@@ -66,7 +69,7 @@
                     <div class="desc">
                         <h4 class="mt-3 mb-2">As an Institution</h4>
                         <p>
-                        You will find the large set of teachers and students on single platform.
+                            You will find the large set of teachers and students on single platform.
                         </p>
                     </div>
                 </div>
@@ -78,7 +81,7 @@
                     <div class="desc">
                         <h4 class="mt-3 mb-2">As a Teacher</h4>
                         <p>
-                        You we get chance to connect with students and institutions.
+                            You we get chance to connect with students and institutions.
                         </p>
                     </div>
                 </div>
@@ -90,7 +93,7 @@
                     <div class="desc">
                         <h4 class="mt-3 mb-2">As a Student</h4>
                         <p>
-                        You will have wide range of options to choose from teachers and institutions.
+                            You will have wide range of options to choose from teachers and institutions.
                         </p>
                     </div>
                 </div>
@@ -139,122 +142,252 @@
     </div>
 </section>
 <!--================ End Feature Area =================-->
-@if($coachingscount)
-<!--================ Start Coachings  Area =================-->
-<div class="popular_courses">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3">Our Popular Coachings</h2>
-                    <p>
-                    The roots of education are bitter, but the fruit is sweet
-                    </p>
-                </div>
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-lg-5">
+            <div class="main_title">
+                <h2 class="mb-3"> Offer! Offer!! Offer!!!
+                </h2>
+                <p>
+                    Register as Premium Member and Avail 10% Off <br>
+                    Register as Exclusive Member and Avail 15% Off
+                </p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="owl-carousel active_course">
-                    @foreach ($coachings as $key => $row)
-                    <?php if ($row->verified && $row->active && $row->is_featured) { ?>
-                        <div class="single_course" style="height: 750px;">
-                            <div class="course_head">
-                                <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;" alt="" />
-                            </div>
-                            <div class="course_content">
-                            <h4 class="mb-3" style="height: 40px;">
-                                <a>{{ $user[$key]->name }}</a>
-                            </h4>
-                            <h6>
-                                Expert in : {{ $row['specialization'] }}
-                            </h6>
-                            <h6>
-                                Level : {{ $row->level}}
-                            </h6>
-                            <h6>
-                                Contact : {{ $row->phone}}
-                            </h6>
-                            <h6 style="height: 30px; word-wrap: break-word;">
-                                Email : {{ $user[$key]->email }}
-                            </h6>
-                            <h6>
-                                Director : {{ $row->directorname}}
-                            </h6>
-                            <h6>
-                                Address : @if($row->address1 != $row->city) {{ $row->address1}}, @endif @if($row->address2) {{ $row->address2}}, @endif {{ $row->city}}, {{ $row->state}}
-                            </h6>
-                            <div class="col-12 text-center">
-                                <a href="/coachingdetail/{{ $row->userid }}" class="mt-4 primary-btn ">Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    @endforeach
-                </div>
-            </div>
+        {{--        <div class="col-lg-5">--}}
+        <div class="table-responsive text-nowrap">
+            <!--Table-->
+            <table class="table table-striped">
+
+                <!--Table head-->
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Position</th>
+                    <th>Age</th>
+                </tr>
+                </thead>
+                <!--Table head-->
+
+                <!--Table body-->
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Kate</td>
+                    <td>Moss</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>23</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Anna</td>
+                    <td>Wintour</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>36</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Tom</td>
+                    <td>Bond</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Jerry</td>
+                    <td>Horwitz</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Janis</td>
+                    <td>Joplin</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>39</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>Gary</td>
+                    <td>Winogrand</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>37</td>
+                </tr>
+                <tr>
+                    <th scope="row">7</th>
+                    <td>Angie</td>
+                    <td>Smith</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>52</td>
+                </tr>
+                <tr>
+                    <th scope="row">8</th>
+                    <td>John</td>
+                    <td>Mattis</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>28</td>
+                </tr>
+                <tr>
+                    <th scope="row">9</th>
+                    <td>Otto</td>
+                    <td>Morris</td>
+                    <td>USA / The United Kingdom / China / Russia</td>
+                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+                    <td>35</td>
+                </tr>
+                </tbody>
+                <!--Table body-->
+
+
+            </table>
+            <!--Table-->
         </div>
+        {{--        </div>--}}
     </div>
 </div>
-<!--================ End Coachings Area =================-->
-@endif
-@if($teacherscount)
-<!--================ Start Popular Courses Area =================-->
-<div class="popular_courses">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3">Our Popular Teachers</h2>
-                    <p>
-                    Live as if you were to die tomorrow. Learn as if you were to live forever
-                    </p>
+@if($coachingscount)
+    <!--================ Start Coachings  Area =================-->
+    <div class="popular_courses">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="main_title">
+                        <h2 class="mb-3">Our Popular Coachings</h2>
+                        <p>
+                            The roots of education are bitter, but the fruit is sweet
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-
-            <div class="col-lg-12">
-                <div class="owl-carousel active_course">
-                    @foreach ($teachers as $key => $row)
-                    <?php if ($row->verified && $row->active && $row->is_featured) { ?>
-                        <div class="single_course">
-                            <div class="course_head">
-                                <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;" alt="" />
-                            </div>
-                            <div class="course_content">
-                                <h4 class="mb-4">
-                                    <a>{{ $teacheruser[$key]->name }}</a>
-                                </h4>
-                                <p>
-                                    {{ $row->description}}
-                                </p>
-                                <br>
-                                <h6>
-                                    Contact : {{ $row->phone}}
-                                </h6>
-                                <h6 style="word-wrap: break-word;">
-                                    Email : {{ $teacheruser[$key]->email }}
-                                </h6>
-                                <h6>
-                                    Expert in : {{ $row->specialization}}
-                                </h6>
-                                <h6>
-                                    Address : {{ $row->city}}, {{ $row->state}}
-                                </h6>
-                                <div class="col-12 text-center">
-                                    <a href="/teacherdetail/{{ $row->userid }}" class="mt-4 primary-btn ">Details</a>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="owl-carousel active_course">
+                        @foreach ($coachings as $key => $row)
+                            <?php if ($row->verified && $row->active && $row->is_featured) { ?>
+                            <div class="single_course" style="height: 750px;">
+                                <div class="course_head">
+                                    <img class="img-fluid" src="{{ $row->imgpath}}"
+                                         style="height: 300px; object-fit: cover;" alt=""/>
+                                </div>
+                                <div class="course_content">
+                                    <h4 class="mb-3" style="height: 40px;">
+                                        <a>{{ $user[$key]->name }}</a>
+                                    </h4>
+                                    <h6>
+                                        Expert in : {{ $row['specialization'] }}
+                                    </h6>
+                                    <h6>
+                                        Level : {{ $row->level}}
+                                    </h6>
+                                    <h6>
+                                        Contact : {{ $row->phone}}
+                                    </h6>
+                                    <h6 style="height: 30px; word-wrap: break-word;">
+                                        Email : {{ $user[$key]->email }}
+                                    </h6>
+                                    <h6>
+                                        Director : {{ $row->directorname}}
+                                    </h6>
+                                    <h6>
+                                        Address : @if($row->address1 != $row->city) {{ $row->address1}}
+                                        , @endif @if($row->address2) {{ $row->address2}}, @endif {{ $row->city}}
+                                        , {{ $row->state}}
+                                    </h6>
+                                    <div class="col-12 text-center">
+                                        <a href="/coachingdetail/{{ $row->userid }}"
+                                           class="mt-4 primary-btn ">Details</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php } ?>
-                    @endforeach
+                            <?php } ?>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--================ End Popular Courses Area =================-->
+    <!--================ End Coachings Area =================-->
+@endif
+@if($teacherscount)
+    <!--================ Start Popular Courses Area =================-->
+    <div class="popular_courses">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="main_title">
+                        <h2 class="mb-3">Our Popular Teachers</h2>
+                        <p>
+                            Live as if you were to die tomorrow. Learn as if you were to live forever
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="owl-carousel active_course">
+                        @foreach ($teachers as $key => $row)
+                            <?php if ($row->verified && $row->active && $row->is_featured) { ?>
+                            <div class="single_course">
+                                <div class="course_head">
+                                    <img class="img-fluid" src="{{ $row->imgpath}}"
+                                         style="height: 300px; object-fit: cover;" alt=""/>
+                                </div>
+                                <div class="course_content">
+                                    <h4 class="mb-4">
+                                        <a>{{ $teacheruser[$key]->name }}</a>
+                                    </h4>
+                                    <p>
+                                        {{ $row->description}}
+                                    </p>
+                                    <br>
+                                    <h6>
+                                        Contact : {{ $row->phone}}
+                                    </h6>
+                                    <h6 style="word-wrap: break-word;">
+                                        Email : {{ $teacheruser[$key]->email }}
+                                    </h6>
+                                    <h6>
+                                        Expert in : {{ $row->specialization}}
+                                    </h6>
+                                    <h6>
+                                        Address : {{ $row->city}}, {{ $row->state}}
+                                    </h6>
+                                    <div class="col-12 text-center">
+                                        <a href="/teacherdetail/{{ $row->userid }}"
+                                           class="mt-4 primary-btn ">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================ End Popular Courses Area =================-->
 @endif
 <!--================ Start Registration Area =================-->
 <!-- <div class="section_gap registration_area">
@@ -419,78 +552,78 @@
 
 <!-- ================ Start Events Area ================= -->
 @if($eventcount)
-<div class="events_area">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3 text-white">Features</h2>
+    <div class="events_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="main_title">
+                        <h2 class="mb-3 text-white">Features</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="single_event position-relative">
-                    <div class="event_thumb">
-                        <img src="img/event/e1.jpg" alt="" />
-                    </div>
-                    <div class="event_details">
-                        <div class="d-flex mb-4">
-                            <div class="date"><span>15</span> Oct</div>
-
-                            <div class="time-location">
-                                <p>
-                                    <span class="ti-time mr-2"></span> 12:00 AM - 12:30 AM
-                                </p>
-                                <p>
-                                    <span class="ti-location-pin mr-2"></span> Purnia
-                                </p>
-                            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="single_event position-relative">
+                        <div class="event_thumb">
+                            <img src="img/event/e1.jpg" alt=""/>
                         </div>
-                        <p>
-                            One make creepeth man for so bearing their firmament won't
-                            fowl meat over seas great
-                        </p>
-                        <a href="#" class="primary-btn rounded-0 mt-3">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="single_event position-relative">
-                    <div class="event_thumb">
-                        <img src="img/event/e2.jpg" alt="" />
-                    </div>
-                    <div class="event_details">
-                        <div class="d-flex mb-4">
-                            <div class="date"><span>25</span> Oct</div>
+                        <div class="event_details">
+                            <div class="d-flex mb-4">
+                                <div class="date"><span>15</span> Oct</div>
 
-                            <div class="time-location">
-                                <p>
-                                    <span class="ti-time mr-2"></span> 12:00 AM - 12:30 AM
-                                </p>
-                                <p>
-                                    <span class="ti-location-pin mr-2"></span> Bangalore
-                                </p>
+                                <div class="time-location">
+                                    <p>
+                                        <span class="ti-time mr-2"></span> 12:00 AM - 12:30 AM
+                                    </p>
+                                    <p>
+                                        <span class="ti-location-pin mr-2"></span> Purnia
+                                    </p>
+                                </div>
                             </div>
+                            <p>
+                                One make creepeth man for so bearing their firmament won't
+                                fowl meat over seas great
+                            </p>
+                            <a href="#" class="primary-btn rounded-0 mt-3">View Details</a>
                         </div>
-                        <p>
-                            One make creepeth man for so bearing their firmament won't
-                            fowl meat over seas great
-                        </p>
                     </div>
                 </div>
-            </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="single_event position-relative">
+                        <div class="event_thumb">
+                            <img src="img/event/e2.jpg" alt=""/>
+                        </div>
+                        <div class="event_details">
+                            <div class="d-flex mb-4">
+                                <div class="date"><span>25</span> Oct</div>
 
-            <!-- <div class="col-lg-12">
-                <div class="text-center pt-lg-5 pt-3">
-                    <a href="#" class="event-link">
-                        View All Event <img src="img/next.png" alt="" />
-                    </a>
+                                <div class="time-location">
+                                    <p>
+                                        <span class="ti-time mr-2"></span> 12:00 AM - 12:30 AM
+                                    </p>
+                                    <p>
+                                        <span class="ti-location-pin mr-2"></span> Bangalore
+                                    </p>
+                                </div>
+                            </div>
+                            <p>
+                                One make creepeth man for so bearing their firmament won't
+                                fowl meat over seas great
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div> -->
+
+                <!-- <div class="col-lg-12">
+                    <div class="text-center pt-lg-5 pt-3">
+                        <a href="#" class="event-link">
+                            View All Event <img src="img/next.png" alt="" />
+                        </a>
+                    </div>
+                </div> -->
+            </div>
         </div>
     </div>
-</div>
 @endif
 <!--================ End Events Area =================-->
 
