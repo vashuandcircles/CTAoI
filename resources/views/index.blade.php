@@ -143,6 +143,7 @@
 </section>
 <!--================ End Feature Area =================-->
 <div class="container">
+
     <div class="row justify-content-center">
 
         <div class="col-lg-5">
@@ -159,108 +160,124 @@
         <div class="table-responsive text-nowrap">
             <!--Table-->
             <table class="table table-striped">
-
                 <!--Table head-->
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Country</th>
-                    <th>City</th>
-                    <th>Position</th>
-                    <th>Age</th>
+                    <th colspan="6" class="text-center">Plan</th>
+                </tr>
+                <tr class="text-center">
+                    <th rowspan="2"></th>
+                    <th>Free</th>
+                    <th>Basic</th>
+                    <th>Advanced</th>
+                    <th>Premium</th>
+                    <th>Exclusive</th>
+                </tr>
+                <tr class="text-center">
+                    <th>Rs. 0/year</th>
+                    <th>Rs. 600/year</th>
+                    <th>Rs. 1200/year</th>
+                    <th>Rs. 2400/year</th>
+                    <th>Rs. 3600/year</th>
                 </tr>
                 </thead>
                 <!--Table head-->
 
                 <!--Table body-->
                 <tbody>
+                @php($val = [
+                'Registration',
+                'Profile Management',
+                'Event/Webinar',
+                'Setup Live Classes'])
+                @foreach($val as $val)
+                    <tr>
+                        <td>{{$val}}</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                @endforeach
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Kate</td>
-                    <td>Moss</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>23</td>
+                    <td>Unmasking Details</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
                 </tr>
                 <tr>
-                    <th scope="row">2</th>
-                    <td>Anna</td>
-                    <td>Wintour</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>36</td>
+                    <td>Public Page</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
                 </tr>
                 <tr>
-                    <th scope="row">3</th>
-                    <td>Tom</td>
-                    <td>Bond</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>25</td>
+                    <td>YouTube Channel Setup for Offline Video Notes</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
                 </tr>
                 <tr>
-                    <th scope="row">4</th>
-                    <td>Jerry</td>
-                    <td>Horwitz</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>41</td>
+                    <td>Featured/Popular (Coaching, Teacher)</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
                 </tr>
                 <tr>
-                    <th scope="row">5</th>
-                    <td>Janis</td>
-                    <td>Joplin</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>39</td>
+                    <td>Academic Calendar</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
                 </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>Gary</td>
-                    <td>Winogrand</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>37</td>
-                </tr>
-                <tr>
-                    <th scope="row">7</th>
-                    <td>Angie</td>
-                    <td>Smith</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>52</td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td>John</td>
-                    <td>Mattis</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <th scope="row">9</th>
-                    <td>Otto</td>
-                    <td>Morris</td>
-                    <td>USA / The United Kingdom / China / Russia</td>
-                    <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-                    <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
-                    <td>35</td>
-                </tr>
+                @php($values1 = [
+                         'Upload Class (Word/Excel/PPT/PDF)',
+                                         'Attendance',
+                                         'Study Material Tracker',
+                                          'Analytics/Dashboard',
+                                           'Student Feedback/Testimonials'
+                           ])
+                @foreach($values1 as $value)
+
+                    <tr>
+                        <td>{{$value}}</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                @endforeach
+
+                @php($values = [
+                                'Custom Test Series',
+                                'Live Group Chat',
+                                'Host Event/Webinar',
+                                'Top 5 (Coaching, Teacher)',
+                                'Share Profile on Leading Social Media'
+                                ])
+                @foreach($values as $value)
+                    <tr>
+                        <td>{{$value}}</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                    </tr>
+                @endforeach
                 </tbody>
                 <!--Table body-->
-
-
             </table>
             <!--Table-->
         </div>
