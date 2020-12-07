@@ -146,24 +146,30 @@
 
     <div class="row justify-content-center">
 
-        <div class="col-lg-5">
-            <div class="main_title">
+{{--        <div class="col-lg-5">--}}
+            <div class="main_title col-lg-5">
                 <h2 class="mb-3"> Offer! Offer!! Offer!!!
                 </h2>
                 <p>
+{{--                <h4 class="mt-3 mb-2"> Register as Premium Member and Avail 10% Off</h4>--}}
+{{--                <h4 class="mt-3 mb-2">Register as Exclusive Member and Avail 15% Of f</h4>--}}
                     Register as Premium Member and Avail 10% Off <br>
                     Register as Exclusive Member and Avail 15% Off
                 </p>
+                <img src="{{asset('img/offer-image.png')}}" style="height: 180px;" alt="offer">
             </div>
-        </div>
+{{--        </div>--}}
         {{--        <div class="col-lg-5">--}}
         <div class="table-responsive text-nowrap">
             <!--Table-->
             <table class="table table-striped">
                 <!--Table head-->
                 <thead>
+
                 <tr>
-                    <th colspan="6" class="text-center">Plan</th>
+                    <th colspan="6" class="text-center">Plan
+                    </th>
+
                 </tr>
                 <tr class="text-center">
                     <th rowspan="2"></th>
@@ -276,6 +282,13 @@
                         <td>Yes</td>
                     </tr>
                 @endforeach
+                <tr>
+                    <td colspan="2" ></td>
+                    <td><a href="{{url('/register')}}">Sign Up</a></td>
+                    <td><a href="{{url('/register')}}">Sign Up</a></td>
+                    <td><a href="{{url('/register')}}">Sign Up</a></td>
+                    <td><a href="{{url('/register')}}">Sign Up</a></td>
+                </tr>
                 </tbody>
                 <!--Table body-->
             </table>
@@ -284,6 +297,9 @@
         {{--        </div>--}}
     </div>
 </div>
+<br>
+<br>
+<br>
 @if($coachingscount)
     <!--================ Start Coachings  Area =================-->
     <div class="popular_courses">
