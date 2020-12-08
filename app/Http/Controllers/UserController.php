@@ -144,23 +144,19 @@ class UserController extends Controller
                 , 'state', 'landmark', 'city', 'level'
             ]);
             if ($request->hasFile('image')) {
-//                $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-//                $coachings->imgpath = $img;
                 $img = (new CustomRepository())->upload($request);
                 $attributes['imgpath'] = $img;
             }
             DB::beginTransaction();
             $user->name = ucwords(strtolower($request->input('name')));
-            $user->email = mb_strtolower($request->input('email'));
+//            $user->email = mb_strtolower($request->input('email'));
             $user->phone = ($request->input('phone'));
             $user->save();
-
             $coachings->update($attributes);
             DB::commit();
             return redirect()->route('coachingdashboard')->with('status', 'Coaching Updated Successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->route('coachingdashboard')->with('status', 'Failed to update Data');
 
