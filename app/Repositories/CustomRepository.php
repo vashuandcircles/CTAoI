@@ -18,10 +18,8 @@ class CustomRepository
             return cloudinary()->upload($request->file('image')->getRealPath(), [
                 'folder' => 'uploads',
                 'transformation' => [
-                    'width' => 300,
-                    'height' => 300,
-                    'gravity' => 'faces',
-                    'crop' => 'fill'
+                    'quality' => 'auto',
+                    'fetch_format' => 'auto'
                 ]
             ])->getSecurePath();
         }
