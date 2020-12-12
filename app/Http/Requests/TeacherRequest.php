@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Entities\Teacher;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TeacherRequest extends FormRequest
@@ -13,12 +14,15 @@ class TeacherRequest extends FormRequest
      */
     public function rules()
     {
+        $user_id = null;
         $id = $this->route()->parameter('teacher');
+        if ($id)
+            $user_id = Teacher::findOrFail($id)->userid;
         return [
-            'email' => 'required|max:255|email|unique:users,name,' . $id,
+            'email' => 'required|max:255|email|unique:users,email,' . $user_id,
             'name' => 'required|max:255|min:3',
             'gender' => 'required|max:6|min:3',
-            'phone' => 'required|regex:/[0-9]{10}/',
+            'phone' => 'required|unique:users,phone,' . $user_id,
             'altphone' => 'nullable|regex:/[0-9]{10}/',
             'specialization' => 'required|max:255|min:3',
             'image' => 'nullable|mimes:jpeg,jpg,png',
