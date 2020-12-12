@@ -33,8 +33,8 @@ class TeacherController extends Controller
 
     public function index(Request $request)
     {
-        $user = User::where('type', 0)->orderBy('id', 'desc')->paginate(10);
-        $teachers = Teacher::orderBy('userid', 'asc')->paginate(10);
+        $user = User::where('type', 0)->paginate(15);
+        $teachers = Teacher::orderBy('userid', 'asc')->paginate(15);
         return view('teachers.index', compact('teachers', 'user'));
     }
 

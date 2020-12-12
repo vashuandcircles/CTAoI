@@ -39,7 +39,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">Gender</label>
                             <div class="col-md-6">
@@ -71,7 +70,6 @@
                                        value="{{old('phone', $user->phone )}}"
                                        class="form-control @error('phone') is-invalid @enderror" name="phone"
                                        autocomplete="phone">
-
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -84,10 +82,9 @@
                                 Phone</label>
 
                             <div class="col-md-6">
-                                <input id="altphone" type="text" value="{{old('altphone', $user->altphone )}}"
+                                <input id="altphone" type="text" value="{{old('altphone', $teachers->altphone )}}"
                                        class="form-control @error('altphone') is-invalid @enderror" name="altphone"
                                        autocomplete="altphone">
-
                                 @error('altphone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -95,17 +92,14 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="specialization"
                                    class="col-md-4 col-form-label text-md-right">Specialization</label>
-
                             <div class="col-md-6">
                                 <input id="specialization" type="text"
-                                       value="{{old('specialization', $user->specialization )}}"
+                                       value="{{old('specialization', $teachers->specialization)}}"
                                        class="form-control @error('specialization') is-invalid @enderror"
                                        name="specialization" autocomplete="specialization">
-
                                 @error('specialization')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -157,7 +151,7 @@
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
                             <div class="col-md-6">
-                                <input id="description" type="text" value="{{old('description', $user->description )}}"
+                                <input id="description" type="text" value="{{old('description', $teachers->description )}}"
                                        class="form-control @error('description') is-invalid @enderror"
                                        name="description" autocomplete="description">
                                 @error('description')
@@ -171,7 +165,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" value="{{old('city', $user->city )}}"
+                                <input id="city" type="text" value="{{old('city', $teachers->city )}}"
                                        class="form-control @error('city') is-invalid @enderror" name="city">
 
                                 @error('city')

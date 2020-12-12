@@ -33,8 +33,8 @@ class CoachingController extends Controller
 
     public function index(Request $request)
     {
-        $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(10);
-        $coachings = Coaching::orderBy('userid', 'desc')->paginate(10);
+        $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(12);
+        $coachings = Coaching::orderBy('userid', 'desc')->paginate(12);
         if ($request->ajax()) {
             $view = view('data')->with(compact('user', 'coachings'))->render();
             return response()->json(['html' => $view]);

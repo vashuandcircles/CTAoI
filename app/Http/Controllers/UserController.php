@@ -178,11 +178,9 @@ class UserController extends Controller
             'image' => 'image|mimes:jpeg,jpg,png',
             'specialization' => 'required|max:255|min:3',
             'level' => 'required',
-            'state' => 'required|max:255|min:3',
-            'city' => 'required|min:4',
+            'state' => 'required|max:255',
+            'city' => 'required',
         ]);
-
-
         try {
             $id = Auth::id();
             $user = User::findOrFail($id);
