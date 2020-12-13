@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Coaching;
+use App\Entities\Student;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Student;
 use App\Teacher;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -62,10 +62,9 @@ class RegisterController extends Controller
             }
             DB::commit();
             return $user;
-
         } catch (\Exception $exception) {
             DB::rollBack();
-            return redirect()->back()->with('failed', 'oops something went wrong');
+            return redirect()->back()->with('failed', 'Oops something went wrong');
         }
 
     }

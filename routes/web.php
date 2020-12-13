@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'dashboard'], function () {
         Route::resource('coachings', 'CoachingController');
         Route::resource('teachers', 'TeacherController');
+        Route::resource('students', 'StudentController');
         Route::put('feature/{id}', 'CoachingController@feature')->name('coachings.feature');
         Route::put('tfeature/{id}', 'TeacherController@feature')->name('teachers.feature');
     });

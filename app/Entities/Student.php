@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+    protected $table = 'students';
     protected $fillable = [
         'level',
         'userid',
@@ -23,7 +24,7 @@ class Student extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'userid');
+        return $this->belongsTo(User::class, 'userid');
     }
 
 }

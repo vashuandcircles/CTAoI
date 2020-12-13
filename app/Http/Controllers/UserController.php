@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Coaching;
 use App\Courses;
+use App\Entities\Student;
 use App\Level;
 use App\Repositories\CustomRepository;
-use App\Student;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;

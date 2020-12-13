@@ -11,6 +11,7 @@ use App\Level;
 use App\place;
 use App\Repositories\CoachingRepository;
 use App\Repositories\CustomRepository;
+use App\Repositories\StudentRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,31 +25,30 @@ class StudentController extends Controller
      * @var CoachingRepository
      */
     private $repo;
+    /**
+     * @var Student
+     */
+    private $student;
 
     public function __construct(Student $student)
     {
         $this->middleware(['auth', 'verified']);
-        $this->repo = new CoachingRepository($student);
+        $this->repo = new StudentRepository($student);
+        $this->student = $student;
     }
 
 
-    public function index(Request $request)
+    public function index()
     {
-        $user = User::where('type', 1)->orderBy('id', 'desc')->paginate(12);
-        $students = Coaching::orderBy('userid', 'desc')->paginate(12);
-        if ($request->ajax()) {
-            $view = view('data')->with(compact('user', 'coachings'))->render();
-            return response()->json(['html' => $view]);
-        }
-        return view('coachings.index', compact('coachings', 'user'));
-
+        $students = Student::with('user')->orderBy('userid', 'desc')->paginate(12);
+        return view('students.index', compact('students'));
     }
 
     public function create()
     {
         $places = place::all();
         $levels = Level::orderBy('name', 'asc')->get();
-        return view('coachings.create', compact('places', 'levels'));
+        return view('students.create', compact('places', 'levels'));
 
 
     }
@@ -83,11 +83,11 @@ class StudentController extends Controller
                 'verified' => 1,
             ]);
             DB::commit();
-            return redirect()->route('coachings.index')->with('status', 'Coaching created successfully');
+            return redirect()->route('students.index')->with('status', 'Coaching created successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
-            return redirect()->route('coachings.index')->with('status', 'Failed to create coaching.');
+            return redirect()->route('students.index')->with('status', 'Failed to create student.');
 
         }
 
@@ -114,11 +114,11 @@ class StudentController extends Controller
             $this->repo->update($id, $attributes);
             $user->save();
             DB::commit();
-            return redirect()->route('coachings.index')->with('status', 'Coaching Updated Successfully');
+            return redirect()->route('students.index')->with('status', 'Coaching Updated Successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
-            return redirect()->route('coachings.index')->with('status', 'Failed to update Data');
+            return redirect()->route('students.index')->with('status', 'Failed to update Data');
 
         }
     }
@@ -128,7 +128,7 @@ class StudentController extends Controller
         $students = $this->repo->getById($id);
         $user = $students->user;
         $levels = Level::orderBy('name', 'asc')->get();
-        return view('coachings.edit', compact('coachings', 'levels', 'user'));
+        return view('students.edit', compact('students', 'levels', 'user'));
 
     }
 
@@ -165,6 +165,6 @@ class StudentController extends Controller
         $students = $this->repo->getById($id);
         $students->is_featured = 1;
         $students->update();
-        return redirect()->route('coachings.index')->with('status', 'Coaching is featured now');
+        return redirect()->route('students.index')->with('status', 'Coaching is featured now');
     }
 }
