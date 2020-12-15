@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Query;
-use App\Subscription;
-use Illuminate\Http\Request;
-use App\Teacher;
 use App\Coaching;
 use App\Courses;
+use App\Entities\Student;
 use App\Event;
 use App\Level;
 use App\place;
+use App\Query;
+use App\Subscription;
+use App\Teacher;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
@@ -25,8 +26,8 @@ class PageController extends Controller
         $teacherscount = Teacher::where('verified', 1)->where('is_featured', 1)->count();
         $eventcount = Event::count();
         $event = Event::all();
-        $teachers = Teacher::all();
-        return view('index', compact('user', 'teachers', 'coachings', 'teacheruser', 'eventcount', 'event','coachingscount','teacherscount'));
+        $teachers = Teacher::with('user')->get();
+        return view('index', compact('user', 'teachers', 'coachings', 'teacheruser', 'eventcount', 'event', 'coachingscount', 'teacherscount'));
     }
 
     public function welcome()
@@ -52,10 +53,19 @@ class PageController extends Controller
         return view('teachers', compact('teachers', 'teacheruser'));
     }
 
+    public function students()
+    {
+//        $teacheruser = User::where('type', 0)->orderBy('id', 'desc')->paginate(20);
+//        $teachers = Teacher::orderBy('userid', 'desc')->paginate(20);
+        $students = Student::with('user')->get();
+        return view('students', compact('students'));
+    }
+
     public function contact()
     {
         return view('contact');
     }
+
     public function coachingpayment()
     {
         $id = Auth::id();
@@ -63,6 +73,7 @@ class PageController extends Controller
         $data = Coaching::where('userid', $id)->first();
         return view('coaching.payment', compact('user', 'data'));
     }
+
     public function teacherpayment()
     {
         $id = Auth::id();
@@ -71,10 +82,12 @@ class PageController extends Controller
         $data = Teacher::where('userid', $id)->first();
         return view('teacher.payment', compact('user', 'data', 'courses'));
     }
+
     public function about()
     {
         return view('about');
     }
+
     public function coachingDetail(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -82,12 +95,19 @@ class PageController extends Controller
         $course = Courses::where('userid', $id)->get();
         return view('coachingdetail', compact('user', 'data', 'course'));
     }
+
     public function teacherDetail(Request $request, $id)
     {
         $user = User::findOrFail($id);
         $data = Teacher::where('userid', $id)->first();
         $course = Courses::where('userid', $id)->get();
         return view('teacherdetail', compact('user', 'data', 'course'));
+    }
+    public function studentDetail(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
+        $course = Courses::where('userid', $id)->get();
+        return view('studentdetail', compact('student', 'course'));
     }
 
     public function coachingRegister()

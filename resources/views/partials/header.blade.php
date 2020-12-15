@@ -55,6 +55,9 @@
                             <li class="nav-item {{ (request()->is('teachers')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{url('/teachers')}}">Tutors</a>
                             </li>
+                            <li class="nav-item {{ (request()->is('teachers')) ? 'active' : '' }}">
+                                <a class="nav-link" href="{{url('/students')}}">Student</a>
+                            </li>
                             <li class="nav-item {{ (request()->is('about')) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{url('/about')}}">About</a>
                             </li>

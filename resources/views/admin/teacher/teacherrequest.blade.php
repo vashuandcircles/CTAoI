@@ -31,7 +31,7 @@
                         @foreach ($teachers as $key => $row)
                         <?php if (!$row->verified  && $row->active) { ?>
                             <tr>
-                                <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
+                                <td><img src="{{ $row->imgpath ?? asset('/img/default-user.jpg')}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
                                 <td>{{ $user[$key]->name }}</td>
                                 <td>{{ $user[$key]->phone }}, {{ $row->altphone}}</td>
                                 <td>{{ $user[$key]->email }}</td>

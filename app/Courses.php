@@ -11,4 +11,10 @@ class Courses extends Model
         'teacher',
         'userid',
     ];
+
+
+    public function course()
+    {
+        return $this->belongsTo(User::class, 'userid');
+    }
 }

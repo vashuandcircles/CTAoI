@@ -2,7 +2,7 @@
     @if ($row->verified && $row->active)
         <div class="single_course col-lg-4 col-sm-12 col-md-6 p-4">
             <div class="course_head">
-                <img class="img-fluid" src="{{ $row->imgpath}}" style="height: 300px; object-fit: cover;"
+                <img class="img-fluid" src="{{ $row->imgpath ?? asset('/img/default-user.jpg')}}" style="height: 300px; object-fit: cover;"
                      alt=""/>
             </div>
             <div class="course_content">

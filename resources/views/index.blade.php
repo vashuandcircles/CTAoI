@@ -146,19 +146,19 @@
 
     <div class="row justify-content-center">
 
-{{--        <div class="col-lg-5">--}}
-            <div class="main_title col-lg-5">
-                <h2 class="mb-3"> Offer! Offer!! Offer!!!
-                </h2>
-                <p>
-{{--                <h4 class="mt-3 mb-2"> Register as Premium Member and Avail 10% Off</h4>--}}
-{{--                <h4 class="mt-3 mb-2">Register as Exclusive Member and Avail 15% Of f</h4>--}}
-                    Register as Premium Member and Avail 10% Off <br>
-                    Register as Exclusive Member and Avail 15% Off
-                </p>
-                <img src="{{asset('img/offer-image.png')}}" style="height: 180px;" alt="offer">
-            </div>
-{{--        </div>--}}
+        {{--        <div class="col-lg-5">--}}
+        <div class="main_title col-lg-5">
+            <h2 class="mb-3"> Offer! Offer!! Offer!!!
+            </h2>
+            <p>
+                {{--                <h4 class="mt-3 mb-2"> Register as Premium Member and Avail 10% Off</h4>--}}
+                {{--                <h4 class="mt-3 mb-2">Register as Exclusive Member and Avail 15% Of f</h4>--}}
+                Register as Premium Member and Avail 10% Off <br>
+                Register as Exclusive Member and Avail 15% Off
+            </p>
+            <img src="{{asset('img/offer-image.png')}}" style="height: 180px;" alt="offer">
+        </div>
+        {{--        </div>--}}
         {{--        <div class="col-lg-5">--}}
         <div class="table-responsive text-nowrap">
             <!--Table-->
@@ -283,7 +283,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="2" ></td>
+                    <td colspan="2"></td>
                     <td><a href="{{url('/register')}}">Sign Up</a></td>
                     <td><a href="{{url('/register')}}">Sign Up</a></td>
                     <td><a href="{{url('/register')}}">Sign Up</a></td>
@@ -321,7 +321,7 @@
                             <?php if ($row->verified && $row->active && $row->is_featured) { ?>
                             <div class="single_course" style="height: 750px;">
                                 <div class="course_head">
-                                    <img class="img-fluid" src="{{ $row->imgpath}}"
+                                    <img class="img-fluid" src="{{ $row->imgpath ?? asset('/img/default-user.jpg')}}"
                                          style="height: 300px; object-fit: cover;" alt=""/>
                                 </div>
                                 <div class="course_content">
@@ -380,40 +380,40 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="owl-carousel active_course">
-                        @foreach ($teachers as $key => $row)
-                            <?php if ($row->verified && $row->active && $row->is_featured) { ?>
-                            <div class="single_course">
-                                <div class="course_head">
-                                    <img class="img-fluid" src="{{ $row->imgpath}}"
-                                         style="height: 300px; object-fit: cover;" alt=""/>
-                                </div>
-                                <div class="course_content">
-                                    <h4 class="mb-4">
-                                        <a>{{ $teacheruser[$key]->name }}</a>
-                                    </h4>
-                                    <p>
-                                        {{ $row->description}}
-                                    </p>
-                                    <br>
-                                    <h6>
-                                        Contact : {{ $row->phone}}
-                                    </h6>
-                                    <h6 style="word-wrap: break-word;">
-                                        Email : {{ $teacheruser[$key]->email }}
-                                    </h6>
-                                    <h6>
-                                        Expert in : {{ $row->specialization}}
-                                    </h6>
-                                    <h6>
-                                        Address : {{ $row->city}}, {{ $row->state}}
-                                    </h6>
-                                    <div class="col-12 text-center">
-                                        <a href="/teacherdetail/{{ $row->userid }}"
-                                           class="mt-4 primary-btn ">Details</a>
+                        @foreach ($teachers as $teacher)
+                            @if ($teacher->verified && $teacher->active && $teacher->is_featured)
+                                <div class="single_course">
+                                    <div class="course_head">
+                                        <img class="img-fluid" src="{{ $teacher->imgpath?? asset('/img/default-user.jpg')}}"
+                                             style="height: 300px; object-fit: cover;" alt=""/>
+                                    </div>
+                                    <div class="course_content">
+                                        <h4 class="mb-4">
+                                            <a>{{ $teacher->user->name }}</a>
+                                        </h4>
+                                        <p>
+                                            {{ $teacher->description}}
+                                        </p>
+                                        <br>
+                                        <h6>
+                                            Contact : {{ $teacher->phone}}
+                                        </h6>
+                                        <h6 style="word-wrap: break-word;">
+                                            Email : {{ $teacher->user->email }}
+                                        </h6>
+                                        <h6>
+                                            Expert in : {{ $teacher->specialization}}
+                                        </h6>
+                                        <h6>
+                                            Address : {{ $teacher->city}}, {{ $teacher->state}}
+                                        </h6>
+                                        <div class="col-12 text-center">
+                                            <a href="/teacherdetail/{{ $teacher->userid }}"
+                                               class="mt-4 primary-btn ">Details</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php } ?>
+                            @endif
                         @endforeach
                     </div>
                 </div>

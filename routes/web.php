@@ -13,6 +13,7 @@ Route::get('/about', 'PageController@about');
 Route::get('/coachings', 'PageController@coachings');
 Route::get('/featuredcoachings', 'PageController@featureCoachings');
 Route::get('/teachers', 'PageController@teachers');
+Route::get('/students', 'PageController@students');
 Route::get('/featuredteachers', 'PagcoachingdashboardeController@featureTeachers');
 Route::post('/addcoachinguser', 'PageController@addCoachingUser');
 Route::post('/addteacheruser', 'PageController@addTeacherUser');
@@ -24,6 +25,7 @@ Route::get('/teacherpayment', 'PageController@teacherpayment');
 
 Route::get('/coachingdetail/{id}', 'PageController@coachingDetail');
 Route::get('/teacherdetail/{id}', 'PageController@teacherDetail');
+Route::get('/studentdetail/{id}', 'PageController@studentDetail');
 
 
 Route::group(['middleware' => ['auth']], function () {
