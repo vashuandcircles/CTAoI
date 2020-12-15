@@ -17,7 +17,6 @@ class Student extends Model
         'gender',
         'city',
         'active',
-        'verified',
         'state',
     ];
     protected $dates = ['created_at', 'updated_at'];

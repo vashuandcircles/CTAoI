@@ -24,7 +24,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Gender</th>
+                        {{--                        <th>Gender</th>--}}
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -40,8 +40,17 @@
                             <td>{{$student->user->name??''}}</td>
                             <td>{{$student->user->phone??''}}</td>
                             <td>{{$student->user->email??''}}</td>
-                            <td>{{$student->gender??''}}</td>
-                            <td>{{$student->active??''}}</td>
+                            {{--                            <td>{{$student->gender??''}}</td>--}}
+                            @if($student->active ==1 )
+                                <span>
+                                   <td class=" btn btn-info btn-sm mt-4">Active</td>
+                               </span>
+                            @else
+                                <span>
+                                   <td class=" btn btn-danger btn-sm mt-4">In Active</td>
+                               </span>
+                            @endif
+
                             <td>
                                 <div class="row">
                                     {{--                                    <form action="{{route('students.feature', $student->id) }}" method="POST">--}}
