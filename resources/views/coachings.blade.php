@@ -1,10 +1,9 @@
 @include('partials.header')
 <section>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <br> <br><br><br>
+        <div class="row justify-content-center" >
+            <div class="col-lg-5" >
+                <div class="main_title"  style="margin-top: 90px;">
                     <h2 class="mb-3">Our Popular Coachings</h2>
                     <p>
                         Replenish man have thing gathering lights yielding shall you

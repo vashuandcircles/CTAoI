@@ -1,10 +1,10 @@
 @include('partials.header')
 <div class="popular_courses">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center"  >
             <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3">Our Popular Coaching</h2>
+                <div class="main_title"   style="margin-top: 90px;">
+                    <h2 >Our Popular Teachers</h2>
                     <p>
                         Replenish man have thing gathering lights yielding shall you
                     </p>
