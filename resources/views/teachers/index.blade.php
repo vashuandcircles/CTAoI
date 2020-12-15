@@ -34,7 +34,7 @@
                         <tr>
                             <td>
                                 <img
-                                    src="@if($row->imgpath != NULL){{ $row->imgpath}}@else ../img/elements/no-image.png  @endif"
+                                    src="{{($row->imgpath ?? asset('/img/default-user.jpg'))}}"
                                     style="width: 50px; height: 75px; object-fit: cover;"></td>
                             <td>{{ $user[$key]->name }}</td>
                             <td>{{ $user[$key]->phone }} <br> {{ $row->altphone}} </td>

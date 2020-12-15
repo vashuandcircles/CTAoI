@@ -95,7 +95,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-3">
-                                <img src="{{ $student->imgpath }}" style="height: 75px; object-fit: cover;">
+                                <img src="{{ $student->imgpath ?? asset('/img/default-user.jpg') }}" style="height: 75px; object-fit: cover;">
                             </div>
                         </div>
                         <div class="form-group row">

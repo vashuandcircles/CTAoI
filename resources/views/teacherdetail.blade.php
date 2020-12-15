@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-8 course_details_left">
                     <div class="main_image text-center">
-                        <img class="img-fluid" src="{{ $data->imgpath }}" alt="">
+                        <img class="img-fluid" src="{{ $data->imgpath ?? asset('/img/default-user.jpg') }}" alt="">
                     </div>
                     <div class="content_wrapper">
                         @if($data->description)

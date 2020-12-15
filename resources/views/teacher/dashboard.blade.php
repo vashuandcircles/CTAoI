@@ -18,7 +18,7 @@
         </div>
         <div class="card-body">
             <div class="text-center">
-                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{$data->imgpath}}" alt="">
+                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{$data->imgpath ?? asset('/img/default-user.jpg')}}" alt="">
             </div>
             <div class="row container">
                 <p class="col-lg-6 col-md-12 col-sm-12">Level: &nbsp; {{$data->level}}</p>

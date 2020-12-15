@@ -92,7 +92,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
 
@@ -105,7 +105,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-3">
-                            <img src="{{ $teachers->imgpath }}" style="height: 75px; object-fit: cover;">
+                            <img src="{{ $teachers->imgpath ?? asset('/img/default-user.jpg') }}" style="height: 75px; ">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -156,7 +156,7 @@
 
                             <div class="col-md-6">
                                 <select id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" autocomplete="state" autofocus>
-                                    <option value="{{ $teachers->state }}">{{ $teachers->state }}</option>    
+                                    <option value="{{ $teachers->state }}">{{ $teachers->state }}</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>

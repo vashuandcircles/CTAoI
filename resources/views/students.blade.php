@@ -28,12 +28,6 @@
                         </p>
                         <br>
                         <h6>
-                            Contact : {{ $student->phone}}
-                        </h6>
-                        <h6 style="word-wrap: break-word;">
-                            Email : {{$student->user->email }}
-                        </h6>
-                        <h6>
                             Address : {{ $student->city}}, {{ $student->state}}
                         </h6>
                         <div class="col-12 text-center">

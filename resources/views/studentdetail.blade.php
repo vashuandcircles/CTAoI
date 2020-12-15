@@ -46,12 +46,7 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a class="justify-content-between d-flex" href="">
-                                <p>Email</p>
-                                <span style="text-align: right;">{{ $student->user->email }}</span>
-                            </a>
-                        </li>
+
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Level </p>
@@ -64,20 +59,7 @@
                                 <span style="text-align: right;">{{ $student->gender }}</span>
                             </a>
                         </li>
-                        <li>
-                            <a class="justify-content-between d-flex" href="">
-                                <p>Phone </p>
-                                <span style="text-align: right;">{{ $student->user->phone }}</span>
-                            </a>
-                        </li>
-                        @if($student->altphone)
-                        <li>
-                            <a class="justify-content-between d-flex" href="">
-                                <p>Alternative Phone </p>
-                                <span style="text-align: right;">{{ $student->altphone }}</span>
-                            </a>
-                        </li>
-                        @endif
+
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>City</p>

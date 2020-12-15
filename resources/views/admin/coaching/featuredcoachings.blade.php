@@ -31,7 +31,7 @@
                         @foreach ($coachings as $row)
                         <?php if ($row->verified && $row->is_featured && $row->active) { ?>
                             <tr>
-                                <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
+                                <td><img src="{{ $row->imgpath ?? asset('/img/default-user.jpg')}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
                                 <td>{{ $row->name}}</td>
                                 <td>{{ $row->directorname}}</td>
                                 <td>{{ $row->phone}}</td>
