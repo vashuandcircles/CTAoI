@@ -151,12 +151,10 @@
             <h2 class="mb-3"> Offer! Offer!! Offer!!!
             </h2>
             <p>
-                {{--                <h4 class="mt-3 mb-2"> Register as Premium Member and Avail 10% Off</h4>--}}
-                {{--                <h4 class="mt-3 mb-2">Register as Exclusive Member and Avail 15% Of f</h4>--}}
                 Register as Premium Member and Avail 10% Off <br>
                 Register as Exclusive Member and Avail 15% Off
             </p>
-            <img src="{{asset('img/offer-image.png')}}" style="height: 180px;" alt="offer">
+            {{--            <img src="{{asset('img/offer-image.png')}}" style="height: 180px;" alt="offer">--}}
         </div>
         {{--        </div>--}}
         {{--        <div class="col-lg-5">--}}
@@ -168,6 +166,10 @@
 
                 <tr>
                     <th colspan="6" class="text-center">Plan
+                    </th>
+                    <th>
+                        <img src="{{asset('img/offer-image.png')}}" style=" height: 100px;margin-top:
+                         -23px;margin-bottom: -30px; margin-left: -280px;" alt="offer">
                     </th>
 
                 </tr>
@@ -384,7 +386,8 @@
                             @if ($teacher->verified && $teacher->active && $teacher->is_featured)
                                 <div class="single_course">
                                     <div class="course_head">
-                                        <img class="img-fluid" src="{{ $teacher->imgpath?? asset('/img/default-user.jpg')}}"
+                                        <img class="img-fluid"
+                                             src="{{ $teacher->imgpath?? asset('/img/default-user.jpg')}}"
                                              style="height: 300px; object-fit: cover;" alt=""/>
                                     </div>
                                     <div class="course_content">
