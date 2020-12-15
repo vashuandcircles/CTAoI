@@ -9,9 +9,12 @@
                         {{ method_field('POST') }}
                         {{ csrf_field() }}
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                             <div class="col-md-6">
-                                <input id="name" value="{{ $user->name }}" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+                                <input id="name" type="text"
+                                       value="{{old('name', $user->name )}}"
+                                       class="form-control @error('name') is-invalid @enderror" name="name"
+                                       autocomplete="name" autofocus>
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -24,7 +27,9 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="phone" value="{{ $user->phone }}" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone">
+                                <input id="phone" type="text" value="{{old('phone', $user->phone) }}"
+                                       class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                       autocomplete="phone">
 
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -36,8 +41,14 @@
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">Gender</label>
                             <div class="col-md-6">
-                                <select id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" autocomplete="gender" autofocus>
-                                    <option value="{{ $data->gender }}">{{ $data->gender }}</option>
+                                <select id="gender" type="text"
+                                        class="form-control @error('gender') is-invalid @enderror" name="gender"
+                                        autocomplete="gender" autofocus>
+                                    @if(old('gender'))
+                                        <option value="{{ old('gender') }}">{{ old('gender') }}</option> @endif
+                                    @if($data->gender )
+                                        <option value="{{ $data->gender }}">{{ $data->gender }}</option> @endif
+                                    <option value="">Select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Others">Others</option>
@@ -53,12 +64,18 @@
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
 
                             <div class="col-md-6">
-                            <select id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" autocomplete="level" autofocus>
-                                    <option value="{{ $data->level }}">{{ $data->level }}</option>
+                                <select id="level" type="text"
+                                        class="form-control @error('level') is-invalid @enderror"
+                                        name="level" autocomplete="level" autofocus>
+                                    @if( old('level'))
+                                        <option value="{{old('level') }}">{{  old('level') }}</option>
+                                    @endif
+                                    @if($data->level)
+                                        <option value="{{ $data->level }}">{{ $data->level }}</option> @endif
                                     @foreach($levels as $level)
-                                    <option value="{{ $level->name }}">{{ $level->name }}</option>
+                                        <option value="{{ $level->name }}">{{ $level->name }}</option>
                                     @endforeach
-                            </select>
+                                </select>
 
                                 @error('level')
                                 <span class="invalid-feedback" role="alert">
@@ -67,11 +84,14 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" value="{{ $data->description }}" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description">
+                                <input id="description" type="text" value="{{old('description', $data->description )}}"
+                                       class="form-control @error('description') is-invalid @enderror"
+                                       name="description" autocomplete="description">
 
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -84,8 +104,9 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
 
                             <div class="col-md-6">
-                                <input id="city" value="{{ $data->city }}" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city">
-
+                                <input id="city" type="text" value="{{old('city', $data->city )}}"
+                                       class="form-control @error('city') is-invalid @enderror"
+                                       name="city">
                                 @error('city')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -97,8 +118,13 @@
                             <label for="state" class="col-md-4 col-form-label text-md-right">State</label>
 
                             <div class="col-md-6">
-                                <select id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" autocomplete="state" autofocus>
-                                    <option value="{{ $data->state }}">{{ $data->state }}</option>
+                                <select id="state" type="text" class="form-control @error('state') is-invalid @enderror"
+                                        name="state" autocomplete="state" autofocus>
+                                    @if( old('state'))
+                                        <option value="{{old('state') }}">{{  old('state') }}</option>
+                                    @endif
+                                    @if($data->state)
+                                        <option value="{{ $data->state }}">{{ $data->state }}</option> @endif
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>
@@ -129,11 +155,15 @@
                                     <option value="West Bengal">West Bengal</option>
                                     <option value="Andaman and Nicobar">Andaman and Nicobar</option>
                                     <option value="Chandigarh">Chandigarh</option>
-                                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and
+                                        Daman and Diu
+                                    </option>
                                     <option value="Jammu and Kashmir">Jammu and Kashmir</option>
                                     <option value="Ladakh">Ladakh</option>
                                     <option value="Lakshadweep">Lakshadweep</option>
-                                    <option value="National Capital Territory of Delhi">National Capital Territory of Delhi</option>
+                                    <option value="National Capital Territory of Delhi">National Capital Territory of
+                                        Delhi
+                                    </option>
                                     <option value="Puducherry">Puducherry</option>
                                 </select>
 

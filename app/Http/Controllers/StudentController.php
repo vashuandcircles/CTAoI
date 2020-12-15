@@ -4,14 +4,13 @@
 namespace App\Http\Controllers;
 
 
-use App\Coaching;
 use App\Entities\Student;
-use App\Http\Requests\CreateCoachingRequest;
+use App\Http\Requests\CreateStudentRequest;
+use App\Http\Requests\StudentRequest;
 use App\Level;
 use App\place;
-use App\Repositories\CoachingRepository;
-use App\Repositories\CustomRepository;
 use App\Repositories\StudentRepository;
+use App\Repositories\CustomRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +21,7 @@ class StudentController extends Controller
 {
 
     /**
-     * @var CoachingRepository
+     * @var StudentRepository
      */
     private $repo;
     /**
@@ -53,8 +52,9 @@ class StudentController extends Controller
 
     }
 
-    public function store(CreateCoachingRequest $request)
+    public function store(StudentRequest $request)
     {
+//        dd($request->all());
         try {
             DB::beginTransaction();
             $user = User::create([
@@ -62,28 +62,24 @@ class StudentController extends Controller
                 'email' => mb_strtolower($request->email),
                 'password' => bcrypt($request->password),
                 'phone' => $request->phone,
-                'type' => 1,
+                'type' => 2,
             ]);
             $secondaryid = $user->id;
             $img = (new CustomRepository())->upload($request);
-            Coaching::create([
-                'name' => ucwords(strtolower($request->name)),
-                'directorname' => ucwords(strtolower($request->directorname)),
-                'altphone' => $request->altphone,
-                'specialization' => ucwords(strtolower($request->specialization)),
+            Student::create([
                 'level' => ucwords(strtolower($request->level)),
-                'landmark' => ucwords(strtolower($request->landmark)),
                 'state' => ucwords(strtolower($request->state)),
                 'description' => ucwords(strtolower($request->description)),
                 'imgpath' => $img,
-                'address1' => ucwords(strtolower($request->address1)),
-                'address2' => ucwords(strtolower($request->address2)),
+                'address' => ucwords(strtolower($request->address)),
                 'city' => ucwords(strtolower($request->city)),
+                'gender' => ucwords(strtolower($request->gender)),
                 'userid' => $secondaryid,
-                'verified' => 1,
+//                'verified' => 1,
+                'active' => 1
             ]);
             DB::commit();
-            return redirect()->route('students.index')->with('status', 'Coaching created successfully');
+            return redirect()->route('students.index')->with('status', 'Student created successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
@@ -94,14 +90,14 @@ class StudentController extends Controller
     }
 
 
-    public function update(CreateCoachingRequest $request, $id)
+    public function update(StudentRequest $request, $id)
     {
         try {
             $students = $this->repo->getById($id);
             $user = $students->user;
             $attributes = $request->only([
-                'directorname', 'description', 'altphone', 'specialization', 'address2', 'address1'
-                , 'state', 'landmark', 'city', 'level'
+                 'description', 'address','gender'
+                , 'state',  'city', 'level'
             ]);
             if ($request->hasFile('image')) {
                 $img = (new CustomRepository())->upload($request);
@@ -114,7 +110,7 @@ class StudentController extends Controller
             $this->repo->update($id, $attributes);
             $user->save();
             DB::commit();
-            return redirect()->route('students.index')->with('status', 'Coaching Updated Successfully');
+            return redirect()->route('students.index')->with('status', 'Student Updated Successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
@@ -125,10 +121,10 @@ class StudentController extends Controller
 
     public function edit($id)
     {
-        $students = $this->repo->getById($id);
-        $user = $students->user;
+        $student = $this->repo->getById($id);
+        $user = $student->user;
         $levels = Level::orderBy('name', 'asc')->get();
-        return view('students.edit', compact('students', 'levels', 'user'));
+        return view('students.edit', compact('student', 'levels', 'user'));
 
     }
 
@@ -143,13 +139,13 @@ class StudentController extends Controller
             $user->delete();
             DB::commit();
             return redirect()->back()
-                ->with('status', 'Coaching deleted Successfully');
+                ->with('status', 'Student deleted Successfully');
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->back()
                 ->withInput()
-                ->with('status', 'Failed to delete Coaching .');
+                ->with('status', 'Failed to delete Student .');
 
         }
     }
@@ -165,6 +161,6 @@ class StudentController extends Controller
         $students = $this->repo->getById($id);
         $students->is_featured = 1;
         $students->update();
-        return redirect()->route('students.index')->with('status', 'Coaching is featured now');
+        return redirect()->route('students.index')->with('status', 'Student is featured now');
     }
 }

@@ -3,9 +3,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edit Coaching</div>
+                <div class="card-header">Edit Student</div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('coachings.update',$coachings->id)}}"
+                    <form method="POST" action="{{route('students.update',$student->id)}}"
                           enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
@@ -24,21 +24,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="directorname" class="col-md-4 col-form-label text-md-right">Director's
-                                Name</label>
-                            <div class="col-md-6">
-                                <input id="directorname" type="text"
-                                       class="form-control @error('directorname') is-invalid @enderror"
-                                       value="{{old('directorname', $user->directorname )}}"
-                                       name="directorname" autocomplete="directorname" autofocus>
-                                @error('directorname')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="email"
                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -72,24 +57,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="altphone" class="col-md-4 col-form-label text-md-right">Alternative
-                                Phone</label>
-
-                            <div class="col-md-6">
-                                <input id="altphone" type="text" value="{{old('altphone', $user->altphone) }}"
-                                       class="form-control @error('altphone') is-invalid @enderror"
-                                       name="altphone"
-                                       autocomplete="altphone">
-
-                                @error('altphone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="level" class="col-md-4 col-form-label text-md-right">Level</label>
 
                             <div class="col-md-6">
@@ -99,8 +66,8 @@
                                     @if( old('level'))
                                         <option value="{{old('level') }}">{{  old('level') }}</option>
                                     @endif
-                                    @if($coachings->level)
-                                        <option value="{{ $coachings->level }}">{{ $coachings->level }}</option> @endif
+                                    @if($student->level)
+                                        <option value="{{ $student->level }}">{{ $student->level }}</option> @endif
                                     @foreach($levels as $level)
                                         <option value="{{ $level->name }}">{{ $level->name }}</option>
                                     @endforeach
@@ -114,23 +81,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="specialization"
-                                   class="col-md-4 col-form-label text-md-right">Specialization</label>
 
-                            <div class="col-md-6">
-                                <input id="specialization" type="text"
-                                       value="{{old('specialization', $user->specialization )}}"
-                                       class="form-control @error('specialization') is-invalid @enderror"
-                                       name="specialization" autocomplete="specialization">
-
-                                @error('specialization')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
 
@@ -144,14 +95,14 @@
                                 @enderror
                             </div>
                             <div class="col-md-3">
-                                <img src="{{ $coachings->imgpath }}" style="height: 75px; object-fit: cover;">
+                                <img src="{{ $student->imgpath }}" style="height: 75px; object-fit: cover;">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" value="{{old('description', $user->description )}}"
+                                <input id="description" type="text" value="{{old('description', $student->description )}}"
                                        class="form-control @error('description') is-invalid @enderror"
                                        name="description" autocomplete="description">
 
@@ -163,12 +114,34 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="address1" class="col-md-4 col-form-label text-md-right">Street Address 1</label>
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">Gender</label>
+                            <div class="col-md-6">
+                                <select id="gender" type="text"
+                                        class="form-control @error('gender') is-invalid @enderror" name="gender"
+                                        autocomplete="gender" autofocus>
+                                    @if(old('gender'))
+                                        <option value="{{ old('gender') }}">{{ old('gender') }}</option> @endif
+                                    @if($student->gender )
+                                        <option value="{{ $student->gender }}">{{ $student->gender }}</option> @endif
+                                    <option value="">Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                                @error('gender')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="address" class="col-md-4 col-form-label text-md-right"> Address </label>
 
                             <div class="col-md-6">
-                                <input id="address1" type="text" value="{{old('address1', $user->address1 )}}"
-                                       class="form-control @error('address1') is-invalid @enderror"
-                                       name="address1">
+                                <input id="address" type="text" value="{{old('address', $student->address)}}"
+                                       class="form-control @error('address') is-invalid @enderror"
+                                       name="address">
 
                                 @error('address1')
                                 <span class="invalid-feedback" role="alert">
@@ -177,36 +150,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="address2" class="col-md-4 col-form-label text-md-right">Street Address 2</label>
 
-                            <div class="col-md-6">
-                                <input id="address2" type="text" value="{{old('address2', $user->address2 )}}"
-                                       class="form-control @error('address2') is-invalid @enderror"
-                                       name="address2">
 
-                                @error('address2')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="landmark" class="col-md-4 col-form-label text-md-right">Landmark</label>
-
-                            <div class="col-md-6">
-                                <input id="landmark" type="text" value="{{old('landmark', $user->landmark )}}"
-                                       class="form-control @error('landmark') is-invalid @enderror"
-                                       name="landmark">
-
-                                @error('landmark')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="state" class="col-md-4 col-form-label text-md-right">State</label>
 
@@ -216,8 +161,8 @@
                                     @if( old('state'))
                                         <option value="{{old('state') }}">{{  old('state') }}</option>
                                     @endif
-                                    @if($coachings->state)
-                                        <option value="{{ $coachings->state }}">{{ $coachings->state }}</option> @endif
+                                    @if($student->state)
+                                        <option value="{{ $student->state }}">{{ $student->state }}</option> @endif
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>
@@ -271,7 +216,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" value="{{old('city', $user->city )}}"
+                                <input id="city" type="text" value="{{old('city', $student->city )}}"
                                        class="form-control @error('city') is-invalid @enderror"
                                        name="city">
                                 @error('city')

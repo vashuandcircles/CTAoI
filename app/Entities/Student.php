@@ -12,11 +12,12 @@ class Student extends Model
         'level',
         'userid',
         'description',
-        'phone',
         'imgpath',
         'gender',
         'city',
         'active',
+        'address',
+        'verified',
         'state',
     ];
     protected $dates = ['created_at', 'updated_at'];
