@@ -32,7 +32,7 @@
                     @foreach ($coachings as $key => $row)
                         <?php if ($row->verified && $row->active) { ?>
                         <tr>
-                            <td><img src="{{ $row->imgpath}}" style="width: 50px; height: 75px; object-fit: cover;">
+                            <td><img src="{{ $row->imgpath ?? asset('/img/default-user.jpg')}}" style="width: 50px; height: 75px; object-fit: cover;">
                             </td>
                             <td>{{ $user[$key]->name }}</td>
                             <td>{{ $row->directorname}}</td>
@@ -59,7 +59,7 @@
                             </td>
                         </tr>
                             <tr>
-                                <td><img src="@if($row->imgpath != NULL){{ $row->imgpath}}@else ../img/elements/no-image.png  @endif" style="width: 50px; height: 75px; object-fit: cover;"> </td>
+                                <td><img src="{{($row->imgpath?? asset('/img/default-user.jpg'))}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
                                 <td>{{ $user[$key]->name }}</td>
                                 <td>{{ $row->directorname}}</td>
                                 <td>{{ $user[$key]->phone }} <br> {{ $row->altphone}} </td>

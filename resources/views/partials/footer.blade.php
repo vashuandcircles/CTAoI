@@ -22,7 +22,7 @@
           <h4>Newsletter</h4>
           <p>You can trust us. we only send promo offers,</p>
           <div class="form-wrap">
-            <form method="POST" 
+            <form method="POST"
               action="{{ url('/subscribe') }}"
               class="form-inline">
               {{ csrf_field() }}
@@ -43,8 +43,7 @@
       </div>
       <div class="row footer-bottom d-flex justify-content-between">
         <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
-          Copyright &copy;
-          <script>document.write(new Date().getFullYear());</script> All rights reserved by CTAoI
+            <span> Copyright  &copy; 2020 CTAoI. All Rights Reserved. </span>
         </p>
         <div class="col-lg-4 col-sm-12 footer-social">
           <a href="#"><i class="ti-facebook"></i></a>
