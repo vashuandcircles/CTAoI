@@ -32,7 +32,7 @@
             }
         }).done(function (data) {
             if (data.html === "") {
-                $('.ajax-load').html("No more records found");
+                $('.ajax-load').html("That's All Folks!!");
                 return;
             }
             $('.ajax-load').hide();
