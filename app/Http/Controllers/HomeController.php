@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Coaching;
+use App\Entities\Coaching;
+use App\Entities\Teacher;
 use App\Event;
 use App\Level;
 use App\place;
 use App\Query;
 use App\Repositories\CustomRepository;
 use App\Subscription;
-use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -119,13 +119,13 @@ class HomeController extends Controller
 
     public function featuredTeacherPage()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::with('user')->get();
         return view('admin/teacher/featuredteachers', compact('teachers'));
     }
 
     public function featuredCoachingPage()
     {
-        $coachings = Coaching::all();
+        $coachings = Coaching::with('user')->get();
         return view('admin/coaching/featuredcoachings', compact('coachings'));
     }
 

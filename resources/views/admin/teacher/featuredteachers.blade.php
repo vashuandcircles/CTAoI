@@ -17,8 +17,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Name</th>
                             <th>Phone</th>
                             <th>Alternative Phone</th>
                             <th>Email</th>
@@ -29,33 +28,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($teachers as $row)
-                        <?php if ($row->verified && $row->is_featured && $row->active) { ?>
+                        @foreach ($teachers as $teacher)
+                        <?php if ($teacher->verified && $teacher->is_featured && $teacher->active) { ?>
                             <tr>
-                                <td><img src="{{ $row->imgpath ?? asset('/img/default-user.jpg')}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
-                                <td>{{ $row->firstname}}</td>
-                                <td>{{ $row->lastname}}</td>
-                                <td>{{ $row->phone}}</td>
-                                <td>{{ $row->altphone}}</td>
-                                <td>{{ $row->email}}</td>
-                                <td>{{ $row->gender}}</td>
+                                <td><img src="{{ $teacher->imgpath ?? asset('/img/default-user.jpg')}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
+                                <td>{{ $teacher->user->name}}</td>
+                                <td>{{ $teacher->user->phone}}</td>
+                                <td>{{ $teacher->altphone}}</td>
+                                <td>{{ $teacher->user->email}}</td>
+                                <td>{{ $teacher->gender}}</td>
                                 <td>
-                                    <?php if ($row->active) {
+                                    <?php if ($teacher->active) {
                                         echo 'Active';
                                     } else {
                                         echo 'Inactive';
                                     } ?>
                                 </td>
-                                <td>{{ $row->city}}, {{ $row->state}}</td>
+                                <td>{{ $teacher->city}}, {{ $teacher->state}}</td>
                                 <td>
                                     <div class="row">
-                                        <form action="/teacher-unfeature/{{ $row->id }}" method="POST">
+                                        <form action="/teacher-unfeature/{{ $teacher->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('PUT') }}
                                             <button type="submit" href="" class="btn btn-warning m-1">UnFeature</button>
                                         </form>
-                                        <a href="/teacher-edit/{{ $row->id }}" class="btn btn-secondary m-1">Edit</a>
-                                        <form action="/teacher-delete/{{ $row->id }}" method="POST">
+                                        <a href="/teacher-edit/{{ $teacher->id }}" class="btn btn-secondary m-1">Edit</a>
+                                        <form action="/teacher-delete/{{ $teacher->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
