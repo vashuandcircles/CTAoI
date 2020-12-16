@@ -20,62 +20,67 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous"></script>
     <!-- main css -->
-    <link rel="stylesheet" href="{{asset('css/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/style.css')}}"/>
 </head>
 
 <body>
-    <header class="header_area">
-        <div class="main_menu">
-      <!-- <div class="search_input" id="search_input_box">
+<header class="header_area">
+    <div class="main_menu">
+    <!-- <div class="search_input" id="search_input_box">
         <div class="container">
           <form class="d-flex justify-content-between" action="/search" method="POST" role="search">
           {{ csrf_field() }}
-            <input type="text" class="form-control" id="search_input" name="q" placeholder="Search Here" />
-            <button type="submit" class="btn"></button>
-            <span class="ti-close" id="close_search" title="Close Search"></span>
-          </form>
-        </div>
-      </div> -->
-            <nav class="navbar navbar-expand-lg bg-white">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="{{url('/')}}"><img src="{{asset('img/logo.png')}}" height="40px" alt="" /></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="icon-bar"></span> <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item {{ (request()->is('/')) ? 'active' : '' }}">
-                                <a class="nav-link" href="{{url('/')}}">Home</a>
-                            </li>
-                            <li class="nav-item @if(Request::is('coachings')) active @endif ">
-                                <a class="nav-link" href="{{url('/coachings')}}">Coaching Centers</a>
-                            </li>
-                            <li class="nav-item {{ (request()->is('teachers')) ? 'active' : '' }}">
-                                <a class="nav-link" href="{{url('/teachers')}}">Tutors</a>
-                            </li>
-                            <li class="nav-item {{ (request()->is('students')) ? 'active' : '' }}">
-                                <a class="nav-link" href="{{url('/students')}}">Student</a>
-                            </li>
-                            <li class="nav-item {{ (request()->is('about')) ? 'active' : '' }}">
-                                <a class="nav-link" href="{{url('/about')}}">About</a>
-                            </li>
-                            <li class="nav-item {{ (request()->is('contact')) ? 'active' : '' }}">
-                                <a class="nav-link" href="{{url('/contact')}}">Contact Us</a>
-                            </li>
-                            <li class="nav-item {{ (request()->is('login')) ? 'active' : '' }}">
-                                @if(Auth::check())
+        <input type="text" class="form-control" id="search_input" name="q" placeholder="Search Here" />
+        <button type="submit" class="btn"></button>
+        <span class="ti-close" id="close_search" title="Close Search"></span>
+      </form>
+    </div>
+  </div> -->
+        <nav class="navbar navbar-expand-lg bg-white">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <a class="navbar-brand logo_h" href="{{url('/')}}"><img src="{{asset('img/logo.png')}}" height="40px"
+                                                                        alt=""/></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item {{ (request()->is('/')) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{url('/')}}">Home</a>
+                        </li>
+                        <li class="nav-item {{ (request()->is('login')) ? 'active' : '' }}">
+                            @if(Auth::check())
                                 <a class="nav-link" href="{{url('/home')}}">{{ Auth::user()->name }} Dashboard</a>
-                                @else
+                            @else
                                 <a class="nav-link" href="{{url('/login')}}">Login</a>
                             @endif
                         </li>
                         @if(!Auth::check())
                             <li class="nav-item {{ (request()->is('register')) ? 'active' : '' }}">
-                                <a class="nav-link" href="{{url('/register')}}">Register</a>
+                                <a class="nav-link" href="{{url('/register')}}">Sign Up</a>
                             </li>
-                         @endif
+                        @endif
+                        <li class="nav-item @if(Request::is('coachings')) active @endif ">
+                            <a class="nav-link" href="{{url('/coachings')}}">Coaching Centers</a>
+                        </li>
+                        <li class="nav-item {{ (request()->is('teachers')) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{url('/teachers')}}">Tutors</a>
+                        </li>
+                        <li class="nav-item {{ (request()->is('students')) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{url('/students')}}">Students</a>
+                        </li>
+                        <li class="nav-item {{ (request()->is('about')) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{url('/about')}}">About Us</a>
+                        </li>
+                        <li class="nav-item {{ (request()->is('contact')) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{url('/contact')}}">Contact Us</a>
+                        </li>
+
+
                     <!-- <li class="nav-item {{ (request()->is('search')) ? 'active' : '' }}">
                                 <a href="{{url('/search')}}" class="nav-link search">
                                     <i class="ti-search"></i>
