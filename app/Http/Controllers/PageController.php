@@ -48,16 +48,16 @@ class PageController extends Controller
 
     public function teachers()
     {
-        $teacheruser = User::where('type', 0)->orderBy('id', 'desc')->paginate(20);
-        $teachers = Teacher::orderBy('userid', 'desc')->paginate(20);
-        return view('teachers', compact('teachers', 'teacheruser'));
+//        $teacheruser = User::where('type', 0)->orderBy('id', 'desc')->paginate(20);
+        $teachers = Teacher::with('user')->paginate(12);
+        return view('teachers', compact('teachers'));
     }
 
     public function students()
     {
 //        $teacheruser = User::where('type', 0)->orderBy('id', 'desc')->paginate(20);
 //        $teachers = Teacher::orderBy('userid', 'desc')->paginate(20);
-        $students = Student::with('user')->get();
+        $students = Student::with('user')->paginate(12);
         return view('students', compact('students'));
     }
 
@@ -93,16 +93,24 @@ class PageController extends Controller
         $user = User::findOrFail($id);
         $data = Coaching::where('userid', $id)->first();
         $course = Courses::where('userid', $id)->get();
-        return view('coachingdetail', compact('user', 'data', 'course'));
+        if ($data->is_featured)
+            return view('coachingdetail', compact('user', 'data', 'course'));
+        else
+            abort(401);
+
     }
 
     public function teacherDetail(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $data = Teacher::where('userid', $id)->first();
+        $data = Teacher::with('user')->whereId($id)->first();
         $course = Courses::where('userid', $id)->get();
-        return view('teacherdetail', compact('user', 'data', 'course'));
+        if ($data->is_featured)
+            return view('teacherdetail', compact('data', 'course'));
+        else {
+            abort(401);
+        }
     }
+
     public function studentDetail(Request $request, $id)
     {
         $student = Student::findOrFail($id);

@@ -39,6 +39,9 @@
             @endforeach
 
         </div>
+        <div class="d-flex justify-content-center">
+            {!! $students->links() !!}
+        </div>
     </div>
 </div>
 @include('partials.footer')

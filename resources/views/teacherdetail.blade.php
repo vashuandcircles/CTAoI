@@ -44,7 +44,7 @@
                     <ul>
                         <li>
                             <a class="justify-content-between d-flex" href="">
-                                <span style="text-align: center;" class="or">{{ $user->name }}</span>
+                                <span style="text-align: center;" class="or">{{ $data->user->name }}</span>
                             </a>
                         </li>
                         <li>
@@ -68,7 +68,7 @@
                         <li>
                             <a class="justify-content-between d-flex" href="">
                                 <p>Phone </p>
-                                <span style="text-align: right;">{{ $user->phone }}</span>
+                                <span style="text-align: right;">{{ $data->user->phone }}</span>
                             </a>
                         </li>
                         @if($data->altphone)
