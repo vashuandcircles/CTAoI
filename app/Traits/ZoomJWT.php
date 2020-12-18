@@ -34,7 +34,7 @@ trait ZoomJWT
         $secret = env('ZOOM_API_SECRET', '');
         $payload = [
             'iss' => $key,
-            'exp' => strtotime('+1 minute'),
+            'exp' => strtotime('+9 minute'),
         ];
         return \Firebase\JWT\JWT::encode($payload, $secret, 'HS256');
     }

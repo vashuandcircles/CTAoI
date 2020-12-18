@@ -16,12 +16,13 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
     <!--Data Table-->
-    <script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript"  src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript"
+            src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
 
-    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js" ></script>
-    <script type="text/javascript"  src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
 
@@ -78,6 +79,11 @@
             <a class="nav-link" href="{{route('students.index')}}">
                 <i class="fas fa-fw fa-people-carry"></i>
                 <span>Students</span></a>
+        </li>
+        <li class="nav-item {{ (request()->is('zoom-meetings')) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('meetings.index')}}">
+                <i class="fas fa-fw fa-meh-rolling-eyes"></i>
+                <span>Zoom Meeting</span></a>
         </li>
 
         <li class="nav-item {{ (request()->is('coaching-request')) ? 'active' : '' }} {{ (request()->is('teacher-request')) ? 'active' : '' }}">
@@ -187,7 +193,7 @@
                            data-target="#logoutModal" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-lg-inline text-gray-600 small">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{ Auth::user()->name }} Logout</span>
+                                    {{ Auth::user()->name??'' }} Logout</span>
                         </a>
                     </li>
 

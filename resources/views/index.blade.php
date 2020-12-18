@@ -303,6 +303,7 @@
 <br>
 <br>
 @if($coachingscount)
+
     <!--================ Start Coachings  Area =================-->
     <div class="popular_courses">
         <div class="container">
@@ -328,7 +329,7 @@
                                 </div>
                                 <div class="course_content">
                                     <h4 class="mb-3" style="height: 40px;">
-                                        <a>{{ $user[$key]->name }}</a>
+                                        <a>{{ $user[$key]->name??'' }}</a>
                                     </h4>
                                     <h6>
                                         Expert in : {{ $row['specialization'] }}
@@ -340,7 +341,7 @@
                                         Contact : {{ $row->phone}}
                                     </h6>
                                     <h6 style="height: 30px; word-wrap: break-word;">
-                                        Email : {{ $user[$key]->email }}
+                                        Email : {{ $user[$key]->email??'' }}
                                     </h6>
                                     <h6>
                                         Director : {{ $row->directorname}}

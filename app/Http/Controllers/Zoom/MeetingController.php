@@ -5,34 +5,44 @@ namespace App\Http\Controllers\Zoom;
 use App\Http\Controllers\Controller;
 use App\Traits\ZoomJWT;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 class MeetingController extends Controller
 {
-    use ZoomJWT;
-
     const MEETING_TYPE_INSTANT = 1;
+
+    use ZoomJWT;
     const MEETING_TYPE_SCHEDULE = 2;
     const MEETING_TYPE_RECURRING = 3;
     const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
 
-    public function list(Request $request)
+//
+    public function index(Request $request)
     {
         $path = 'users/me/meetings';
         $response = $this->zoomGet($path);
-
         $data = json_decode($response->body(), true);
         $data['meetings'] = array_map(function (&$m) {
             $m['start_at'] = $this->toUnixTimeStamp($m['start_time'], $m['timezone']);
             return $m;
         }, $data['meetings']);
 
-        return [
-            'success' => $response->ok(),
-            'data' => $data,
-        ];
+        if ($request->wantsJson()) {
+            return [
+                'success' => $response->ok(),
+                'data' => $data,
+            ];
+        }
+        return view('zoom-meetings.index')
+            ->with('meetings', $data);
     }
 
-    public function create(Request $request)
+    public function create()
+    {
+
+    }
+
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'topic' => 'required|string',
@@ -69,7 +79,7 @@ class MeetingController extends Controller
         ];
     }
 
-    public function get(Request $request, string $id)
+    public function edit(Request $request, string $id)
     {
         $path = 'meetings/' . $id;
         $response = $this->zoomGet($path);
@@ -121,7 +131,7 @@ class MeetingController extends Controller
         ];
     }
 
-    public function delete(Request $request, string $id)
+    public function destroy(Request $request, string $id)
     {
         $path = 'meetings/' . $id;
         $response = $this->zoomDelete($path);
