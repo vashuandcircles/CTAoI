@@ -15,23 +15,24 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Alternative Phone</th>
-                            <th>Email</th>
-                            <th>Gender</th>
-                            <th>Status</th>
-                            <th>Address</th>
-                            <th>Actions</th>
-                        </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Alternative Phone</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Status</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach ($teachers as $teacher)
-                        <?php if ($teacher->verified && $teacher->is_featured && $teacher->active) { ?>
+                    @foreach ($teachers as $teacher)
+                        @if ($teacher->verified && $teacher->is_featured && $teacher->active)
                             <tr>
-                                <td><img src="{{ $teacher->imgpath ?? asset('/img/default-user.jpg')}}" style="width: 50px; height: 75px; object-fit: cover;"> </td>
+                                <td><img src="{{ $teacher->imgpath ?? asset('/img/default-user.jpg')}}"
+                                         style="width: 50px; height: 75px; object-fit: cover;"></td>
                                 <td>{{ $teacher->user->name}}</td>
                                 <td>{{ $teacher->user->phone}}</td>
                                 <td>{{ $teacher->altphone}}</td>
@@ -52,7 +53,8 @@
                                             {{ method_field('PUT') }}
                                             <button type="submit" href="" class="btn btn-warning m-1">UnFeature</button>
                                         </form>
-                                        <a href="/teacher-edit/{{ $teacher->id }}" class="btn btn-secondary m-1">Edit</a>
+                                        <a href="/teacher-edit/{{ $teacher->id }}"
+                                           class="btn btn-secondary m-1">Edit</a>
                                         <form action="/teacher-delete/{{ $teacher->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
@@ -61,8 +63,8 @@
                                     </div>
                                 </td>
                             </tr>
-                        <?php } ?>
-                        @endforeach
+                        @endif
+                    @endforeach
                     </tbody>
                 </table>
             </div>
