@@ -28,16 +28,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- @foreach ($queries as $row => $query)
+                        @foreach($events as $row => $events)
                         <tr>
                             <td>{{ $row+1 }}</td>
-                            <td>{{ $query['name']}}</td>
-                            <td>{{ $query['phone']}}</td>
-                            <td>{{ $query['email']}}</td>
-                            <td>{{ $query['subject']}}</td>
-                            <td>{{ $query['message']}}</td>
+                            <td> <div class="text-center"> <img src="{{ $events['imagepath']}}" height="150px"/> </div></td>
+                            <td>{{ $events['date']}}</td>
+                            <td>{{ $events['starttime']}}</td>
+                            <td>{{ $events['endtime']}}</td>
+                            <td>{{ $events['smalldesc']}}</td>
                         </tr>
-                        @endforeach -->
+                        @endforeach
                     </tbody>
                 </table>
             </div>

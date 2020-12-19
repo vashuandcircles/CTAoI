@@ -599,18 +599,19 @@
                 </div>
             </div>
             <div class="row">
+                @foreach ($event as $row => $events)
                 <div class="col-lg-6 col-md-6">
                     <div class="single_event position-relative">
                         <div class="event_thumb">
-                            <img src="img/event/e1.jpg" alt=""/>
+                            <img src="{{ $events['imagepath']}}" height="300px" alt="Event Image"/>
                         </div>
                         <div class="event_details">
                             <div class="d-flex mb-4">
-                                <div class="date"><span>15</span> Oct</div>
+                                <div class="date">{{ $events['date']}}</div>
 
                                 <div class="time-location">
                                     <p>
-                                        <span class="ti-time mr-2"></span> 12:00 AM - 12:30 AM
+                                        <span class="ti-time mr-2"></span> {{ $events['starttime']}} - {{ $events['endtime']}}
                                     </p>
                                     <p>
                                         <span class="ti-location-pin mr-2"></span> Purnia
@@ -618,46 +619,13 @@
                                 </div>
                             </div>
                             <p>
-                                One make creepeth man for so bearing their firmament won't
-                                fowl meat over seas great
+                            {{ $events['smalldesc']}}
                             </p>
                             <a href="#" class="primary-btn rounded-0 mt-3">View Details</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single_event position-relative">
-                        <div class="event_thumb">
-                            <img src="img/event/e2.jpg" alt=""/>
-                        </div>
-                        <div class="event_details">
-                            <div class="d-flex mb-4">
-                                <div class="date"><span>25</span> Oct</div>
-
-                                <div class="time-location">
-                                    <p>
-                                        <span class="ti-time mr-2"></span> 12:00 AM - 12:30 AM
-                                    </p>
-                                    <p>
-                                        <span class="ti-location-pin mr-2"></span> Bangalore
-                                    </p>
-                                </div>
-                            </div>
-                            <p>
-                                One make creepeth man for so bearing their firmament won't
-                                fowl meat over seas great
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- <div class="col-lg-12">
-                    <div class="text-center pt-lg-5 pt-3">
-                        <a href="#" class="event-link">
-                            View All Event <img src="img/next.png" alt="" />
-                        </a>
-                    </div>
-                </div> -->
+                @endforeach
             </div>
         </div>
     </div>

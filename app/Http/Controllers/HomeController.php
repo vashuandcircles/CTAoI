@@ -36,8 +36,8 @@ class HomeController extends Controller
 
     public function event()
     {
-        $queries = Event::all();
-        return view('admin/event/events', compact('queries'));
+        $events = Event::all();
+        return view('admin/event/events', compact('events'));
     }
 
     public function addEventPage()
@@ -50,27 +50,21 @@ class HomeController extends Controller
         $request->validate([
             'date' => 'required|max:255|min:3',
             'starttime' => 'required|max:255|min:2',
-            'endtime' => 'required|max:255|email',
-            'smalldesc' => 'required|max:6|min:3',
-            'priority' => 'required|regex:/[0-9]{10}/',
-            'image' => 'required|mimes:jpeg,jpg,png',
+            'endtime' => 'required|max:255|min:2',
+            'smalldesc' => 'required|max:255|min:3',
+            'priority' => 'required|numeric',
+            'imagepath' => 'required|mimes:jpeg,jpg,png',
         ]);
-        $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-        Event::create([
-            'firstname' => ucwords(strtolower($request->firstname)),
-            'lastname' => ucwords(strtolower($request->lastname)),
-            'email' => mb_strtolower($request->email),
-            'gender' => ucwords(strtolower($request->gender)),
-            'phone' => $request->phone,
-            'level' => ucwords(strtolower($request->level)),
-            'altphone' => $request->altphone,
-            'specialization' => $request->specialization,
-            'description' => ucwords(strtolower($request->description)),
-            'imgpath' => $img,
-            'state' => ucwords(strtolower($request->state)),
-            'city' => ucwords(strtolower($request->city)),
-            'verified' => 1,
+        $img = cloudinary()->upload($request->file('imagepath')->getRealPath())->getSecurePath();
+        $res = Event::create([
+            'smalldesc' => ucwords(strtolower($request->smalldesc)),
+            'starttime' => $request->starttime,
+            'endtime' => $request->endtime,
+            'priority' => $request->priority,
+            'date' => $request->date,
+            'imagepath' => $img,
         ]);
+        dd($res);
         return redirect('/teacher-page')->with('status', 'Teacher created successfully');
     }
 

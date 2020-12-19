@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="smalldesc" class="col-md-4 col-form-label text-md-right">Small Description</label>
+                            <label for="smalldesc" class="col-md-4 col-form-label text-md-right">Short Description</label>
 
                             <div class="col-md-6">
                                 <input id="smalldesc" type="text" class="form-control @error('smalldesc') is-invalid @enderror" name="smalldesc" value="{{ old('smalldesc') }}" maxlength="40" autocomplete="smalldesc">
