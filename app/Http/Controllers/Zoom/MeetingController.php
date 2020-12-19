@@ -39,7 +39,7 @@ class MeetingController extends Controller
 
     public function create()
     {
-
+        return view('zoom-meetings.create');
     }
 
     public function store(Request $request)
