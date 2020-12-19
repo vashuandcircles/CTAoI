@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Zoom;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MeetingRequest;
 use App\Traits\ZoomJWT;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Log;
 
 class MeetingController extends Controller
 {
@@ -42,104 +43,84 @@ class MeetingController extends Controller
         return view('zoom-meetings.create');
     }
 
-    public function store(Request $request)
+    public function store(MeetingRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'topic' => 'required|string',
-            'start_time' => 'required|date',
-            'agenda' => 'string|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            return [
-                'success' => false,
-                'data' => $validator->errors(),
-            ];
-        }
-        $data = $validator->validated();
-
+        $data = $request->only(['topic', 'start_time', 'agenda']);
         $path = 'users/me/meetings';
-        $response = $this->zoomPost($path, [
-            'topic' => $data['topic'],
-            'type' => self::MEETING_TYPE_SCHEDULE,
-            'start_time' => $this->toZoomTimeFormat($data['start_time']),
-            'duration' => 30,
-            'agenda' => $data['agenda'],
-            'settings' => [
-                'host_video' => false,
-                'participant_video' => false,
-                'waiting_room' => true,
-            ]
-        ]);
+        try {
+            $this->zoomPost($path, [
+                'topic' => $data['topic'],
+                'type' => self::MEETING_TYPE_SCHEDULE,
+                'start_time' => $this->toZoomTimeFormat($data['start_time']),
+                'duration' => 40,
+                'agenda' => $data['agenda'],
+                'settings' => [
+                    'host_video' => false,
+                    'participant_video' => false,
+                    'waiting_room' => true,
+                ]
+            ]);
+//            if ($request->wantsJson()) {
+//                return [
+//                    'success' => $response->status() === 201,
+//                    'data' => json_decode($response->body(), true),
+//                ];
+//            }
+            return redirect()->route('meetings.index')->with('status', 'Meeting created successfully.');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . $exception->getTraceAsString());
+            return redirect()->route('meetings.index')->with('status', 'Meeting can not be created.');
 
-
-        return [
-            'success' => $response->status() === 201,
-            'data' => json_decode($response->body(), true),
-        ];
+        }
     }
 
     public function edit(Request $request, string $id)
     {
         $path = 'meetings/' . $id;
         $response = $this->zoomGet($path);
-
         $data = json_decode($response->body(), true);
         if ($response->ok()) {
             $data['start_at'] = $this->toUnixTimeStamp($data['start_time'], $data['timezone']);
         }
-
-        return [
-            'success' => $response->ok(),
-            'data' => $data,
-        ];
+        return view('zoom-meetings.edit')->with('meeting', $data);
     }
 
-    public function update(Request $request, string $id)
+    public function update(MeetingRequest $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'topic' => 'required|string',
-            'start_time' => 'required|date',
-            'agenda' => 'string|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            return [
-                'success' => false,
-                'data' => $validator->errors(),
-            ];
-        }
-        $data = $validator->validated();
-
+        $data = $request->all();
         $path = 'meetings/' . $id;
-        $response = $this->zoomPatch($path, [
-            'topic' => $data['topic'],
-            'type' => self::MEETING_TYPE_SCHEDULE,
-            'start_time' => (new \DateTime($data['start_time']))->format('Y-m-d\TH:i:s'),
-            'duration' => 30,
-            'agenda' => $data['agenda'],
-            'settings' => [
-                'host_video' => false,
-                'participant_video' => false,
-                'waiting_room' => true,
-            ]
-        ]);
+        try {
+            $this->zoomPatch($path, [
+                'topic' => $data['topic'],
+                'type' => self::MEETING_TYPE_SCHEDULE,
+                'start_time' => (new \DateTime($data['start_time']))->format('Y-m-d\TH:i:s'),
+                'duration' => 40,
+                'agenda' => $data['agenda'],
+                'settings' => [
+                    'host_video' => false,
+                    'participant_video' => false,
+                    'waiting_room' => true,
+                ]
+            ]);
+            return redirect()->route('meetings.index')->with('status', 'Meeting updated successfully.');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . $exception->getTraceAsString());
+            return redirect()->route('meetings.index')->with('status', 'Meeting can not be updated.');
 
-        return [
-            'success' => $response->status() === 204,
-            'data' => json_decode($response->body(), true),
-        ];
+        }
     }
 
     public function destroy(Request $request, string $id)
     {
-        $path = 'meetings/' . $id;
-        $response = $this->zoomDelete($path);
+        try {
+            $path = 'meetings/' . $id;
+            $this->zoomDelete($path);
+            return redirect()->route('meetings.index')->with('status', 'Meeting deleted successfully.');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . $exception->getTraceAsString());
+            return redirect()->route('meetings.index')->with('status', 'Meeting can not be deleted.');
 
-        return [
-            'success' => $response->status() === 204,
-            'data' => json_decode($response->body(), true),
-        ];
+        }
     }
 }
 

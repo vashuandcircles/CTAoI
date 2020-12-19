@@ -126,10 +126,10 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/meetings/create', 'Zoom\MeetingController@create')
         ->name('meetings.create');
 // Get information of the meeting room by ID.
-    Route::get('/meetings/{id}', 'Zoom\MeetingController@edit')
-        ->where('id', '[0-9]+')->name('meetings.edit');
-    Route::patch('/meetings/{id}', 'Zoom\MeetingController@update')
-        ->where('id', '[0-9]+')->name('meetings.update');
-    Route::delete('/meetings/{id}', 'Zoom\MeetingController@destroy')
-        ->where('id', '[0-9]+')->name('meetings.destroy');
+    Route::get('/meetings/{meeting}', 'Zoom\MeetingController@edit')
+        ->where('meeting', '[0-9]+')->name('meetings.edit');
+    Route::patch('/meetings/{meeting}', 'Zoom\MeetingController@update')
+        ->where('meeting', '[0-9]+')->name('meetings.update');
+    Route::delete('/meetings/{meeting}', 'Zoom\MeetingController@destroy')
+        ->where('meeting', '[0-9]+')->name('meetings.destroy');
 });
