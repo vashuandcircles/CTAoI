@@ -59,7 +59,7 @@ class HomeController extends Controller
             'imagepath' => $img,
         ]);
         dd($res);
-        return redirect('/teacher-page')->with('status', 'Teacher created successfully');
+        return redirect('/event')->with('status', 'Event added successfully');
     }
 
     public function level()
