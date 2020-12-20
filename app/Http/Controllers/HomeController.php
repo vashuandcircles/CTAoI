@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Coaching;
 use App\Entities\Teacher;
 use App\Event;
+use App\Http\Requests\EventRequest;
 use App\Level;
 use App\place;
 use App\Query;
@@ -45,16 +46,9 @@ class HomeController extends Controller
         return view('admin/event/addeventpage');
     }
 
-    public function addEvent(Request $request)
+    public function addEvent(EventRequest  $request)
     {
-        $request->validate([
-            'date' => 'required|max:255|min:3',
-            'starttime' => 'required|max:255|min:2',
-            'endtime' => 'required|max:255|min:2',
-            'smalldesc' => 'required|max:255|min:3',
-            'priority' => 'required|numeric',
-            'imagepath' => 'required|mimes:jpeg,jpg,png',
-        ]);
+
         $img = cloudinary()->upload($request->file('imagepath')->getRealPath())->getSecurePath();
         $res = Event::create([
             'smalldesc' => ucwords(strtolower($request->smalldesc)),
