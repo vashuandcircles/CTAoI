@@ -48,7 +48,6 @@ class HomeController extends Controller
 
     public function addEvent(EventRequest  $request)
     {
-
         $img = cloudinary()->upload($request->file('imagepath')->getRealPath())->getSecurePath();
         $res = Event::create([
             'smalldesc' => ucwords(strtolower($request->smalldesc)),
