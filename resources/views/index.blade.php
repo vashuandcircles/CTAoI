@@ -621,7 +621,6 @@
                             <p>
                             {{ $events['smalldesc']}}
                             </p>
-                            <a href="#" class="primary-btn rounded-0 mt-3">View Details</a>
                         </div>
                     </div>
                 </div>
