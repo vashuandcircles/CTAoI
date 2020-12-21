@@ -26,6 +26,7 @@ class PageController extends Controller
         $teacherscount = Teacher::where('verified', 1)->where('is_featured', 1)->count();
         $eventcount = Event::count();
         $event = Event::all();
+        $event = $event->sortBy('priority');
         $teachers = Teacher::with('user')->get();
         return view('index', compact('user', 'teachers', 'coachings', 'teacheruser', 'eventcount', 'event', 'coachingscount', 'teacherscount'));
     }

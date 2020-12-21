@@ -38,6 +38,7 @@ class HomeController extends Controller
     public function event()
     {
         $events = Event::all();
+        $events = $events->sortBy('priority');
         return view('admin/event/events', compact('events'));
     }
 
