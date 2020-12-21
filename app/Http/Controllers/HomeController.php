@@ -67,7 +67,7 @@ class HomeController extends Controller
         $event->delete();
         return redirect('/event')->with('status', 'Your data is deleted successfully');
     }
-    
+
     public function level()
     {
         $levels = Level::orderBy('name', 'asc')->get();
