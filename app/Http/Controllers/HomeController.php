@@ -49,7 +49,7 @@ class HomeController extends Controller
     public function addEvent(EventRequest  $request)
     {
         $img = cloudinary()->upload($request->file('imagepath')->getRealPath())->getSecurePath();
-        $res = Event::create([
+        Event::create([
             'smalldesc' => ucwords(strtolower($request->smalldesc)),
             'starttime' => $request->starttime,
             'endtime' => $request->endtime,
@@ -57,10 +57,16 @@ class HomeController extends Controller
             'date' => $request->date,
             'imagepath' => $img,
         ]);
-        dd($res);
         return redirect('/event')->with('status', 'Event added successfully');
     }
 
+    public function deleteEvent(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+        $event->delete();
+        return redirect('/event')->with('status', 'Your data is deleted successfully');
+    }
+    
     public function level()
     {
         $levels = Level::orderBy('name', 'asc')->get();

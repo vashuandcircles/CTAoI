@@ -64,9 +64,12 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
 
     Route::get('/subscription', 'HomeController@subscription');
     Route::get('/enquiry', 'HomeController@enquiry');
+
     Route::get('/event', 'HomeController@event');
     Route::get('/addeventpage', 'HomeController@addEventPage');
     Route::post('/addevent', 'HomeController@addEvent');
+    Route::delete('/event-delete/{id}', 'HomeController@deleteEvent');
+
     Route::get('/level', 'HomeController@level');
     Route::get('/addlevelpage', 'HomeController@addLevelPage');
     Route::post('/addlevel', 'HomeController@addLevel');

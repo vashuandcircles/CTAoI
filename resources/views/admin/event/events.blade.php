@@ -25,6 +25,7 @@
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Message</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,14 @@
                             <td>{{ $events['starttime']}}</td>
                             <td>{{ $events['endtime']}}</td>
                             <td>{{ $events['smalldesc']}}</td>
+                            <td>
+                            
+                            <form action="/event-delete/{{ $events['id']}}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
+                    </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
