@@ -611,10 +611,7 @@
 
                                 <div class="time-location">
                                     <p>
-                                        <span class="ti-time mr-2"></span> {{ $events['starttime']}} - {{ $events['endtime']}}
-                                    </p>
-                                    <p>
-                                        <span class="ti-location-pin mr-2"></span> Purnia
+                                        <span class="ti-time mr-2"></span> {{ $events['starttime']}} - <br> <span class="ti-time mr-2"></span> {{ $events['endtime']}}
                                     </p>
                                 </div>
                             </div>
