@@ -38,7 +38,6 @@ class HomeController extends Controller
     public function event()
     {
         $events = Event::all();
-        $events = $events->sortBy('priority');
         return view('admin/event/events', compact('events'));
     }
 
@@ -47,25 +46,23 @@ class HomeController extends Controller
         return view('admin/event/addeventpage');
     }
 
-    public function addEvent(EventRequest  $request)
+    public function addEvent(EventRequest $request)
     {
-        $img = cloudinary()->upload($request->file('imagepath')->getRealPath())->getSecurePath();
-        Event::create([
-            'smalldesc' => ucwords(strtolower($request->smalldesc)),
-            'starttime' => $request->starttime,
-            'endtime' => $request->endtime,
-            'priority' => $request->priority,
-            'date' => $request->date,
-            'imagepath' => $img,
-        ]);
-        return redirect('/event')->with('status', 'Event added successfully');
-    }
+        try {
+            $img = cloudinary()->upload($request->file('imagepath')->getRealPath())->getSecurePath();
+            Event::create([
+                'smalldesc' => ucwords(strtolower($request->smalldesc)),
+                'starttime' => $request->starttime,
+                'endtime' => $request->endtime,
+                'priority' => $request->priority,
+                'date' => $request->date,
+                'imagepath' => $img,
+            ]);
+            return redirect('/event')->with('status', 'Event created successfully');
+        } catch (\Exception $exception) {
+            return redirect('/event')->with('status', 'Failed to create event.');
+        }
 
-    public function deleteEvent(Request $request, $id)
-    {
-        $event = Event::findOrFail($id);
-        $event->delete();
-        return redirect('/event')->with('status', 'Your data is deleted successfully');
     }
 
     public function level()
