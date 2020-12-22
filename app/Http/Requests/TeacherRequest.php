@@ -42,4 +42,17 @@ class TeacherRequest extends FormRequest
     {
         return true;
     }
+    public function messages()
+    {
+        return [
+            'email.required' => 'The email field is required.',
+            'name.required' => 'The name field is required.',
+            'gender.required' => 'The gender field is required.',
+            'phone.required' => 'The phone field is required.',
+            'specialization.required' => 'The specialization field is required.',
+            'level.required' => 'The level field is required.',
+            'state.required' => 'The state field is required.',
+            'city.required' => 'The city field is required.',
+        ];
+    }
 }

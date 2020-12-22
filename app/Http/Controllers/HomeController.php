@@ -153,18 +153,6 @@ class HomeController extends Controller
 
     public function addTeacher(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255|min:3',
-            'password' => 'required|confirmed',
-            'email' => 'required|unique:users|max:255|email',
-            'gender' => 'required|max:6|min:3',
-            'phone' => 'required|regex:/[0-9]{10}/|unique:users',
-            'specialization' => 'required|max:255|min:3',
-            'image' => 'required|mimes:jpeg,jpg,png',
-            'level' => 'required|max:255',
-            'state' => 'required|max:255|min:4',
-            'city' => 'required|min:4',
-        ]);
         $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         $user = User::create([
             'name' => ucwords(strtolower($request->name)),
@@ -190,20 +178,6 @@ class HomeController extends Controller
 
     public function addCoaching(Request $request)
     {
-        $request->validate([
-            'name' => 'max:255|min:3',
-            'directorname' => 'max:255|min:2',
-            'email' => 'unique:users|max:255|email',
-            'phone' => 'regex:/[0-9]{10}/|unique:users',
-            'specialization' => 'max:255|min:3',
-            'state' => 'max:255|min:4',
-            'landmark' => 'max:255|min:4',
-            'level' => 'max:255',
-            'image' => 'required|mimes:jpeg,jpg,png',
-            'address1' => 'max:255|min:4',
-            'address2' => 'max:255|min:4',
-            'city' => 'min:4',
-        ]);
         $user = User::create([
             'name' => ucwords(strtolower($request->name)),
             'email' => mb_strtolower($request->email),
@@ -252,16 +226,6 @@ class HomeController extends Controller
     {
         $user = User::findOrFail($id);
         $data = Teacher::where('userid', $id)->first();
-        $request->validate([
-            'name' => 'required|max:255|min:3',
-            'email' => 'required|max:255|email|unique:users',
-            'gender' => 'required|max:6|min:3',
-            'phone' => 'required|regex:/[0-9]{10}/|unique:users',
-            'image' => 'required|mimes:jpeg,jpg',
-            'state' => 'required|max:255|min:3',
-            'city' => 'required|min:4',
-        ]);
-
         if (($request->input('image')) != null) {
 //            $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
 //            $data->imgpath = $img;
@@ -286,17 +250,6 @@ class HomeController extends Controller
     {
         $data = User::findOrFail($id);
         $coachings = Coaching::where('userid', $id)->first();
-        $request->validate([
-            'name' => 'required|max:255|min:3',
-            'directorname' => 'required|max:255|min:2',
-            'email' => 'required|max:255|email|unique:users',
-            'phone' => 'required|regex:/[0-9]{10}/',
-            'image' => 'mimes:jpeg,jpg',
-            'specialization' => 'required|max:255|min:3|unique:users',
-            'address1' => 'required|max:255|min:4',
-            'state' => 'required|max:255|min:4',
-            'city' => 'required|min:4',
-        ]);
         if (($request->input('image')) != null) {
             $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
             $coachings->imgpath = $img;
