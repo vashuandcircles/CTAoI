@@ -68,7 +68,7 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
     Route::get('/event', 'HomeController@event');
     Route::get('/addeventpage', 'HomeController@addEventPage');
     Route::post('/addevent', 'HomeController@addEvent');
-    Route::delete('/event-delete/{id}', 'HomeController@deleteEvent');
+    Route::delete('/event-delete/{id}', 'HomeController@deleteEvent')->name('events.destroy');
 
     Route::get('/level', 'HomeController@level');
     Route::get('/addlevelpage', 'HomeController@addLevelPage');

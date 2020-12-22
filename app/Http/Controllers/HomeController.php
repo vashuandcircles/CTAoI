@@ -65,6 +65,14 @@ class HomeController extends Controller
 
     }
 
+    public function deleteEvent($id)
+    {
+        Event::where('id',$id)->delete();
+        return redirect('/event')->with('status', 'Event deleted successfully');
+
+
+    }
+
     public function level()
     {
         $levels = Level::orderBy('name', 'asc')->get();
