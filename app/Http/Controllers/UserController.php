@@ -230,7 +230,6 @@ class UserController extends Controller
     public function teacherRecommendation()
     {
         $id = Auth::id();
-        $user = User::findOrFail($id);
         $data = Student::where('userid', $id)->first();
         $state = $data->state;
         $teachers = Teacher::where('state', $state)->get();

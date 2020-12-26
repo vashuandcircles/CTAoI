@@ -10,43 +10,46 @@
             </div>
         </div>
         @if (session('status'))
-        <div class="alert alert-success mt-2 ml-2 mr-2" role="alert">
-            {{ session('status') }}
-        </div>
+            <div class="alert alert-success mt-2 ml-2 mr-2" role="alert">
+                {{ session('status') }}
+            </div>
         @endif
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Image</th>
-                            <th>Date</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Message</th>
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Message</th>
+                        <th>Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach($events as $row => $events)
+                    @foreach($events as $row => $events)
                         <tr>
                             <td>{{ $row+1 }}</td>
-                            <td> <div class="text-center"> <img src="{{ $events['imagepath']}}" height="150px"/> </div></td>
+                            <td>
+                                <div class="text-center"><img src="{{ $events['imagepath']}}" height="150px"/></div>
+                            </td>
                             <td>{{ $events['date']}}</td>
                             <td>{{ $events['starttime']}}</td>
                             <td>{{ $events['endtime']}}</td>
                             <td>{{ $events['smalldesc']}}</td>
                             <td>
-                            
-                            <form action="/event-delete/{{ $events['id']}}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
-                    </form>
+
+                                <form action="{{ route('events.destroy',$events['id']) }}" method="POST"
+                                      onclick="return confirm('Are you sure to delete this item?')">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
+                                </form>
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
             </div>
