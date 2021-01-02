@@ -30,7 +30,7 @@
                             <div class="col-md-6">
                                 <input id="directorname" type="text"
                                        class="form-control @error('directorname') is-invalid @enderror"
-                                       value="{{old('directorname', $user->directorname )}}"
+                                       value="{{old('directorname', $coachings->directorname )}}"
                                        name="directorname" autocomplete="directorname" autofocus>
                                 @error('directorname')
                                 <span class="invalid-feedback" role="alert">
@@ -76,7 +76,7 @@
                                 Phone</label>
 
                             <div class="col-md-6">
-                                <input id="altphone" type="text" value="{{old('altphone', $user->altphone) }}"
+                                <input id="altphone" type="text" value="{{old('altphone', $coachings->altphone) }}"
                                        class="form-control @error('altphone') is-invalid @enderror"
                                        name="altphone"
                                        autocomplete="altphone">
@@ -120,7 +120,7 @@
 
                             <div class="col-md-6">
                                 <input id="specialization" type="text"
-                                       value="{{old('specialization', $user->specialization )}}"
+                                       value="{{old('specialization', $coachings->specialization )}}"
                                        class="form-control @error('specialization') is-invalid @enderror"
                                        name="specialization" autocomplete="specialization">
 
@@ -151,7 +151,7 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" value="{{old('description', $user->description )}}"
+                                <input id="description" type="text" value="{{old('description', $coachings->description )}}"
                                        class="form-control @error('description') is-invalid @enderror"
                                        name="description" autocomplete="description">
 
@@ -166,7 +166,7 @@
                             <label for="address1" class="col-md-4 col-form-label text-md-right">Street Address 1</label>
 
                             <div class="col-md-6">
-                                <input id="address1" type="text" value="{{old('address1', $user->address1 )}}"
+                                <input id="address1" type="text" value="{{old('address1', $coachings->address1 )}}"
                                        class="form-control @error('address1') is-invalid @enderror"
                                        name="address1">
 
@@ -181,7 +181,7 @@
                             <label for="address2" class="col-md-4 col-form-label text-md-right">Street Address 2</label>
 
                             <div class="col-md-6">
-                                <input id="address2" type="text" value="{{old('address2', $user->address2 )}}"
+                                <input id="address2" type="text" value="{{old('address2', $coachings->address2 )}}"
                                        class="form-control @error('address2') is-invalid @enderror"
                                        name="address2">
 
@@ -196,7 +196,7 @@
                             <label for="landmark" class="col-md-4 col-form-label text-md-right">Landmark</label>
 
                             <div class="col-md-6">
-                                <input id="landmark" type="text" value="{{old('landmark', $user->landmark )}}"
+                                <input id="landmark" type="text" value="{{old('landmark', $coachings->landmark )}}"
                                        class="form-control @error('landmark') is-invalid @enderror"
                                        name="landmark">
 
@@ -271,7 +271,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" value="{{old('city', $user->city )}}"
+                                <input id="city" type="text" value="{{old('city', $coachings->city )}}"
                                        class="form-control @error('city') is-invalid @enderror"
                                        name="city">
                                 @error('city')
