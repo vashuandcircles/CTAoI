@@ -16,7 +16,7 @@
         @endif
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table id="example" class="display" style="width:100%">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -29,30 +29,35 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($teachers as $key => $row)
-                        <?php if ($row->verified) { ?>
+                    @foreach ($teachers as $key => $teacher)
                         <tr>
                             <td>
-                                <img
-                                    src="{{($row->imgpath ?? asset('/img/default-user.jpg'))}}"
-                                    style="width: 50px; height: 75px; object-fit: cover;"></td>
-                            <td>{{ $user[$key]->name }}</td>
-                            <td>{{ $user[$key]->phone }} <br> {{ $row->altphone}} </td>
-                            <td>{{ $user[$key]->email }}</td>
-                            <td>{{ $row->gender}}</td>
-                            <td>{{ $row->city}} @if($row->state != NULL) , @endif {{ $row->state}}</td>
+                                <img src="{{$teacher->imgpath ?? asset('/img/default-user.jpg')}}"
+                                     style="width: 50px; height: 75px; object-fit: cover;">
+
+                            </td>
+                            <td>{{$teacher->user->name??''}}</td>
+                            <td>{{$teacher->user->phone??''}}</td>
+                            <td>{{$teacher->user->email??''}}</td>
+                            <td>{{$teacher->gender??''}}</td>
+                            <td>{{ $teacher->city}} @if($teacher->state != NULL) , @endif {{ $teacher->state}}</td>
+
+
                             <td>
                                 <div class="row">
-                                    <?php if (!$row->is_featured) { ?>
-                                    <form action="{{route('teachers.feature', $row->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
-                                        <button type="submit" href="" class="btn btn-success m-1">Feature</button>
-                                    </form>
-                                    <?php } ?>
-                                    <a href="{{route('teachers.edit', $row->id) }}"
+                                    @if (!$teacher->is_featured)
+                                        <form action="{{route('teachers.feature', $teacher->id) }}"
+                                              method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PUT') }}
+                                            <button type="submit" href=""
+                                                    class="btn btn-success m-1">Feature
+                                            </button>
+                                        </form>
+                                    @endif
+                                    <a href="{{route('teachers.edit', $teacher->id) }}"
                                        class="btn btn-secondary m-1">Edit</a>
-                                    <form action="{{route('teachers.destroy', $row->id) }}" method="POST">
+                                    <form action="{{route('teachers.destroy', $teacher->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" href="" class="btn btn-danger m-1"
@@ -62,16 +67,20 @@
                                 </div>
                             </td>
                         </tr>
-                        <?php } ?>
                     @endforeach
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
-                    {!! $teachers->links() !!}
-                </div>
+
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $.noConflict();
 
+        $('#example').DataTable();
+    });
+</script>
 @include('admin.partials.footer')
+
