@@ -85,6 +85,11 @@
                 <i class="fas fa-fw fa-meh-rolling-eyes"></i>
                 <span>Zoom Meeting</span></a>
         </li>
+        <li class="nav-item {{ (request()->is('zoom-meetings')) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('calenders.index')}}">
+                <i class="fas fa-fw fa-meh-rolling-eyes"></i>
+                <span>Events</span></a>
+        </li>
 
         <li class="nav-item {{ (request()->is('coaching-request')) ? 'active' : '' }} {{ (request()->is('teacher-request')) ? 'active' : '' }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"

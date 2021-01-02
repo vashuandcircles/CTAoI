@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use Spatie\GoogleCalendar\Event;
 
 Auth::routes(['verify' => true]);
 Route::get('/', 'PageController@index');
@@ -123,7 +125,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::get('/meetings', 'Zoom\MeetingController@index')
         ->name('meetings.index');
-// Create meeting room using topic, agenda, start_time.
+// Create meeting room using topic, agenda, start_time.01111
     Route::post('/meetings', 'Zoom\MeetingController@store')
         ->name('meetings.store');
     Route::get('/meetings/create', 'Zoom\MeetingController@create')
@@ -135,4 +137,14 @@ Route::group(['prefix' => 'api'], function () {
         ->where('meeting', '[0-9]+')->name('meetings.update');
     Route::delete('/meetings/{meeting}', 'Zoom\MeetingController@destroy')
         ->where('meeting', '[0-9]+')->name('meetings.destroy');
+});
+
+Route::resource('/calenders', 'BookingController');
+
+Route::group(array('domain' => '{account}.'.config('app.short_url')), function() {
+    Route::get('/ram', function($account) {
+        dd($account);
+        // ...
+        return Redirect::to('https://www.myapp.com'.'/'.$account);
+    });
 });
