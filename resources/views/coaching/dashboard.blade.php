@@ -1,13 +1,23 @@
 @include('coaching.partials.header')
 <!-- End of Topbar -->
-
+<script>
+    function copyToClipboard(id) {
+        document.getElementById(id).select();
+        document.execCommand('copy');
+        console.log(id);
+    }
+</script>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-lg-12 d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Coaching Dashboard</h1>
-        <a href="{{ url('/editcoaching') }}" class="btn btn-sm btn-primary m-2"><i class="m-2 fas fa-list fa-sm text-white-50"></i> Edit Details</a>
+        <div class="ml-auto text-center">
+            <input type="text" class="form-control m-2" id="copy_{{ $user->id }}" value="http://ctaoi.com/coachingdetail/{{ $user->id }}">
+            <button onclick="copyToClipboard('copy_{{ $user->id }}')" class="btn btn-sm btn-primary m-2"><i class="m-2 fas fa-clipboard fa-sm text-white-50"></i>Copy Profile Link</button>
+            <a href="{{ url('/editcoaching') }}"  class="btn btn-sm btn-primary m-2"><i class="m-2 fas fa-list fa-sm text-white-50"></i> Edit Details</a>
+        </div>
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">

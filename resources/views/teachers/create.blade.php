@@ -113,10 +113,12 @@
                             <div class="col-md-6">
                                 <select id="level" type="text" class="form-control @error('level') is-invalid @enderror"
                                         name="level" autocomplete="level" autofocus>
-                                    @foreach($levels as $level)
+                                    <option value="">Select Level</option>
+
+                                @foreach($levels as $level)
                                         @if(old('level'))
-                                            <option value="{{ old('level') }}">{{ old('level') }}</option> @endif
-                                        <option value="">Select Level</option>
+                                            <option value="{{ old('level') }}">{{ old('level') }}</option>
+                                        @endif
                                         <option value="{{ $level->name }}">{{ $level->name }}</option>
                                     @endforeach
                                 </select>

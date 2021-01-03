@@ -232,8 +232,6 @@ class HomeController extends Controller
         $user = User::findOrFail($id);
         $data = Teacher::where('userid', $id)->first();
         if (($request->input('image')) != null) {
-//            $img = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-//            $data->imgpath = $img;
             $img = (new CustomRepository())->upload($request);
             $data->imgpath = $img;
         }
