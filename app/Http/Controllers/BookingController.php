@@ -14,11 +14,13 @@ class BookingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Factory|Response|View
      */
     public function index()
     {
-        dd($events = Event::get());
+
+        $events = Event::get();
+        return \view('calenders.index', compact('events'));
     }
 
     /**
@@ -35,19 +37,24 @@ class BookingController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|Response
      */
     public function store(Request $request)
     {
-        $start_date = Carbon::parse(\request()->start_date) . '' . \request()->start_time;
-//        $end_time = ($start_date)->addHour();
-        $end_time =Carbon::now()->addHour();
+        $event = new Event;
+
+        $event->name = 'A new full day event';
+        $event->startDate = Carbon::now();
+        $event->endDate = Carbon::now()->addDay();
+
+        $event->save();
+        $start_date = Carbon::parse($request->start_date);
         Event::create([
-            'name' =>\request()->name ,
+            'name' => $request->topic,
             'startDateTime' => $start_date,
-            'endDateTime' => $end_time,
+            'endDateTime' => Carbon::now()->addHour()
         ]);
-        return redirect()->back()->with('success', 'booked');
+        return redirect()->route('calenders.index')->with('success', 'booked');
     }
 
     /**

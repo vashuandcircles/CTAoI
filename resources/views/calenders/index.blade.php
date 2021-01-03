@@ -4,7 +4,7 @@
         <div class="card-header py-3">
             <div class="row">
                 <h6 class="m-3 font-weight-bold text-primary">Meetings</h6>
-                <a href="{{ route('calender.create') }}" class="m-2 ml-auto btn btn-primary text-white">
+                <a href="{{ route('calenders.create') }}" class="m-2 ml-auto btn btn-primary text-white">
                     Schedule
                 </a>
             </div>
@@ -29,24 +29,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($calender['calender'] as $meeting)
+                    @foreach($events as $meeting)
                         <tr>
-                            <td>{{$meeting['id']}}</td>
-                            <td>{{$meeting['topic']}}</td>
-                            <td>{{$meeting['start_time']}}</td>
-                            <td>{{$meeting['duration']}}</td>
+                            <td>{{$meeting->id}}</td>
+                            <td>{{$meeting->summary}}</td>
+                            <td>{{$meeting->start_time}}</td>
+                            <td>gg</td>
                             <td>
-                                <a href="{{$meeting['join_url']}}" target="_blank"
+                                <a href="{{$meeting->conferenceData->entryPoints[0]->uri??''}}" target="_blank"
                                    class="btn btn-info m-1">Join</a>
                             </td>
                             <td>
                                 <div class="row">
                                     <div class="col-3">
-                                        <a href="{{route('calender.edit', $meeting['id']) }}"
+                                        <a href="{{route('calenders.edit', $meeting->id) }}"
                                            class="btn btn-secondary m-1"><i class="fas fa-edit"></i></a>
                                     </div>
                                     <div class="col-3">
-                                        <form action="{{route('calender.destroy',  $meeting['id']) }}" method="POST">
+                                        <form action="{{route('calenders.destroy',  $meeting->id) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" href="" class="btn btn-danger m-1"
