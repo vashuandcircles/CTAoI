@@ -103,13 +103,17 @@ class PageController extends Controller
 
     public function teacherDetail(Request $request, $id)
     {
-        $data = Teacher::with('user')->whereId($id)->first();
-        $course = Courses::where('userid', $id)->get();
+        $teacher = Teacher::findOrFail($id);
+        if ($teacher) {
+            $data = Teacher::with('user')->whereId($id)->first();
+            $course = Courses::where('userid', $id)->get();
 //        if ($data->is_featured)
             return view('teacherdetail', compact('data', 'course'));
 //        else {
 //            abort(401);
 //        }
+        }
+
     }
 
     public function studentDetail(Request $request, $id)
