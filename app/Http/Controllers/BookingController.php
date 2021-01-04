@@ -18,7 +18,6 @@ class BookingController extends Controller
      */
     public function index()
     {
-
         $events = Event::get();
         return \view('calenders.index', compact('events'));
     }
