@@ -15,8 +15,8 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Teacher Dashboard</h1>
         <div class="ml-auto text-center">
-            <input type="text" class="form-control m-2" id="copy_{{ $user->id }}" value="http://ctaoi.com/teacherdetail/{{ $user->id }}">
-            <button onclick="copyToClipboard('copy_{{ $user->id }}')" class="btn btn-sm btn-primary m-2"><i class="m-2 fas fa-clipboard fa-sm text-white-50"></i>Copy Profile Link</button>
+            <input type="text" class="form-control m-2" id="copy_{{ $data->id }}" value="http://ctaoi.com/teacherdetail/{{ $data->id }}">
+            <button onclick="copyToClipboard('copy_{{ $data->id }}')" class="btn btn-sm btn-primary m-2"><i class="m-2 fas fa-clipboard fa-sm text-white-50"></i>Copy Profile Link</button>
             <a href="{{ url('/editteacher') }}" class="btn btn-sm btn-primary m-2"><i class="m-2 fas fa-list fa-sm text-white-50"></i> Edit Details</a>
         </div>
     </div>

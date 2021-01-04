@@ -105,11 +105,11 @@ class PageController extends Controller
     {
         $data = Teacher::with('user')->whereId($id)->first();
         $course = Courses::where('userid', $id)->get();
-        if ($data->is_featured)
+//        if ($data->is_featured)
             return view('teacherdetail', compact('data', 'course'));
-        else {
-            abort(401);
-        }
+//        else {
+//            abort(401);
+//        }
     }
 
     public function studentDetail(Request $request, $id)
