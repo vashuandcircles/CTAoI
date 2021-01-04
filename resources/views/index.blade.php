@@ -482,114 +482,115 @@
 <!--================ End Registration Area =================-->
 
 <!--================ Start Trainers Area =================-->
-<!-- <section class="trainer_area section_gap_top">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3">Our Expert Trainers</h2>
-                    <p>
-                        Replenish man have thing gathering lights yielding shall you
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center d-flex align-items-center">
-            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-                <div class="thumb d-flex justify-content-sm-center">
-                    <img class="img-fluid" src="img/trainer/t1.jpg" alt="" />
-                </div>
-                <div class="meta-text text-sm-center">
-                    <h4>Mated Nithan</h4>
-                    <p class="designation">Sr. web designer</p>
-                    <div class="mb-4">
-                        <p>
-                            If you are looking at blank cassettes on the web, you may be
-                            very confused at the.
-                        </p>
-                    </div>
-                    <div class="align-items-center justify-content-center d-flex">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
+{{--<section class="trainer_area section_gap_top">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row justify-content-center">--}}
+{{--            <div class="col-lg-5">--}}
+{{--                <div class="main_title">--}}
+{{--                    <h2 class="mb-3">Our Expert Trainers</h2>--}}
+{{--                    <p>--}}
+{{--                        Replenish man have thing gathering lights yielding shall you--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <div class="row justify-content-center d-flex align-items-center">--}}
+{{--            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">--}}
+{{--                <div class="thumb d-flex justify-content-sm-center">--}}
+{{--                    <img class="img-fluid" src="img/trainer/t1.jpg" alt="" />--}}
+{{--                </div>--}}
+{{--                <div class="meta-text text-sm-center">--}}
+{{--                    <h4>Mated Nithan</h4>--}}
+{{--                    <p class="designation">Sr. web designer</p>--}}
+{{--                    <div class="mb-4">--}}
+{{--                        <p>--}}
+{{--                            If you are looking at blank cassettes on the web, you may be--}}
+{{--                            very confused at the.--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                    <div class="align-items-center justify-content-center d-flex">--}}
+{{--                        <a href="#"><i class="ti-facebook"></i></a>--}}
+{{--                        <a href="#"><i class="ti-twitter"></i></a>--}}
+{{--                        <a href="#"><i class="ti-linkedin"></i></a>--}}
+{{--                        <a href="#"><i class="ti-pinterest"></i></a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-                <div class="thumb d-flex justify-content-sm-center">
-                    <img class="img-fluid" src="img/trainer/t2.jpg" alt="" />
-                </div>
-                <div class="meta-text text-sm-center">
-                    <h4>David Cameron</h4>
-                    <p class="designation">Sr. web designer</p>
-                    <div class="mb-4">
-                        <p>
-                            If you are looking at blank cassettes on the web, you may be
-                            very confused at the.
-                        </p>
-                    </div>
-                    <div class="align-items-center justify-content-center d-flex">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">--}}
+{{--                <div class="thumb d-flex justify-content-sm-center">--}}
+{{--                    <img class="img-fluid" src="img/trainer/t2.jpg" alt="" />--}}
+{{--                </div>--}}
+{{--                <div class="meta-text text-sm-center">--}}
+{{--                    <h4>David Cameron</h4>--}}
+{{--                    <p class="designation">Sr. web designer</p>--}}
+{{--                    <div class="mb-4">--}}
+{{--                        <p>--}}
+{{--                            If you are looking at blank cassettes on the web, you may be--}}
+{{--                            very confused at the.--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                    <div class="align-items-center justify-content-center d-flex">--}}
+{{--                        <a href="#"><i class="ti-facebook"></i></a>--}}
+{{--                        <a href="#"><i class="ti-twitter"></i></a>--}}
+{{--                        <a href="#"><i class="ti-linkedin"></i></a>--}}
+{{--                        <a href="#"><i class="ti-pinterest"></i></a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-                <div class="thumb d-flex justify-content-sm-center">
-                    <img class="img-fluid" src="img/trainer/t3.jpg" alt="" />
-                </div>
-                <div class="meta-text text-sm-center">
-                    <h4>Jain Redmel</h4>
-                    <p class="designation">Sr. Faculty Data Science</p>
-                    <div class="mb-4">
-                        <p>
-                            If you are looking at blank cassettes on the web, you may be
-                            very confused at the.
-                        </p>
-                    </div>
-                    <div class="align-items-center justify-content-center d-flex">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">--}}
+{{--                <div class="thumb d-flex justify-content-sm-center">--}}
+{{--                    <img class="img-fluid" src="img/trainer/t3.jpg" alt="" />--}}
+{{--                </div>--}}
+{{--                <div class="meta-text text-sm-center">--}}
+{{--                    <h4>Jain Redmel</h4>--}}
+{{--                    <p class="designation">Sr. Faculty Data Science</p>--}}
+{{--                    <div class="mb-4">--}}
+{{--                        <p>--}}
+{{--                            If you are looking at blank cassettes on the web, you may be--}}
+{{--                            very confused at the.--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                    <div class="align-items-center justify-content-center d-flex">--}}
+{{--                        <a href="#"><i class="ti-facebook"></i></a>--}}
+{{--                        <a href="#"><i class="ti-twitter"></i></a>--}}
+{{--                        <a href="#"><i class="ti-linkedin"></i></a>--}}
+{{--                        <a href="#"><i class="ti-pinterest"></i></a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-                <div class="thumb d-flex justify-content-sm-center">
-                    <img class="img-fluid" src="img/trainer/t4.jpg" alt="" />
-                </div>
-                <div class="meta-text text-sm-center">
-                    <h4>Nathan Macken</h4>
-                    <p class="designation">Sr. web designer</p>
-                    <div class="mb-4">
-                        <p>
-                            If you are looking at blank cassettes on the web, you may be
-                            very confused at the.
-                        </p>
-                    </div>
-                    <div class="align-items-center justify-content-center d-flex">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
+{{--            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">--}}
+{{--                <div class="thumb d-flex justify-content-sm-center">--}}
+{{--                    <img class="img-fluid" src="img/trainer/t4.jpg" alt="" />--}}
+{{--                </div>--}}
+{{--                <div class="meta-text text-sm-center">--}}
+{{--                    <h4>Nathan Macken</h4>--}}
+{{--                    <p class="designation">Sr. web designer</p>--}}
+{{--                    <div class="mb-4">--}}
+{{--                        <p>--}}
+{{--                            If you are looking at blank cassettes on the web, you may be--}}
+{{--                            very confused at the.--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                    <div class="align-items-center justify-content-center d-flex">--}}
+{{--                        <a href="#"><i class="ti-facebook"></i></a>--}}
+{{--                        <a href="#"><i class="ti-twitter"></i></a>--}}
+{{--                        <a href="#"><i class="ti-linkedin"></i></a>--}}
+{{--                        <a href="#"><i class="ti-pinterest"></i></a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</section>--}}
 <!--================ End Trainers Area =================-->
 
 <!-- ================ Start Events Area ================= -->
 @if($eventcount)
-    <div class="events_area">
+    <div class="events_area" style="background: #0c1440;
+}">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
@@ -629,125 +630,125 @@
 <!--================ End Events Area =================-->
 
 <!--================ Start Testimonial Area =================-->
-<!-- <div class="testimonial_area section_gap">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3">Client say about me</h2>
-                    <p>
-                        Replenish man have thing gathering lights yielding shall you
-                    </p>
-                </div>
-            </div>
-        </div>
+{{-- <div class="testimonial_area section_gap">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row justify-content-center">--}}
+{{--            <div class="col-lg-5">--}}
+{{--                <div class="main_title">--}}
+{{--                    <h2 class="mb-3">Client say about me</h2>--}}
+{{--                    <p>--}}
+{{--                        Replenish man have thing gathering lights yielding shall you--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-        <div class="row">
-            <div class="testi_slider owl-carousel">
-                <div class="testi_item">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <img src="img/testimonials/t1.jpg" alt="" />
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="testi_text">
-                                <h4>Elite Martin</h4>
-                                <p>
-                                    Him, made can't called over won't there on divide there
-                                    male fish beast own his day third seed sixth seas unto.
-                                    Saw from
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testi_item">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <img src="img/testimonials/t2.jpg" alt="" />
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="testi_text">
-                                <h4>Davil Saden</h4>
-                                <p>
-                                    Him, made can't called over won't there on divide there
-                                    male fish beast own his day third seed sixth seas unto.
-                                    Saw from
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testi_item">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <img src="img/testimonials/t1.jpg" alt="" />
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="testi_text">
-                                <h4>Elite Martin</h4>
-                                <p>
-                                    Him, made can't called over won't there on divide there
-                                    male fish beast own his day third seed sixth seas unto.
-                                    Saw from
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testi_item">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <img src="img/testimonials/t2.jpg" alt="" />
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="testi_text">
-                                <h4>Davil Saden</h4>
-                                <p>
-                                    Him, made can't called over won't there on divide there
-                                    male fish beast own his day third seed sixth seas unto.
-                                    Saw from
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testi_item">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <img src="img/testimonials/t1.jpg" alt="" />
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="testi_text">
-                                <h4>Elite Martin</h4>
-                                <p>
-                                    Him, made can't called over won't there on divide there
-                                    male fish beast own his day third seed sixth seas unto.
-                                    Saw from
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testi_item">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <img src="img/testimonials/t2.jpg" alt="" />
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="testi_text">
-                                <h4>Davil Saden</h4>
-                                <p>
-                                    Him, made can't called over won't there on divide there
-                                    male fish beast own his day third seed sixth seas unto.
-                                    Saw from
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
+{{--        <div class="row">--}}
+{{--            <div class="testi_slider owl-carousel">--}}
+{{--                <div class="testi_item">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-lg-4 col-md-6">--}}
+{{--                            <img src="img/testimonials/t1.jpg" alt="" />--}}
+{{--                        </div>--}}
+{{--                        <div class="col-lg-8">--}}
+{{--                            <div class="testi_text">--}}
+{{--                                <h4>Elite Martin</h4>--}}
+{{--                                <p>--}}
+{{--                                    Him, made can't called over won't there on divide there--}}
+{{--                                    male fish beast own his day third seed sixth seas unto.--}}
+{{--                                    Saw from--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="testi_item">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-lg-4 col-md-6">--}}
+{{--                            <img src="img/testimonials/t2.jpg" alt="" />--}}
+{{--                        </div>--}}
+{{--                        <div class="col-lg-8">--}}
+{{--                            <div class="testi_text">--}}
+{{--                                <h4>Davil Saden</h4>--}}
+{{--                                <p>--}}
+{{--                                    Him, made can't called over won't there on divide there--}}
+{{--                                    male fish beast own his day third seed sixth seas unto.--}}
+{{--                                    Saw from--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="testi_item">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-lg-4 col-md-6">--}}
+{{--                            <img src="img/testimonials/t1.jpg" alt="" />--}}
+{{--                        </div>--}}
+{{--                        <div class="col-lg-8">--}}
+{{--                            <div class="testi_text">--}}
+{{--                                <h4>Elite Martin</h4>--}}
+{{--                                <p>--}}
+{{--                                    Him, made can't called over won't there on divide there--}}
+{{--                                    male fish beast own his day third seed sixth seas unto.--}}
+{{--                                    Saw from--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="testi_item">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-lg-4 col-md-6">--}}
+{{--                            <img src="img/testimonials/t2.jpg" alt="" />--}}
+{{--                        </div>--}}
+{{--                        <div class="col-lg-8">--}}
+{{--                            <div class="testi_text">--}}
+{{--                                <h4>Davil Saden</h4>--}}
+{{--                                <p>--}}
+{{--                                    Him, made can't called over won't there on divide there--}}
+{{--                                    male fish beast own his day third seed sixth seas unto.--}}
+{{--                                    Saw from--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="testi_item">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-lg-4 col-md-6">--}}
+{{--                            <img src="img/testimonials/t1.jpg" alt="" />--}}
+{{--                        </div>--}}
+{{--                        <div class="col-lg-8">--}}
+{{--                            <div class="testi_text">--}}
+{{--                                <h4>Elite Martin</h4>--}}
+{{--                                <p>--}}
+{{--                                    Him, made can't called over won't there on divide there--}}
+{{--                                    male fish beast own his day third seed sixth seas unto.--}}
+{{--                                    Saw from--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="testi_item">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-lg-4 col-md-6">--}}
+{{--                            <img src="img/testimonials/t2.jpg" alt="" />--}}
+{{--                        </div>--}}
+{{--                        <div class="col-lg-8">--}}
+{{--                            <div class="testi_text">--}}
+{{--                                <h4>Davil Saden</h4>--}}
+{{--                                <p>--}}
+{{--                                    Him, made can't called over won't there on divide there--}}
+{{--                                    male fish beast own his day third seed sixth seas unto.--}}
+{{--                                    Saw from--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 @include('partials.footer')
