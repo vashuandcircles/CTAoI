@@ -589,7 +589,7 @@
 
 <!-- ================ Start Events Area ================= -->
 @if($eventcount)
-    <div class="events_area" style="background: #0c1440;">
+    <div class="events_area" style="background: #1b3740;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
@@ -603,12 +603,11 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="single_event position-relative">
                             <div class="event_thumb">
-                                <img src="{{ $events['imagepath']}}" height="300px" alt="Event Image"/>
+                                <img src="{{ $events['imagepath']}}" height="250px" width="250px" alt="Event Image"/>
                             </div>
                             <div class="event_details">
                                 <div class="d-flex mb-4">
                                     <div class="date">{{ $events['date']}}</div>
-
                                     <div class="time-location">
                                         <p>
                                             <span class="ti-time mr-2"></span> {{ $events['starttime']}} - <br> <span
