@@ -594,7 +594,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5">
                     <div class="main_title">
-                        <h2 class="mb-3 text-white">Features</h2>
+                        <h2 class="mb-3 text-white">Events</h2>
                     </div>
                 </div>
             </div>
