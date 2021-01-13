@@ -121,6 +121,9 @@ Route::get('laravel-logs', function () {
 Route::group(['prefix' => 'api'], function () {
     Route::get('/meetings', 'Zoom\MeetingController@index')
         ->name('meetings.index');
+
+    Route::get('/zoom-setup', 'Zoom\MeetingController@zoomSetup')
+        ->name('meetings.setup');
 // Create meeting room using topic, agenda, start_time.
     Route::post('/meetings', 'Zoom\MeetingController@store')
         ->name('meetings.store');
