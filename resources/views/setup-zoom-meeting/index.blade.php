@@ -3,10 +3,11 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
-                <h6 class="m-3 font-weight-bold text-primary">Meetings</h6>
+                <h6 class="m-3 font-weight-bold text-primary">Zoom credentials</h6>
                 <a href="{{ route('meetings.create') }}" class="m-2 ml-auto btn btn-primary text-white">
-                    Schedule
+                    create credentials
                 </a>
+
             </div>
         </div>
         @if (session('status'))
@@ -20,33 +21,24 @@
                 <table id="example" class="display" style="width:100%">
                     <thead>
                     <tr>
-                        <th>Meeting Id</th>
-                        <th>Topic</th>
-                        <th>Start Time</th>
-                        <th>Duration</th>
-                        <th>Join Url</th>
+                        <th>ZOOM_API_KEY</th>
+                        <th>ZOOM_API_SECRET</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($meetings['meetings'] as $meeting)
+                    @foreach($credentials as $credential)
                         <tr>
-                            <td>{{$meeting['id']}}</td>
-                            <td>{{$meeting['topic']}}</td>
-                            <td>{{$meeting['start_time']}}</td>
-                            <td>{{$meeting['duration']}}</td>
-                            <td>
-                                <a href="{{$meeting['join_url']}}" target="_blank"
-                                   class="btn btn-info m-1">Join</a>
-                            </td>
+                            <td>{{$credential->zoom_api_key}}</td>
+                            <td>{{$credential->zoom_api_secret}}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-3">
-                                        <a href="{{route('meetings.edit', $meeting['id']) }}"
+                                        <a href="#{{--{{route('meetings.edit', $credential->id) }}--}}"
                                            class="btn btn-secondary m-1"><i class="fas fa-edit"></i></a>
                                     </div>
                                     <div class="col-3">
-                                        <form action="{{route('meetings.destroy',  $meeting['id']) }}" method="POST">
+                                        <form action="#{{--{{route('meetings.destroy',  $credential->id) }}--}}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" href="" class="btn btn-danger m-1"

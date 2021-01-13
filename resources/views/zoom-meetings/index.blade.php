@@ -4,7 +4,10 @@
         <div class="card-header py-3">
             <div class="row">
                 <h6 class="m-3 font-weight-bold text-primary">Meetings</h6>
-                <a href="{{ route('meetings.create') }}" class="m-2 ml-auto btn btn-primary text-white">
+                <a href="{{ route('meetings.setup') }}" class="float-right m-2 ml-auto btn btn-primary text-white">
+                    Set up credentials
+                </a>
+                <a href="{{ route('meetings.create') }}" class="m-2 ml-auto btn btn-primary text-white flo">
                     Schedule
                 </a>
             </div>

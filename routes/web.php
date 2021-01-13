@@ -136,4 +136,8 @@ Route::group(['prefix' => 'api'], function () {
         ->where('meeting', '[0-9]+')->name('meetings.update');
     Route::delete('/meetings/{meeting}', 'Zoom\MeetingController@destroy')
         ->where('meeting', '[0-9]+')->name('meetings.destroy');
+
 });
+Route::get('/zoom-meeting-rooms', function () {
+    return view('setup-zoom-meeting.introduction');
+})->name('zoom-meeting-rooms');
