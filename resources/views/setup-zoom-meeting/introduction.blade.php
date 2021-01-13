@@ -27,9 +27,6 @@
                         Sign in
                     </li>
                     <li>
-                        Sign in
-                    </li>
-                    <li>
                         Click <i>Develop</i> button on header and select <i>Build App</i> menu.
                     </li>
                     <li>
@@ -41,7 +38,7 @@
                     </li>
                 </ol>
             </div>
-
+            <br>
 
             <div class="row">
                 <div class="col-lg-12">

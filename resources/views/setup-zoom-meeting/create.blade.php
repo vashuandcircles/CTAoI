@@ -47,7 +47,7 @@
                                 <button type="submit" id="create" class="btn btn-primary">
                                     Create
                                 </button>
-                                <a href="{{ route('meetings.index')}}" class="btn btn-danger text-white">
+                                <a href="{{ route('meetings.setup')}}" class="btn btn-danger text-white">
                                     Cancel
                                 </a>
                             </div>
