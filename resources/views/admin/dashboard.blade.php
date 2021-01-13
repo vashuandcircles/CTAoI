@@ -35,10 +35,10 @@
         chart.render();
         var chart = new CanvasJS.Chart("chartContainerStudent", {
             title: {
-                text: "This year teachers"
+                text: "This year students"
             },
             axisY: {
-                title: "Number of teachers"
+                title: "Number of students"
             },
             data: [{
                 type: "line",
