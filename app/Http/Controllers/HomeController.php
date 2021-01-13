@@ -26,6 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $registeredcoaching = Coaching::where('verified', 'LIKE', '1')->count();
+        $activeStudent = Student::where('active',  '1')->count();
         $pendingcoaching = Coaching::where('verified', 'LIKE', '0')->count();
         $featuredcoaching = Coaching::where('is_featured', 'LIKE', '1')->count();
         $registeredteacher = Teacher::where('verified', 'LIKE', '1')->count();
@@ -95,7 +96,7 @@ class HomeController extends Controller
             $dataPointTeacher[] =
                 ["y" => $value, "label" => $key];
 
-        $StudentChart = Student::select(
+        $studentChart = Student::select(
             [
                 \DB::raw('MONTH(created_at) as month'),
                 \DB::raw('YEAR(created_at) as year'),
@@ -112,7 +113,7 @@ class HomeController extends Controller
         for ($i = 1; $i <= 12; $i++) {
             $YearDate = strtotime(date("Y-m-d", $YearDate) . " +1 month");
             $monthData[__(date('M', $YearDate))] = 0;
-            foreach ($teacherChart as $chart) {
+            foreach ($studentChart as $chart) {
                 if (intval($chart->month) == intval(date('m', $YearDate))) {
 
                     $monthData[date('M', $YearDate)] = $chart->total;
@@ -124,7 +125,16 @@ class HomeController extends Controller
             $dataPointStudent[] =
                 ["y" => $value, "label" => $key];
 
-        return view('admin.dashboard', compact('registeredcoaching', 'featuredcoaching', 'pendingcoaching', 'registeredteacher', 'featuredteacher', 'pendingteacher', 'subscriptions', 'enquiry', 'dataPoints', 'dataPointTeacher', 'dataPointStudent'));
+
+        $data = array(
+            array("label" => "Registered Coachings", "symbol" => "C", "y" => $registeredcoaching),
+            array("label" => "Registered Teachers", "symbol" => "T", "y" => $registeredteacher),
+            array("label" => "Active Students", "symbol" => "S", "y" => $activeStudent)
+        );
+
+
+
+        return view('admin.dashboard', compact('registeredcoaching', 'featuredcoaching', 'pendingcoaching', 'registeredteacher', 'featuredteacher', 'pendingteacher', 'subscriptions', 'enquiry', 'dataPoints', 'dataPointTeacher', 'dataPointStudent','data'));
     }
 
     public function event()
