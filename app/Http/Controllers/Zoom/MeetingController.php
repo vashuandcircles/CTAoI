@@ -123,9 +123,13 @@ class MeetingController extends Controller
         }
     }
 
-    public function zoomSetup()
+    public function zoomSetupCreate()
     {
         return view('setup-zoom-meeting.create');
+    }
+    public function zoomSetup()
+    {
+        return view('setup-zoom-meeting.index');
     }
 }
 

@@ -122,6 +122,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/meetings', 'Zoom\MeetingController@index')
         ->name('meetings.index');
 
+    Route::get('/zoom-setup-create', 'Zoom\MeetingController@zoomSetupCreate')
+        ->name('meetings.setup-create');
     Route::get('/zoom-setup', 'Zoom\MeetingController@zoomSetup')
         ->name('meetings.setup');
 // Create meeting room using topic, agenda, start_time.
