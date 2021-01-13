@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Coaching;
+use App\Entities\Student;
 use App\Entities\Teacher;
 use App\Event;
 use App\Http\Requests\EventRequest;
@@ -25,6 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $registeredcoaching = Coaching::where('verified', 'LIKE', '1')->count();
+        $activeStudent = Student::where('active',  '1')->count();
         $pendingcoaching = Coaching::where('verified', 'LIKE', '0')->count();
         $featuredcoaching = Coaching::where('is_featured', 'LIKE', '1')->count();
         $registeredteacher = Teacher::where('verified', 'LIKE', '1')->count();
@@ -32,7 +34,107 @@ class HomeController extends Controller
         $pendingteacher = Teacher::where('verified', 'LIKE', '0')->count();
         $subscriptions = Subscription::all()->count();
         $enquiry = Query::all()->count();
-        return view('admin.dashboard', compact('registeredcoaching', 'featuredcoaching', 'pendingcoaching', 'registeredteacher', 'featuredteacher', 'pendingteacher', 'subscriptions', 'enquiry'));
+
+        $barChart = Coaching::select(
+            [
+                \DB::raw('MONTH(created_at) as month'),
+                \DB::raw('YEAR(created_at) as year'),
+                \DB::raw('count(*) as total'),
+            ]
+        )->where('created_at', '>', \DB::raw('DATE_SUB(NOW(),INTERVAL 1 YEAR)'))->groupBy(
+            [
+                \DB::raw('MONTH(created_at)'),
+                \DB::raw('YEAR(created_at)'),
+            ]
+        )->get();
+        $dataPoints = [];
+        $YearDate = strtotime(date("Y-m-d", time()) . " -1 year");
+        for ($i = 1; $i <= 12; $i++) {
+            $YearDate = strtotime(date("Y-m-d", $YearDate) . " +1 month");
+
+            $monthData[__(date('M', $YearDate))] = 0;
+
+            foreach ($barChart as $chart) {
+                if (intval($chart->month) == intval(date('m', $YearDate))) {
+
+                    $monthData[date('M', $YearDate)] = $chart->total;
+                }
+            }
+        }
+
+        foreach ($monthData as $key => $value)
+            $dataPoints[] =
+                ["y" => $value, "label" => $key];
+
+
+        $teacherChart = Teacher::select(
+            [
+                \DB::raw('MONTH(created_at) as month'),
+                \DB::raw('YEAR(created_at) as year'),
+                \DB::raw('count(*) as total'),
+            ]
+        )->where('created_at', '>', \DB::raw('DATE_SUB(NOW(),INTERVAL 1 YEAR)'))->groupBy(
+            [
+                \DB::raw('MONTH(created_at)'),
+                \DB::raw('YEAR(created_at)'),
+            ]
+        )->get();
+        $dataPointTeacher = [];
+        $YearDate = strtotime(date("Y-m-d", time()) . " -1 year");
+        for ($i = 1; $i <= 12; $i++) {
+            $YearDate = strtotime(date("Y-m-d", $YearDate) . " +1 month");
+            $monthData[__(date('M', $YearDate))] = 0;
+            foreach ($teacherChart as $chart) {
+                if (intval($chart->month) == intval(date('m', $YearDate))) {
+
+                    $monthData[date('M', $YearDate)] = $chart->total;
+                }
+            }
+        }
+
+        foreach ($monthData as $key => $value)
+            $dataPointTeacher[] =
+                ["y" => $value, "label" => $key];
+
+        $studentChart = Student::select(
+            [
+                \DB::raw('MONTH(created_at) as month'),
+                \DB::raw('YEAR(created_at) as year'),
+                \DB::raw('count(*) as total'),
+            ]
+        )->where('created_at', '>', \DB::raw('DATE_SUB(NOW(),INTERVAL 1 YEAR)'))->groupBy(
+            [
+                \DB::raw('MONTH(created_at)'),
+                \DB::raw('YEAR(created_at)'),
+            ]
+        )->get();
+        $dataPointStudent = [];
+        $YearDate = strtotime(date("Y-m-d", time()) . " -1 year");
+        for ($i = 1; $i <= 12; $i++) {
+            $YearDate = strtotime(date("Y-m-d", $YearDate) . " +1 month");
+            $monthData[__(date('M', $YearDate))] = 0;
+            foreach ($studentChart as $chart) {
+                if (intval($chart->month) == intval(date('m', $YearDate))) {
+
+                    $monthData[date('M', $YearDate)] = $chart->total;
+                }
+            }
+        }
+
+        foreach ($monthData as $key => $value)
+            $dataPointStudent[] =
+                ["y" => $value, "label" => $key];
+
+
+        $data = array(
+            array("label" => "Registered Coachings", "symbol" => "Coaching", "y" => $registeredcoaching),
+            array("label" => "Registered Teachers", "symbol" => "Teacher", "y" => $registeredteacher),
+            array("label" => "Active Students", "symbol" => "Student", "y" => $activeStudent)
+        );
+
+
+
+        return view('admin.dashboard', compact('registeredcoaching', 'featuredcoaching', 'pendingcoaching', 'registeredteacher', 'featuredteacher', 'pendingteacher', 'subscriptions', 'enquiry', 'dataPoints', 'dataPointTeacher', 'dataPointStudent','data'));
     }
 
     public function event()
@@ -67,7 +169,7 @@ class HomeController extends Controller
 
     public function deleteEvent($id)
     {
-        Event::where('id',$id)->delete();
+        Event::where('id', $id)->delete();
         return redirect('/event')->with('status', 'Event deleted successfully');
 
 

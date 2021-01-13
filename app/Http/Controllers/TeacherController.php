@@ -31,11 +31,10 @@ class TeacherController extends Controller
     }
 
 
-    public function index(Request $request)
+    public function index()
     {
-        $user = User::where('type', 0)->paginate(15);
-        $teachers = Teacher::orderBy('userid', 'asc')->paginate(15);
-        return view('teachers.index', compact('teachers', 'user'));
+        $teachers = Teacher::with('user')->get();
+        return view('teachers.index', compact('teachers'));
     }
 
     public function create()
