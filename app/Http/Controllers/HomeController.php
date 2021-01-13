@@ -127,9 +127,9 @@ class HomeController extends Controller
 
 
         $data = array(
-            array("label" => "Registered Coachings", "symbol" => "C", "y" => $registeredcoaching),
-            array("label" => "Registered Teachers", "symbol" => "T", "y" => $registeredteacher),
-            array("label" => "Active Students", "symbol" => "S", "y" => $activeStudent)
+            array("label" => "Registered Coachings", "symbol" => "Coaching", "y" => $registeredcoaching),
+            array("label" => "Registered Teachers", "symbol" => "Teacher", "y" => $registeredteacher),
+            array("label" => "Active Students", "symbol" => "Student", "y" => $activeStudent)
         );
 
 
