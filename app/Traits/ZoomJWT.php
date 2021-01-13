@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 trait ZoomJWT
@@ -18,7 +19,7 @@ trait ZoomJWT
         return env('ZOOM_API_URL', '');
     }
 
-    private function zoomRequest()
+    private function zoomRequest(): \Illuminate\Http\Client\PendingRequest
     {
         $jwt = $this->generateZoomToken();
         return \Illuminate\Support\Facades\Http::withHeaders([
@@ -28,10 +29,13 @@ trait ZoomJWT
 
     }
 
-    private function generateZoomToken()
+    private function generateZoomToken(): string
     {
-        $key = env('ZOOM_API_KEY', '');
-        $secret = env('ZOOM_API_SECRET', '');
+        $ZoomInfo = DB::table('zoom_config')
+            ->where('user_id', auth()->id())
+            ->first();
+        $key = $ZoomInfo->zoom_api_key ?? env('ZOOM_API_KEY', '');
+        $secret = $ZoomInfo->zoom_api_secret ?? env('ZOOM_API_SECRET', '');
         $payload = [
             'iss' => $key,
             'exp' => strtotime('+9 minute'),
@@ -39,14 +43,14 @@ trait ZoomJWT
         return \Firebase\JWT\JWT::encode($payload, $secret, 'HS256');
     }
 
-    public function zoomPost(string $path, array $body = [])
+    public function zoomPost(string $path, array $body = []): \Illuminate\Http\Client\Response
     {
         $url = $this->retrieveZoomUrl();
         $request = $this->zoomRequest();
         return $request->post($url . $path, $body);
     }
 
-    public function zoomPatch(string $path, array $body = [])
+    public function zoomPatch(string $path, array $body = []): \Illuminate\Http\Client\Response
     {
         $url = $this->retrieveZoomUrl();
         $request = $this->zoomRequest();
@@ -59,6 +63,7 @@ trait ZoomJWT
         $request = $this->zoomRequest();
         return $request->delete($url . $path, $body);
     }
+
     public function toZoomTimeFormat(string $dateTime)
     {
         try {
