@@ -1,6 +1,6 @@
 @include('admin.partials.header')
 <div class="container-fluid">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4"  style="background-color: black">
         <div class="card-header py-3">
             <div class="row">
                 <h3 class="m-3 font-weight-bold text-primary">Introduction to create zoom meeting credentials </h3>
@@ -14,14 +14,14 @@
                 {{ session('status') }}
             </div>
         @endif
-        <div class="card-body">
+        <div class="card-body" style="background-color: #f3e3ff">
             <div class="col-md-8">
 
                 <h4>Build an Zoom Application
                 </h4>
                 <ol>
                     <li>
-                        Access <a href="https://marketplace.zoom.us/">Zoom marketplace</a>
+                        Access <a target="_blank" href="https://marketplace.zoom.us/">Zoom marketplace</a>
                     </li>
                     <li>
                         Sign in
@@ -38,9 +38,8 @@
                     </li>
                 </ol>
             </div>
-            <br>
 
-            <div class="row">
+            <div class="row" >
                 <div class="col-lg-12">
                     <div class="owl-carousel active_course">
                         <div class="course_head">
