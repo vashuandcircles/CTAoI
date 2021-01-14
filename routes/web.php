@@ -143,3 +143,5 @@ Route::group(['prefix' => 'api'], function () {
 Route::get('/zoom-meeting-rooms', function () {
     return view('setup-zoom-meeting.introduction');
 })->name('zoom-meeting-rooms');
+
+Route::resource('zoom-meeting-config', 'Zoom\ZoomMetingConfiguration');

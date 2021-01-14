@@ -48,7 +48,7 @@ class MeetingController extends Controller
         $data = $request->only(['topic', 'start_time', 'agenda']);
         $path = 'users/me/meetings';
         try {
-            $this->zoomPost($path, [
+           $response = $this->zoomPost($path, [
                 'topic' => $data['topic'],
                 'type' => self::MEETING_TYPE_SCHEDULE,
                 'start_time' => $this->toZoomTimeFormat($data['start_time']),
@@ -60,6 +60,7 @@ class MeetingController extends Controller
                     'waiting_room' => true,
                 ]
             ]);
+//           dd($response->body());
 //            if ($request->wantsJson()) {
 //                return [
 //                    'success' => $response->status() === 201,

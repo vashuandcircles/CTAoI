@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 trait ZoomJWT
@@ -30,8 +31,11 @@ trait ZoomJWT
 
     private function generateZoomToken()
     {
-        $key = env('ZOOM_API_KEY', '');
-        $secret = env('ZOOM_API_SECRET', '');
+        $ZoomInfo = DB::table('zoom_config')
+            ->where('user_id', auth()->id())
+            ->first();
+        $key = $ZoomInfo->zoom_api_key ?? env('ZOOM_API_KEY', '');
+        $secret = $ZoomInfo->zoom_api_secret ?? env('ZOOM_API_SECRET', '');
         $payload = [
             'iss' => $key,
             'exp' => strtotime('+9 minute'),
