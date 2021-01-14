@@ -4,6 +4,10 @@
         <div class="card-header py-3">
             <div class="row">
                 <h6 class="m-3 font-weight-bold text-primary">Zoom credentials</h6>
+                <a href="{{ route('meetings.index') }}" class="m-2 ml-auto btn btn-primary btn-sm text-white ">
+                    Go to Zoom Meeting
+                </a>
+
                 <a href="{{ route('meetings.setup-create') }}" class="m-2 ml-auto btn btn-primary text-white">
                     create credentials
                 </a>

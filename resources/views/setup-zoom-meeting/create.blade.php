@@ -8,8 +8,7 @@
                     Setup Your Zoom Credentials
                     <a href="{{route('zoom-meeting-rooms')}}">
                         <div
-                            class="m-2 ml-auto btn btn-primary text-white float-right">Way Create Zoom Credentials
-                        </div>
+                            class="m-2 ml-auto btn btn-sm btn-primary text-white float-right">Way to Create Zoom Credentials</div>
                     </a>
 
                 </div>
