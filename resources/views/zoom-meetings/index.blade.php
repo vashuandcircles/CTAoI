@@ -69,9 +69,18 @@
                         </tr>
                     @endforeach
                     </tbody>
-                        @endif
-                    {{--                    </table>--}}
-                </table>
+                    </table>
+                    {{--                        @endif--}}
+                @else
+
+
+                    <div class="card-title">
+                        <h1>Please Setup your Zoom credentials.</h1>
+                    </div>
+                @endif
+
+                {{--                    </table>--}}
+
                 {{--                <div class="d-flex justify-content-center">--}}
                 {{--                    {!! $coachings->links() !!}--}}
                 {{--                </div>--}}
