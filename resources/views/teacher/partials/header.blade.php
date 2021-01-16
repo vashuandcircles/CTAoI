@@ -44,9 +44,15 @@
                 <i class="fas fa-fw fa-book"></i>
                 <span>Courses</span></a>
         </li>
+        <li class="nav-item {{ (request()->is('zoom-meetings')) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('teachers.meetings.index')}}">
+                <i class="fas fa-fw fa-meh-rolling-eyes"></i>
+                <span>Zoom Meeting</span></a>
+        </li>
 
         @if($data->is_featured != '1')
-            <a href="{{ url('/teacherpayment') }}" class="m-3 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <a href="{{ url('/teacherpayment') }}"
+               class="m-3 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-star fa-sm text-white-50"></i> Upgrade to Pro</a>
         @endif
         <hr class="sidebar-divider d-none d-md-block">
