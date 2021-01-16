@@ -4,9 +4,16 @@
         <div class="card-header py-3">
             <div class="row">
                 <h6 class="m-3 font-weight-bold text-primary">Meetings</h6>
-                <a href="{{ route('meetings.create') }}" class="m-2 ml-auto btn btn-primary text-white">
-                    Schedule
-                </a>
+                @inject('zoomConfig','App\Http\Controllers\Zoom\ZoomMetingConfiguration')
+                @if(!$zoomConfig->hasZoomCredentials())
+                    <a href="{{ route('meetings.setup') }}" class="float-right m-2 ml-auto btn btn-primary text-white">
+                        Set up credentials
+                    </a>
+                @else
+                    <a href="{{ route('meetings.create') }}" class="m-2 ml-auto btn btn-primary text-white flo">
+                        Schedule
+                    </a>
+                @endif
             </div>
         </div>
         @if (session('status'))
@@ -14,17 +21,19 @@
                 {{ session('status') }}
             </div>
         @endif
+
         <div class="card-body">
             <div class="table-responsive">
                 {{--                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">--}}
-                <table id="example" class="display" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th>Meeting Id</th>
-                        <th>Topic</th>
-                        <th>Start Time</th>
-                        <th>Duration</th>
-                        <th>Join Url</th>
+                @if($zoomConfig->hasZoomCredentials())
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Meeting Id</th>
+                            <th>Topic</th>
+                            <th>Start Time</th>
+                            <th>Duration</th>
+                            <th>Join Url</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -60,13 +69,24 @@
                         </tr>
                     @endforeach
                     </tbody>
-                    {{--                    </table>--}}
-                </table>
+                    </table>
+                    {{--                        @endif--}}
+                @else
+
+
+                    <div class="card-title">
+                        <h1>Please Setup your Zoom credentials.</h1>
+                    </div>
+                @endif
+
+                {{--                    </table>--}}
+
                 {{--                <div class="d-flex justify-content-center">--}}
                 {{--                    {!! $coachings->links() !!}--}}
                 {{--                </div>--}}
             </div>
         </div>
+
     </div>
 </div>
 <script>

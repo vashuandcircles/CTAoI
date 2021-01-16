@@ -56,6 +56,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/coachingrecommendation', 'UserController@coachingRecommendation')->name('coachingrecommendation');
     Route::get('/teacherrecommendation', 'UserController@teacherRecommendation')->name('teacherrecommendation');
 
+    Route::group(['prefix' => 'teachers/zoom-meeting', 'as' => 'teachers.meetings.'], function ($router) {
+        $router->get('/', 'TeacherController@meetingIndex')->name('index');
+        $router->get('/schedule', 'TeacherController@meetingSchedule')->name('schedule');
+        $router->match(['GET', 'POST'], '/configuration', 'TeacherController@meetingConfiguration')->name('configuration');
+        $router->get('/configuration/edit/{id}', 'TeacherController@meetingConfigurationEdit')->name('configuration.edit');
+        $router->PATCH('/configuration/update/{id}', 'TeacherController@meetingConfigurationUpdate')->name('configuration.update');
+        $router->POST('/store', 'TeacherController@meetingStore')->name('store');
+    });
+
+
 });
 
 Route::group(['middleware' => ['auth', 'is_admin']], function () {
@@ -121,6 +131,11 @@ Route::get('laravel-logs', function () {
 Route::group(['prefix' => 'api'], function () {
     Route::get('/meetings', 'Zoom\MeetingController@index')
         ->name('meetings.index');
+
+    Route::get('/zoom-setup-create', 'Zoom\MeetingController@zoomSetupCreate')
+        ->name('meetings.setup-create');
+    Route::get('/zoom-setup', 'Zoom\MeetingController@zoomSetup')
+        ->name('meetings.setup');
 // Create meeting room using topic, agenda, start_time.
     Route::post('/meetings', 'Zoom\MeetingController@store')
         ->name('meetings.store');
@@ -133,4 +148,10 @@ Route::group(['prefix' => 'api'], function () {
         ->where('meeting', '[0-9]+')->name('meetings.update');
     Route::delete('/meetings/{meeting}', 'Zoom\MeetingController@destroy')
         ->where('meeting', '[0-9]+')->name('meetings.destroy');
+
 });
+Route::get('/zoom-meeting-rooms', function () {
+    return view('setup-zoom-meeting.introduction');
+})->name('zoom-meeting-rooms');
+
+Route::resource('zoom-meeting-config', 'Zoom\ZoomMetingConfiguration');

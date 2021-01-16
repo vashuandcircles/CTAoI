@@ -107,7 +107,7 @@
             </a>
             <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{ url('/featured-coaching-page')}}">Featured Coachings</a>
+                    <a class="collapse-item" href="{{ url('/featured-coaching-page')}}">Featured Coaching</a>
                     <a class="collapse-item" href="{{ url('/featured-teacher-page')}}">Featured Teachers</a>
                 </div>
             </div>
