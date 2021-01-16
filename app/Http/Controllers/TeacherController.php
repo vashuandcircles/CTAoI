@@ -160,33 +160,13 @@ class TeacherController extends Controller
         return redirect()->route('teachers.index')->with('status', 'Teacher is featured now');
     }
 
-
-    public function meetingConfiguration(Request $request)
-    {
-
-        if ($request->method() == 'POST') {
-            $request->validate([
-                'zoom_api_key' => 'required',
-                'zoom_api_secret' => 'required'
-            ]);
-            $attributes = $request->except('_token');
-            $attributes['user_id'] = \auth()->id();
-            DB::table('zoom_config')
-                ->insert($attributes);
-            return redirect()->route('teachers.meetings.index');
-        } else {
-            $data = Auth::user();
-            return view('teacher.zoom-meeting.create', compact('data'));
-        }
-    }
-
     public function meetingSchedule()
     {
         $data = Teacher::where('userid', \auth()->id())->first();
         return view('teacher.zoom-meeting.schedule', compact('data'));
     }
 
-    public function meetingIndex(Request  $request)
+    public function meetingIndex(Request $request)
     {
         $hasConfig = DB::table('zoom_config')
             ->where('user_id', '=', \auth()->id())
@@ -208,7 +188,7 @@ class TeacherController extends Controller
                 return $this->meetingConfigurationEdit();
             } else {
                 request()->session()->flash('error', 'You should set Zoom credentials');
-                return  $this->meetingConfiguration($request);
+                return $this->meetingConfiguration($request);
 
             }
 
@@ -228,6 +208,27 @@ class TeacherController extends Controller
         return DB::table('zoom_config')
             ->where('user_id', '=', \auth()->id())
             ->first();
+    }
+
+    public function meetingConfiguration(Request $request)
+    {
+
+        if ($request->method() == 'POST') {
+            $request->validate([
+                'zoom_api_key' => 'required',
+                'zoom_api_secret' => 'required'
+            ]);
+            $attributes = $request->except('_token');
+            $attributes['user_id'] = \auth()->id();
+            DB::table('zoom_config')
+                ->insert($attributes);
+            return redirect()->route('teachers.meetings.index');
+        } else {
+            $data = Auth::user();
+            $key = null;
+            $secret = null;
+            return view('teacher.zoom-meeting.create', compact('data', 'key', 'secret'));
+        }
     }
 
     public function meetingConfigurationUpdate(Request $request, $id)
