@@ -24,6 +24,7 @@ class TeacherController extends Controller
 {
 
     use ZoomJWT;
+
     /**
      * @var TeacherRepository
      */
@@ -175,7 +176,7 @@ class TeacherController extends Controller
             return redirect()->route('teachers.meetings.index');
         } else {
             $data = Auth::user();
-            return view('teacher.zoom-meeting.configuration', compact('data'));
+            return view('teacher.zoom-meeting.create', compact('data'));
         }
     }
 
@@ -185,8 +186,11 @@ class TeacherController extends Controller
         return view('teacher.zoom-meeting.schedule', compact('data'));
     }
 
-    public function meetingIndex()
+    public function meetingIndex(Request  $request)
     {
+        $hasConfig = DB::table('zoom_config')
+            ->where('user_id', '=', \auth()->id())
+            ->count();
         try {
             $id = Auth::id();
             $data = \App\Teacher::where('userid', $id)->first();
@@ -199,16 +203,16 @@ class TeacherController extends Controller
             }, $zoom['meetings']);
             return view('teacher.zoom-meeting.index', compact('data', 'zoom'));
         } catch (\Exception $exception) {
-            request()->session()->flash('error', 'Your Credential May be incorrect. Please Edit Your Zoom configuration');
-            return $this->meetingConfigurationEdit();
-        }
-    }
+            if ($hasConfig) {
+                request()->session()->flash('error', 'Your Credential May be incorrect. Please Edit Your Zoom configuration');
+                return $this->meetingConfigurationEdit();
+            } else {
+                request()->session()->flash('error', 'You should set Zoom credentials');
+                return  $this->meetingConfiguration($request);
 
-    protected function getZoomMeetingConfiguration()
-    {
-        return DB::table('zoom_config')
-            ->where('user_id', '=', \auth()->id())
-            ->first();
+            }
+
+        }
     }
 
     public function meetingConfigurationEdit()
@@ -219,7 +223,14 @@ class TeacherController extends Controller
 
     }
 
-    public function meetingConfigurationUpdate(Request $request, $id): \Illuminate\Http\RedirectResponse
+    protected function getZoomMeetingConfiguration()
+    {
+        return DB::table('zoom_config')
+            ->where('user_id', '=', \auth()->id())
+            ->first();
+    }
+
+    public function meetingConfigurationUpdate(Request $request, $id)
     {
 
         $request->validate([
@@ -242,7 +253,7 @@ class TeacherController extends Controller
         }
     }
 
-    public function meetingStore(MeetingRequest $request): \Illuminate\Http\RedirectResponse
+    public function meetingStore(MeetingRequest $request)
     {
         $data = $request->only(['topic', 'start_time', 'agenda']);
         $path = 'users/me/meetings';
