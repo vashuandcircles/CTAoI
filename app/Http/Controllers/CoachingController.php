@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 
 use App\Entities\Coaching;
-use App\Entities\Teacher;
 use App\Http\Requests\CreateCoachingRequest;
 use App\Http\Requests\MeetingRequest;
 use App\Level;
@@ -186,7 +185,7 @@ class CoachingController extends Controller
             ->count();
         try {
             $id = Auth::id();
-            $data = \App\Teacher::where('userid', $id)->first();
+            $data = \App\Coaching::where('userid', $id)->first();
             $path = 'users/me/meetings';
             $response = $this->zoomGet($path);
             $zoom = json_decode($response->body(), true);
@@ -238,7 +237,7 @@ class CoachingController extends Controller
                 ->insert($attributes);
             return redirect()->route('coaching.meetings.index');
         } else {
-            $data = Auth::user();
+            $data = Coaching::where('userid', \auth()->id())->first();
             $key = null;
             $secret = null;
             return view('coaching.zoom-meeting.create', compact('data', 'key', 'secret'));
