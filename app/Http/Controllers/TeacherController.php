@@ -168,31 +168,35 @@ class TeacherController extends Controller
 
     public function meetingIndex(Request $request)
     {
+
         $hasConfig = DB::table('zoom_config')
             ->where('user_id', '=', \auth()->id())
             ->count();
-        try {
-            $id = Auth::id();
-            $data = \App\Teacher::where('userid', $id)->first();
-            $path = 'users/me/meetings';
-            $response = $this->zoomGet($path);
-            $zoom = json_decode($response->body(), true);
-            $zoom['meetings'] = array_map(function (&$m) {
-                $m['start_at'] = $this->toUnixTimeStamp($m['start_time'], $m['timezone']);
-                return $m;
-            }, $zoom['meetings']);
-            return view('teacher.zoom-meeting.index', compact('data', 'zoom'));
-        } catch (\Exception $exception) {
-            if ($hasConfig) {
-                request()->session()->flash('error', 'Your Credential May be incorrect. Please Edit Your Zoom configuration');
-                return $this->meetingConfigurationEdit();
-            } else {
-                request()->session()->flash('error', 'You should set Zoom credentials');
-                return $this->meetingConfiguration($request);
+        if ($hasConfig) {
+            try {
+                $id = Auth::id();
+                $data = \App\Teacher::where('userid', $id)->first();
+                $path = 'users/me/meetings';
+                $response = $this->zoomGet($path);
+                $zoom = json_decode($response->body(), true);
+                $zoom['meetings'] = array_map(function (&$m) {
+                    $m['start_at'] = $this->toUnixTimeStamp($m['start_time'], $m['timezone']);
+                    return $m;
+                }, $zoom['meetings']);
+                return view('teacher.zoom-meeting.index', compact('data', 'zoom'));
+            } catch (\Exception $exception) {
+                if ($hasConfig) {
+                    request()->session()->flash('error', 'Your Credential May be incorrect. Please Edit Your Zoom configuration');
+                    return $this->meetingConfigurationEdit();
+                } else {
+                    request()->session()->flash('error', 'You should set Zoom credentials');
+                    return $this->meetingConfiguration($request);
 
+                }
             }
-
         }
+        return  $this->meetingConfiguration($request);
+
     }
 
     public function meetingConfigurationEdit()
