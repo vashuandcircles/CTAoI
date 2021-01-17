@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
 
 
 class TeacherController extends Controller
@@ -186,14 +185,8 @@ class TeacherController extends Controller
                 return view('teacher.zoom-meeting.index', compact('data', 'zoom'));
             } catch (\Exception $exception) {
                 Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
-                if ($hasConfig) {
                     request()->session()->flash('error', 'Your Credential May be incorrect. Please Edit Your Zoom configuration');
                     return $this->meetingConfigurationEdit();
-                } else {
-                    request()->session()->flash('error', 'You should set Zoom credentials');
-                    return $this->meetingConfiguration($request);
-
-                }
             }
         }
         return  $this->meetingConfiguration($request);

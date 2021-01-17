@@ -34,8 +34,8 @@ trait ZoomJWT
         $ZoomInfo = DB::table('zoom_config')
             ->where('user_id', auth()->id())
             ->first();
-        $key = $ZoomInfo->zoom_api_key ?? env('ZOOM_API_KEY', '');
-        $secret = $ZoomInfo->zoom_api_secret ?? env('ZOOM_API_SECRET', '');
+        $key = $ZoomInfo->zoom_api_key;
+        $secret = $ZoomInfo->zoom_api_secret;
         $payload = [
             'iss' => $key,
             'exp' => strtotime('+9 minute'),
