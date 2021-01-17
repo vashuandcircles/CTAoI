@@ -12,6 +12,7 @@ use App\Level;
 use App\place;
 use App\Repositories\CoachingRepository;
 use App\Repositories\CustomRepository;
+use App\Traits\ZoomJWT;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Log;
 class CoachingController extends Controller
 {
 
+    use ZoomJWT;
     /**
      * @var CoachingRepository
      */
@@ -194,6 +196,7 @@ class CoachingController extends Controller
             }, $zoom['meetings']);
             return view('coaching.zoom-meeting.index', compact('data', 'zoom'));
         } catch (\Exception $exception) {
+//            dd($exception);
             if ($hasConfig) {
                 request()->session()->flash('error', 'Your Credential May be incorrect. Please Edit Your Zoom configuration');
                 return $this->meetingConfigurationEdit();
