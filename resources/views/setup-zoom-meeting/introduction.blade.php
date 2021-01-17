@@ -5,7 +5,7 @@
         <div class="card-header py-3">
             <div class="row">
                 <h3 class="m-3 font-weight-bold text-primary">Introduction to create zoom meeting credentials </h3>
-                <a href="javascript:go(-1)" class="m-2 ml-auto btn btn-primary text-white flo">
+                <a href="javascript:window.history.go(-1)" class="m-2 ml-auto btn btn-primary text-white flo">
                     Back to credentials
                 </a>
             </div>
