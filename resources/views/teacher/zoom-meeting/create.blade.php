@@ -9,9 +9,9 @@
                 </strong>
             </span>
             <div class="pull-right float-right">
-                <button title="Nee Help to configure ?" class="btn btn-primary">
+                <a title="Nee Help to configure ?" class="btn btn-primary" href="{{route('teachers.meetings.help')}}">
                     <i class="fa fa-question"></i> Need Help
-                </button>
+                </a>
 
             </div>
         </div>

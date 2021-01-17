@@ -185,8 +185,7 @@ class CoachingController extends Controller
             ->count();
         if ($hasConfig) {
             try {
-                $id = Auth::id();
-                $data = \App\Coaching::where('userid', $id)->first();
+                $data = \App\Coaching::where('userid', \auth()->id())->first();
                 $path = 'users/me/meetings';
                 $response = $this->zoomGet($path);
                 $zoom = json_decode($response->body(), true);
@@ -223,6 +222,8 @@ class CoachingController extends Controller
     public function meetingConfiguration(Request $request)
     {
 
+
+
         if ($request->method() == 'POST') {
             $request->validate([
                 'zoom_api_key' => 'required',
@@ -234,7 +235,7 @@ class CoachingController extends Controller
                 ->insert($attributes);
             return redirect()->route('coaching.meetings.index');
         } else {
-            $data = Coaching::where('userid', \auth()->id())->first();
+            $data = \App\Coaching::where('userid', \auth()->id())->first();
             $key = null;
             $secret = null;
             return view('coaching.zoom-meeting.create', compact('data', 'key', 'secret'));
@@ -256,7 +257,8 @@ class CoachingController extends Controller
                     'zoom_api_key' => $request->get('zoom_api_key'),
                     'zoom_api_secret' => $request->get('zoom_api_secret'),
                 ]);
-            return redirect()->route('coaching.meetings.index')->with('success', 'Zoom Configuration updated successfully');
+            return redirect()->route('coaching.meetings.index')
+                ->with('success', 'Zoom Configuration updated successfully');
         } catch (\Exception $exception) {
             return redirect()->back()
                 ->with('failed', 'Failed to update Zoom Configuration')
