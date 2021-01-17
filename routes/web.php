@@ -56,6 +56,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/coachingrecommendation', 'UserController@coachingRecommendation')->name('coachingrecommendation');
     Route::get('/teacherrecommendation', 'UserController@teacherRecommendation')->name('teacherrecommendation');
 
+
+    Route::group(['prefix' => 'coaching/zoom-meeting', 'as' => 'coaching.meetings.'], function ($router) {
+        $router->get('/', 'CoachingController@meetingIndex')->name('index');
+        $router->get('/schedule', 'CoachingController@meetingSchedule')->name('schedule');
+        $router->match(['GET', 'POST'], '/configuration', 'CoachingController@meetingConfiguration')->name('configuration');
+        $router->get('/configuration/edit/{id}', 'CoachingController@meetingConfigurationEdit')->name('configuration.edit');
+        $router->PATCH('/configuration/update/{id}', 'CoachingController@meetingConfigurationUpdate')->name('configuration.update');
+        $router->POST('/store', 'TeacherController@meetingStore')->name('store');
+    });
+
+
     Route::group(['prefix' => 'teachers/zoom-meeting', 'as' => 'teachers.meetings.'], function ($router) {
         $router->get('/', 'TeacherController@meetingIndex')->name('index');
         $router->get('/schedule', 'TeacherController@meetingSchedule')->name('schedule');
