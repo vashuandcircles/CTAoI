@@ -183,29 +183,26 @@ class CoachingController extends Controller
         $hasConfig = DB::table('zoom_config')
             ->where('user_id', '=', \auth()->id())
             ->count();
-        try {
-            $id = Auth::id();
-            $data = \App\Coaching::where('userid', $id)->first();
-            $path = 'users/me/meetings';
-            $response = $this->zoomGet($path);
-            $zoom = json_decode($response->body(), true);
-            $zoom['meetings'] = array_map(function (&$m) {
-                $m['start_at'] = $this->toUnixTimeStamp($m['start_time'], $m['timezone']);
-                return $m;
-            }, $zoom['meetings']);
-            return view('coaching.zoom-meeting.index', compact('data', 'zoom'));
-        } catch (\Exception $exception) {
-//            dd($exception);
-            if ($hasConfig) {
+        if ($hasConfig) {
+            try {
+                $id = Auth::id();
+                $data = \App\Coaching::where('userid', $id)->first();
+                $path = 'users/me/meetings';
+                $response = $this->zoomGet($path);
+                $zoom = json_decode($response->body(), true);
+                $zoom['meetings'] = array_map(function (&$m) {
+                    $m['start_at'] = $this->toUnixTimeStamp($m['start_time'], $m['timezone']);
+                    return $m;
+                }, $zoom['meetings']);
+                return view('coaching.zoom-meeting.index', compact('data', 'zoom'));
+            } catch (\Exception $exception) {
                 request()->session()->flash('error', 'Your Credential May be incorrect. Please Edit Your Zoom configuration');
                 return $this->meetingConfigurationEdit();
-            } else {
-                request()->session()->flash('error', 'You should set Zoom credentials');
-                return $this->meetingConfiguration($request);
+
 
             }
-
         }
+        return $this->meetingConfiguration($request);
     }
 
     public function meetingConfigurationEdit()
