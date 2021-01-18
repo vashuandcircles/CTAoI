@@ -26,38 +26,38 @@
                     </thead>
                     <tbody>
                     @foreach ($teachers as $key => $row)
-                        <?php if (!$row->verified && $row->active) { ?>
-                        <tr>
-                            <td>
+                        @if (!$row->verified && $row->active)
+                            <tr>
+                                <td>
 
-                                <img src="{{$row->imgpath ?? asset('/img/default-user.jpg')}}"
-                                     class="rounded-circle" alt="img"
-                                     style="width: 75px; height: 75px; object-fit: cover;">
-                            </td>
-                            <td>{{ $user[$key]->name }}</td>
-                            <td>{{ $user[$key]->phone }}, {{ $row->altphone}}</td>
-                            <td>{{ $user[$key]->email }}</td>
-                            <td>{{ $row->city}}, {{ $row->state}}</td>
-                            <td>
-                                <div class="row">
-                                    <form action="/teacher-accept/{{ $row->userid }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
-                                        <button type="submit" href="" class="btn btn-sm btn-success m-1"><i
-                                                class="fas fa-check" title="  Accept"></i>
-                                        </button>
-                                    </form>
-                                    <form action="/teacher-delete/{{ $row->userid }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" href="" class="btn btn-sm btn-danger m-1"><i
-                                                class="fas fa-times" title="  Decline"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php } ?>
+                                    <img src="{{$row->imgpath ?? asset('/img/default-user.jpg')}}"
+                                         class="rounded-circle" alt="img"
+                                         style="width: 75px; height: 75px; object-fit: cover;">
+                                </td>
+                                <td>{{ $user[$key]->name }}</td>
+                                <td>{{ $user[$key]->phone }}, {{ $row->altphone}}</td>
+                                <td>{{ $user[$key]->email }}</td>
+                                <td>{{ $row->city}}, {{ $row->state}}</td>
+                                <td>
+                                    <div class="row">
+                                        <form action="/teacher-accept/{{ $row->userid }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PUT') }}
+                                            <button type="submit" href="" class="btn btn-sm btn-success m-1"><i
+                                                    class="fas fa-check" title="  Accept"></i>
+                                            </button>
+                                        </form>
+                                        <form action="/teacher-delete/{{ $row->userid }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" href="" class="btn btn-sm btn-danger m-1"><i
+                                                    class="fas fa-times" title="  Decline"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>
