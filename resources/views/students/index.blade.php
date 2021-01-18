@@ -23,7 +23,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Phone</th>
-                        <th>Email</th>
+{{--                        <th>Email</th>--}}
                         {{--                        <th>Gender</th>--}}
                         <th>Status</th>
                         <th>Actions</th>
@@ -34,7 +34,8 @@
                         <tr>
                             <td>
                                 <img src="{{$student->imgpath ?? asset('/img/default-user.jpg')}}"
-                                     style="width: 50px; height: 75px; object-fit: cover;">
+                                     class="rounded-circle" alt="img"
+                                     style="width: 75px; height: 75px; object-fit: cover;">
 
                             </td>
                             <td>{{$student->user->name??''}}</td>
@@ -42,9 +43,7 @@
                             <td>{{$student->user->email??''}}</td>
                             {{--                            <td>{{$student->gender??''}}</td>--}}
                             @if($student->active ==1 )
-                                <span>
-                                   <td class=" btn btn-info btn-sm mt-4">Active</td>
-                               </span>
+                                   <td class=" btn btn-info btn-sm mt-4 badge"> <span>Active</span></td>
                             @else
                                 <span>
                                    <td class=" btn btn-danger btn-sm mt-4">In Active</td>
@@ -52,19 +51,18 @@
                             @endif
 
                             <td>
-                                <div class="row">
-                                    {{--                                    <form action="{{route('students.feature', $student->id) }}" method="POST">--}}
-                                    {{--                                        {{ csrf_field() }}--}}
-                                    {{--                                        {{ method_field('PUT') }}--}}
-                                    {{--                                        <button type="submit" href="" class="btn btn-success m-1">Feature</button>--}}
-                                    {{--                                    </form>--}}
+                                <div class="row"  style="    flex-wrap: initial;
+">
                                     <a href="{{route('students.edit', $student->id) }}"
-                                       class="btn btn-secondary m-1">Edit</a>
+                                       class="btn btn-sm btn-secondary m-1"><i class="fas  fa-edit" title="  Edit"
+                                        ></i></a>
                                     <form action="{{route('students.destroy', $student->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
-                                        <button type="submit" href="" class="btn btn-danger m-1"
-                                                onclick="return confirm('Are you sure to delete this item?')">Delete
+                                        <button type="submit" href="" class="btn btn-sm btn-danger m-1"
+                                                onclick="return confirm('Are you sure to delete this item?')"><i
+                                                class="fas fa-trash" title="  Delete"
+                                            ></i>
                                         </button>
                                     </form>
                                 </div>

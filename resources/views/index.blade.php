@@ -589,7 +589,7 @@
 
 <!-- ================ Start Events Area ================= -->
 @if($eventcount)
-    <div class="events_area" style="background: #1b3740;">
+    <div class="events_area" style="background: #91b9d7;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5">

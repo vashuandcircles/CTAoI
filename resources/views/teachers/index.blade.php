@@ -33,8 +33,8 @@
                         <tr>
                             <td>
                                 <img src="{{$teacher->imgpath ?? asset('/img/default-user.jpg')}}"
-                                     style="width: 50px; height: 75px; object-fit: cover;">
-
+                                     class="rounded-circle" alt="img"
+                                     style="width: 75px; height: 75px; object-fit: cover;">
                             </td>
                             <td>{{$teacher->user->name??''}}</td>
                             <td>{{$teacher->user->phone??''}}</td>
@@ -44,27 +44,39 @@
 
 
                             <td>
-                                <div class="row">
-                                    @if (!$teacher->is_featured)
-                                        <form action="{{route('teachers.feature', $teacher->id) }}"
-                                              method="POST">
+                                <nobr>
+                                    <div class="row"  style="    flex-wrap: initial;
+">
+                                        @if (!$teacher->is_featured)
+                                            <form action="{{route('teachers.feature', $teacher->id) }}"
+                                                  method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+                                                <button type="submit" href=""
+                                                        class="btn btn-success btn-sm m-1"><i class="fa fa-user-plus"
+                                                                                       title="  Feature"
+                                                                                       aria-hidden="true"></i>
+
+                                                </button>
+                                            </form>
+                                        @endif
+                                        <a href="{{route('teachers.edit', $teacher->id) }}"
+                                           class="btn btn-sm btn-secondary m-1"><i class="fas fa-edit" title="  Edit"
+                                            ></i>
+
+                                        </a>
+
+                                        <form action="{{route('teachers.destroy', $teacher->id) }}" method="POST">
                                             {{ csrf_field() }}
-                                            {{ method_field('PUT') }}
-                                            <button type="submit" href=""
-                                                    class="btn btn-success m-1">Feature
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" href="" class="btn btn-sm btn-danger m-1"
+                                                    onclick="return confirm('Are you sure to delete this item?')"><i
+                                                    class="fas fa-trash" title="  Delete"
+                                                ></i>
                                             </button>
                                         </form>
-                                    @endif
-                                    <a href="{{route('teachers.edit', $teacher->id) }}"
-                                       class="btn btn-secondary m-1">Edit</a>
-                                    <form action="{{route('teachers.destroy', $teacher->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" href="" class="btn btn-danger m-1"
-                                                onclick="return confirm('Are you sure to delete this item?')">Delete
-                                        </button>
-                                    </form>
-                                </div>
+                                    </div>
+                                </nobr>
                             </td>
                         </tr>
                     @endforeach

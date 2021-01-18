@@ -34,7 +34,8 @@
                             <tr>
                                 <td>
                                     <img src="{{$coaching->imgpath ?? asset('/img/default-user.jpg')}}"
-                                         style="width: 50px; height: 75px; object-fit: cover;">
+                                         class="rounded-circle" alt="img"
+                                         style="width: 75px; height: 75px; object-fit: cover;">
                                 </td>
                                 <td>{{ $coaching->user->name??'' }}</td>
                                 <td>{{ $coaching->directorname??""}}</td>
@@ -43,22 +44,29 @@
                                 <td>{{ $coaching->address1??""}} {{ $coaching->address2??''}}, {{ $coaching->state??''}}
                                     , {{ $coaching->city??''}} {{ $coaching->zipcode??''}}</td>
                                 <td>
-                                    <div class="row">
+                                    <div class="row" style="    flex-wrap: initial;
+">
                                         @if (!$coaching->is_featured)
                                             <form action="{{route('coachings.feature', $coaching->id) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('PUT') }}
-                                                <button type="submit" href="" class="btn btn-success m-1">Feature
+                                                <button type="submit" href="" class="btn btn-sm btn-success m-1"><i
+                                                        class="fa fa-user-plus"
+                                                        title="  Feature"
+                                                        aria-hidden="true"></i>
                                                 </button>
                                             </form>
                                         @endif
                                         <a href="{{ route('coachings.edit',$coaching->id) }}"
-                                           class="btn btn-secondary m-1">Edit</a>
+                                           class="btn btn-sm btn-secondary m-1"><i class="fas  fa-edit" title="  Edit"
+                                            ></i></a>
                                         <form action="{{ route('coachings.destroy',$coaching->id) }}" method="POST"
                                               onclick="return confirm('Are you sure to delete this item?')">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
+                                            <button type="submit" href="" class="btn btn-sm btn-danger m-1"><i
+                                                    class="fas fa-trash" title="  Delete"
+                                                ></i></button>
                                         </form>
                                     </div>
                                 </td>
