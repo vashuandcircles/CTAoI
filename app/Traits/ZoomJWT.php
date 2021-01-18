@@ -34,8 +34,8 @@ trait ZoomJWT
         $ZoomInfo = DB::table('zoom_config')
             ->where('user_id', auth()->id())
             ->first();
-        $key = $ZoomInfo->zoom_api_key;
-        $secret = $ZoomInfo->zoom_api_secret;
+        $key = $ZoomInfo->zoom_api_key ?? '';
+        $secret = $ZoomInfo->zoom_api_secret ?? '';
         $payload = [
             'iss' => $key,
             'exp' => strtotime('+9 minute'),
@@ -69,7 +69,7 @@ trait ZoomJWT
         try {
             $date = new \DateTime($dateTime);
             return $date->format('Y-m-d\TH:i:s');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::error('ZoomJWT->toZoomTimeFormat : ' . $e->getMessage());
             return '';
         }
