@@ -7,9 +7,9 @@
             </div>
         </div>
         @if (session('status'))
-        <div class="alert alert-success mt-2 ml-2 mr-2" role="alert">
-            {{ session('status') }}
-        </div>
+            <div class="alert alert-success mt-2 ml-2 mr-2" role="alert">
+                {{ session('status') }}
+            </div>
         @endif
         <div class="card-body">
             <div class="table-responsive">
@@ -31,8 +31,12 @@
                     @foreach ($teachers as $teacher)
                         @if ($teacher->verified && $teacher->is_featured && $teacher->active)
                             <tr>
-                                <td><img src="{{ $teacher->imgpath ?? asset('/img/default-user.jpg')}}"
-                                         style="width: 50px; height: 75px; object-fit: cover;"></td>
+                                <td>
+                                    <img src="{{$teacher->imgpath ?? asset('/img/default-user.jpg')}}"
+                                         class="rounded-circle" alt="img"
+                                         style="width: 75px; height: 75px; object-fit: cover;">
+
+                                </td>
                                 <td>{{ $teacher->user->name}}</td>
                                 <td>{{ $teacher->user->phone}}</td>
                                 <td>{{ $teacher->altphone}}</td>
@@ -47,18 +51,23 @@
                                 </td>
                                 <td>{{ $teacher->city}}, {{ $teacher->state}}</td>
                                 <td>
-                                    <div class="row">
+                                    <div class="row" style="    flex-wrap: initial;
+">
                                         <form action="/teacher-unfeature/{{ $teacher->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('PUT') }}
-                                            <button type="submit" href="" class="btn btn-warning m-1">UnFeature</button>
-                                        </form>
+                                            <button type="submit" href="" class="btn btn-sm btn-warning m-1"><i
+                                                    class="fas fa-undo" title="  UnFeature"></i>
+                                            </button>                                        </form>
                                         <a href="/teacher-edit/{{ $teacher->id }}"
-                                           class="btn btn-secondary m-1">Edit</a>
+                                           class="btn btn-sm btn-secondary m-1"><i
+                                                class="fas fa-edit" title="  Edit"></i></a>
                                         <form action="/teacher-delete/{{ $teacher->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" href="" class="btn btn-danger m-1">Delete</button>
+                                            <button type="submit" href="" class="btn btn-sm btn-danger m-1"><i
+                                                    class="fas fa-trash" title="  Delete"></i>
+                                            </button>
                                         </form>
                                     </div>
                                 </td>
