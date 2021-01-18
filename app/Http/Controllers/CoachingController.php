@@ -6,12 +6,15 @@ namespace App\Http\Controllers;
 
 use App\Entities\Coaching;
 use App\Http\Requests\CreateCoachingRequest;
+use App\Http\Requests\MeetingRequest;
 use App\Level;
 use App\place;
 use App\Repositories\CoachingRepository;
 use App\Repositories\CustomRepository;
+use App\Traits\ZoomJWT;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -19,6 +22,7 @@ use Illuminate\Support\Facades\Log;
 class CoachingController extends Controller
 {
 
+    use ZoomJWT;
     /**
      * @var CoachingRepository
      */
@@ -166,5 +170,124 @@ class CoachingController extends Controller
         $coachings->is_featured = 1;
         $coachings->update();
         return redirect()->route('coachings.index')->with('status', 'Coaching is featured now');
+    }
+
+    public function meetingSchedule()
+    {
+        $data = Coaching::where('userid', \auth()->id())->first();
+        return view('coaching.zoom-meeting.schedule', compact('data'));
+    }
+
+    public function meetingIndex(Request $request)
+    {
+        $hasConfig = DB::table('zoom_config')
+            ->where('user_id', '=', \auth()->id())
+            ->count();
+        if ($hasConfig) {
+            try {
+                $data = \App\Coaching::where('userid', \auth()->id())->first();
+                $path = 'users/me/meetings';
+                $response = $this->zoomGet($path);
+                $zoom = json_decode($response->body(), true);
+                $zoom['meetings'] = array_map(function (&$m) {
+                    $m['start_at'] = $this->toUnixTimeStamp($m['start_time'], $m['timezone']);
+                    return $m;
+                }, $zoom['meetings']);
+                return view('coaching.zoom-meeting.index', compact('data', 'zoom'));
+            } catch (\Exception $exception) {
+                request()->session()->flash('error', 'Your Credential May be incorrect. Please Edit Your Zoom configuration');
+                return $this->meetingConfigurationEdit();
+
+
+            }
+        }
+        return $this->meetingConfiguration($request);
+    }
+
+    public function meetingConfigurationEdit()
+    {
+        $data = \App\Coaching::where('userid', \auth()->id())->first();
+        $zoomConfig = $this->getZoomMeetingConfiguration();
+        return view('coaching.zoom-meeting.edit', compact('zoomConfig', 'data'));
+
+    }
+
+    protected function getZoomMeetingConfiguration()
+    {
+        return DB::table('zoom_config')
+            ->where('user_id', '=', \auth()->id())
+            ->first();
+    }
+
+    public function meetingConfiguration(Request $request)
+    {
+
+
+
+        if ($request->method() == 'POST') {
+            $request->validate([
+                'zoom_api_key' => 'required',
+                'zoom_api_secret' => 'required'
+            ]);
+            $attributes = $request->except('_token');
+            $attributes['user_id'] = \auth()->id();
+            DB::table('zoom_config')
+                ->insert($attributes);
+            return redirect()->route('coaching.meetings.index');
+        } else {
+            $data = \App\Coaching::where('userid', \auth()->id())->first();
+            $key = null;
+            $secret = null;
+            return view('coaching.zoom-meeting.create', compact('data', 'key', 'secret'));
+        }
+    }
+
+    public function meetingConfigurationUpdate(Request $request, $id)
+    {
+
+        $request->validate([
+            'zoom_api_key' => 'required',
+            'zoom_api_secret' => 'required'
+        ]);
+        try {
+            DB::table('zoom_config')
+                ->where('id', $id)
+                ->update([
+                    'user_id' => \auth()->id(),
+                    'zoom_api_key' => $request->get('zoom_api_key'),
+                    'zoom_api_secret' => $request->get('zoom_api_secret'),
+                ]);
+            return redirect()->route('coaching.meetings.index')
+                ->with('success', 'Zoom Configuration updated successfully');
+        } catch (\Exception $exception) {
+            return redirect()->back()
+                ->with('failed', 'Failed to update Zoom Configuration')
+                ->withInput();
+        }
+    }
+
+    public function meetingStore(MeetingRequest $request)
+    {
+        $data = $request->only(['topic', 'start_time', 'agenda']);
+        $path = 'users/me/meetings';
+        try {
+            $this->zoomPost($path, [
+                'topic' => $data['topic'],
+                'type' => 2,
+                'start_time' => $this->toZoomTimeFormat($data['start_time']),
+                'duration' => 40,
+                'agenda' => $data['agenda'],
+                'settings' => [
+                    'host_video' => false,
+                    'participant_video' => false,
+                    'waiting_room' => true,
+                ]
+            ]);
+            return redirect()->route('coaching.meetings.index')->with('success', 'Meeting created successfully.');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . $exception->getTraceAsString());
+            return redirect()->route('coaching.meetings.index')->with('failed', 'Meeting can not be created.');
+
+        }
     }
 }

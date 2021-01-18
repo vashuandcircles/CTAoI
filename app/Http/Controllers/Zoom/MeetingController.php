@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MeetingRequest;
 use App\Traits\ZoomJWT;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class MeetingController extends Controller
@@ -18,8 +19,15 @@ class MeetingController extends Controller
     const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
 
 //
+
     public function index(Request $request)
     {
+        $response = $this->checkCredentials();
+        if ($response == false) {
+            return redirect()->route('meetings.setup')->with('status', 'You need to setup your zoom credentials first.');
+        } elseif ($response === 'invalid access') {
+            return redirect()->route('meetings.setup')->with('status', 'Invalid Credentials please create new one');
+        }
         $path = 'users/me/meetings';
         $response = $this->zoomGet($path);
         $data = json_decode($response->body(), true);
@@ -38,6 +46,25 @@ class MeetingController extends Controller
             ->with('meetings', $data);
     }
 
+
+    protected function checkCredentials()
+    {
+        $count = DB::table('zoom_config')->where('user_id', auth()->id())->count();
+        $path = 'users/me/meetings';
+        $response = $this->zoomGet($path);
+        $data = json_decode($response->body(), true);;
+        $isValid = false;
+        if (isset($data['message']))
+            $isValid = $data['message'] == "Invalid access token.";
+        if ($count > 0) {
+            if ($isValid == true)
+                return 'invalid access';
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function create()
     {
         return view('zoom-meetings.create');
@@ -48,7 +75,7 @@ class MeetingController extends Controller
         $data = $request->only(['topic', 'start_time', 'agenda']);
         $path = 'users/me/meetings';
         try {
-            $this->zoomPost($path, [
+           $response = $this->zoomPost($path, [
                 'topic' => $data['topic'],
                 'type' => self::MEETING_TYPE_SCHEDULE,
                 'start_time' => $this->toZoomTimeFormat($data['start_time']),
@@ -60,6 +87,7 @@ class MeetingController extends Controller
                     'waiting_room' => true,
                 ]
             ]);
+//           dd($response->body());
 //            if ($request->wantsJson()) {
 //                return [
 //                    'success' => $response->status() === 201,
@@ -127,6 +155,7 @@ class MeetingController extends Controller
     {
         return view('setup-zoom-meeting.create');
     }
+
     public function zoomSetup()
     {
         return view('setup-zoom-meeting.index');

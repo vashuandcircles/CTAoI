@@ -8,6 +8,7 @@ use App\Entities\Student;
 use App\Level;
 use App\Repositories\CustomRepository;
 use App\Teacher;
+use App\Traits\ZoomJWT;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
+    use ZoomJWT;
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
@@ -266,6 +268,26 @@ class UserController extends Controller
             DB::rollBack();
             return redirect('/studentdashboard')->with('status', 'failed to update student');
 
+        }
+
+    }
+
+    public function teachersZoomMeeting()
+    {
+        try {
+            $id = Auth::id();
+            $data = Teacher::where('userid', $id)->first();
+            $path = 'users/me/meetings';
+            $response = $this->zoomGet($path);
+            $zoom = json_decode($response->body(), true);
+            $zoom['meetings'] = array_map(function (&$m) {
+                $m['start_at'] = $this->toUnixTimeStamp($m['start_time'], $m['timezone']);
+                return $m;
+            }, $zoom['meetings']);
+
+            return view('teacher.zoom-meeting.index', compact('data', 'zoom'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('failed', 'Something went Wrong');
         }
 
     }

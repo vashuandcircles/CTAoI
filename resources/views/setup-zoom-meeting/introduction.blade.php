@@ -1,11 +1,12 @@
-@include('admin.partials.header')
+{{--@isset($type)--}}
+@include($type.'.partials.header')
 <div class="container-fluid">
-    <div class="card shadow mb-4"  style="background-color: black">
+    <div class="card shadow mb-4" style="background-color: black">
         <div class="card-header py-3">
             <div class="row">
                 <h3 class="m-3 font-weight-bold text-primary">Introduction to create zoom meeting credentials </h3>
-                <a href="{{ route('meetings.setup') }}" class="m-2 ml-auto btn btn-primary text-white flo">
-                    back to credentials
+                <a href="javascript:window.history.go(-1)" class="m-2 ml-auto btn btn-primary text-white flo">
+                    Back to credentials
                 </a>
             </div>
         </div>
@@ -39,7 +40,7 @@
                 </ol>
             </div>
 
-            <div class="row" >
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="owl-carousel active_course">
                         <div class="course_head">
@@ -49,55 +50,55 @@
                     </div>
                 </div>
             </div>
-                <br>
-                <hr>
-                <div class="col-lg-12">
-                    <div class="owl-carousel active_course">
-                        <div class="course_head">
-                            <img class="img-fluid"
-                                 src="{{asset('img/zoom-file/cr2.png')}}" alt="intro 1">
-                        </div>
+            <br>
+            <hr>
+            <div class="col-lg-12">
+                <div class="owl-carousel active_course">
+                    <div class="course_head">
+                        <img class="img-fluid"
+                             src="{{asset('img/zoom-file/cr2.png')}}" alt="intro 1">
                     </div>
                 </div>
-                <br>
-                <hr>
-                <div class="col-lg-12">
-                    <div class="owl-carousel active_course">
-                        <div class="course_head">
-                            <img class="img-fluid"
-                                 src="{{asset('img/zoom-file/cr3.png')}}" alt="intro 1">
-                        </div>
+            </div>
+            <br>
+            <hr>
+            <div class="col-lg-12">
+                <div class="owl-carousel active_course">
+                    <div class="course_head">
+                        <img class="img-fluid"
+                             src="{{asset('img/zoom-file/cr3.png')}}" alt="intro 1">
                     </div>
                 </div>
-                <br>
-                <hr>
-                <div class="col-lg-12">
-                    <div class="owl-carousel active_course">
-                        <div class="course_head">
-                            <img class="img-fluid"
-                                 src="{{asset('img/zoom-file/cr4.png')}}" alt="intro 1">
-                        </div>
+            </div>
+            <br>
+            <hr>
+            <div class="col-lg-12">
+                <div class="owl-carousel active_course">
+                    <div class="course_head">
+                        <img class="img-fluid"
+                             src="{{asset('img/zoom-file/cr4.png')}}" alt="intro 1">
                     </div>
                 </div>
-                <br>
-                <hr>
-                <div class="col-lg-12">
-                    <div class="owl-carousel active_course">
-                        <div class="course_head">
-                            <img class="img-fluid"
-                                 src="{{asset('img/zoom-file/cr5.png')}}" alt="intro 1">
-                        </div>
+            </div>
+            <br>
+            <hr>
+            <div class="col-lg-12">
+                <div class="owl-carousel active_course">
+                    <div class="course_head">
+                        <img class="img-fluid"
+                             src="{{asset('img/zoom-file/cr5.png')}}" alt="intro 1">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $.noConflict();
+</div>
+<script>
+    $(document).ready(function () {
+        $.noConflict();
 
-            $('#example').DataTable();
-        });
-    </script>
-@include('admin.partials.footer')
+        $('#example').DataTable();
+    });
+</script>
+@include($type.'.partials.footer')
 

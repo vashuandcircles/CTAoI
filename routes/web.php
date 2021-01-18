@@ -56,6 +56,35 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/coachingrecommendation', 'UserController@coachingRecommendation')->name('coachingrecommendation');
     Route::get('/teacherrecommendation', 'UserController@teacherRecommendation')->name('teacherrecommendation');
 
+
+    Route::group(['prefix' => 'coaching/zoom-meeting', 'as' => 'coaching.meetings.'], function ($router) {
+        $router->get('/', 'CoachingController@meetingIndex')->name('index');
+        $router->get('/schedule', 'CoachingController@meetingSchedule')->name('schedule');
+        $router->match(['GET', 'POST'], '/configuration', 'CoachingController@meetingConfiguration')->name('configuration');
+        $router->get('/configuration/edit/{id}', 'CoachingController@meetingConfigurationEdit')->name('configuration.edit');
+        $router->PATCH('/configuration/update/{id}', 'CoachingController@meetingConfigurationUpdate')->name('configuration.update');
+        $router->POST('/store', 'TeacherController@meetingStore')->name('store');
+        Route::get('/help', function () {
+            $type = 'coaching';
+            return view('setup-zoom-meeting.introduction', compact('type'));
+        })->name('help');
+    });
+
+
+    Route::group(['prefix' => 'teachers/zoom-meeting', 'as' => 'teachers.meetings.'], function ($router) {
+        $router->get('/', 'TeacherController@meetingIndex')->name('index');
+        $router->get('/schedule', 'TeacherController@meetingSchedule')->name('schedule');
+        $router->match(['GET', 'POST'], '/configuration', 'TeacherController@meetingConfiguration')->name('configuration');
+        $router->get('/configuration/edit/{id}', 'TeacherController@meetingConfigurationEdit')->name('configuration.edit');
+        $router->PATCH('/configuration/update/{id}', 'TeacherController@meetingConfigurationUpdate')->name('configuration.update');
+        $router->POST('/store', 'TeacherController@meetingStore')->name('store');
+        Route::get('/help', function () {
+            $type = 'teacher';
+            return view('setup-zoom-meeting.introduction', compact('type'));
+        })->name('help');
+    });
+
+
 });
 
 Route::group(['middleware' => ['auth', 'is_admin']], function () {
@@ -110,12 +139,12 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
 });
 
 Route::get('laravel-logs', function () {
-    if (\Illuminate\Support\Facades\Auth::user()->isSuper()) {
+//    if (\Illuminate\Support\Facades\Auth::user()->isSuper()) {
         $controller = new \Rap2hpoutre\LaravelLogViewer\LogViewerController();
         return $controller->index();
-    } else {
-        abort(404);
-    }
+//    } else {
+//        abort(404);
+//    }
 })->name('laravel.logs')->middleware('auth');
 
 Route::group(['prefix' => 'api'], function () {
@@ -141,5 +170,8 @@ Route::group(['prefix' => 'api'], function () {
 
 });
 Route::get('/zoom-meeting-rooms', function () {
-    return view('setup-zoom-meeting.introduction');
+    $type = 'admin';
+    return view('setup-zoom-meeting.introduction', compact('type'));
 })->name('zoom-meeting-rooms');
+
+Route::resource('zoom-meeting-config', 'Zoom\ZoomMetingConfiguration');
