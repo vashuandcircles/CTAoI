@@ -20,9 +20,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Specialization</th>
                         <th>Address</th>
-                        <th>Description</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -39,9 +37,7 @@
                             <td>{{ $user[$key]->name }}</td>
                             <td>{{ $user[$key]->phone }}, {{ $row->altphone}}</td>
                             <td>{{ $user[$key]->email }}</td>
-                            <td>{{ $row->specialization}}</td>
                             <td>{{ $row->city}}, {{ $row->state}}</td>
-                            <td>{{ $row->description}}</td>
                             <td>
                                 <div class="row">
                                     <form action="/teacher-accept/{{ $row->userid }}" method="POST">
