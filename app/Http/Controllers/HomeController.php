@@ -381,7 +381,7 @@ class HomeController extends Controller
             return back()->with('status', 'Your data is deleted successfully');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage() . $exception->getTraceAsString());
-            return back()->with('status', 'Teacher cannot be deleted.');
+            return back()->with('status', ' This user is used so cannot be deleted.');
         }
     }
 
