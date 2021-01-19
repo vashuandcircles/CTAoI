@@ -21,49 +21,45 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Director's Name</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Address</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($coachings as $key => $row)
-                        <?php if (!$row->verified) { ?>
-                        <tr>
-                            <td>
-                                <img src="{{$row->imgpath ?? asset('/img/default-user.jpg')}}"
-                                     class="rounded-circle" alt="img"
-                                     style="width: 75px; height: 75px; object-fit: cover;">
+                    @foreach ($coachings as $coaching)
+                        @if (!$coaching->verified)
+                            <tr>
+                                <td>
+                                    <img src="{{$coaching->imgpath ?? asset('/img/default-user.jpg')}}"
+                                         class="rounded-circle" alt="img"
+                                         style="width: 75px; height: 75px; object-fit: cover;">
 
-                            </td>
-                            <td>{{ $user[$key]->name }}</td>
-                            <td>{{ $row->directorname}}</td>
-                            <td>{{ $user[$key]->phone }} <br> {{ $row->altphone}} </td>
-                            <td>{{ $user[$key]->email }}</td>
-                            <td>{{ $row->address1}} {{ $row->address2}}, {{ $row->state}}
-                                , {{ $row->city}} {{ $row->zipcode}}</td>
-                            <td>
-                                <div class="row">
-                                    <form action="/coaching-accept/{{ $row->userid }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
-                                        <button type="submit" href="" class="btn btn-sm btn-success m-1"><i
-                                                class="fas fa-check" title="  Accept"></i>
-                                        </button>
-                                    </form>
-                                    <form action="/coaching-delete/{{ $row->userid }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" href="" class="btn btn-sm btn-danger m-1"><i
-                                                class="fas fa-times" title="  Decline"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php } ?>
+                                </td>
+                                <td>{{  $coaching->user->name }}</td>
+                                <td>{{ $coaching->user->phone }} <br> {{ $coaching->altphone}} </td>
+                                <td>{{ $coaching->user->email }}</td>
+                                <td>
+                                    <div class="row">
+                                        <form action="/coaching-accept/{{ $coaching->id }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PUT') }}
+                                            <button type="submit" href="" class="btn btn-sm btn-success m-1"><i
+                                                    class="fas fa-check" title="  Accept"></i>
+                                            </button>
+                                        </form>
+                                        <form action="/coaching-delete/{{ $coaching->id }}" method="POST"
+                                              onclick="return confirm('Are you sure to Decline this item?')">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" href="" class="btn btn-sm btn-danger m-1"><i
+                                                    class="fas fa-times" title="  Decline"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>

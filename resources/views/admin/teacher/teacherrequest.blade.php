@@ -20,34 +20,33 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Address</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($teachers as $key => $row)
-                        @if (!$row->verified && $row->active)
+                    @foreach ($teachers as $teacher)
+                        @if (!$teacher->verified && $teacher->active)
                             <tr>
                                 <td>
 
-                                    <img src="{{$row->imgpath ?? asset('/img/default-user.jpg')}}"
+                                    <img src="{{$teacher->imgpath ?? asset('/img/default-user.jpg')}}"
                                          class="rounded-circle" alt="img"
                                          style="width: 75px; height: 75px; object-fit: cover;">
                                 </td>
-                                <td>{{ $user[$key]->name }}</td>
-                                <td>{{ $user[$key]->phone }}, {{ $row->altphone}}</td>
-                                <td>{{ $user[$key]->email }}</td>
-                                <td>{{ $row->city}}, {{ $row->state}}</td>
+                                <td>{{  $teacher->user->name}}</td>
+                                <td>{{  $teacher->user->phone }}</td>
+                                <td>{{  $teacher->user->email }}</td>
                                 <td>
                                     <div class="row">
-                                        <form action="/teacher-accept/{{ $row->userid }}" method="POST">
+                                        <form action="/teacher-accept/{{ $teacher->id }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('PUT') }}
                                             <button type="submit" href="" class="btn btn-sm btn-success m-1"><i
                                                     class="fas fa-check" title="  Accept"></i>
                                             </button>
                                         </form>
-                                        <form action="/teacher-delete/{{ $row->userid }}" method="POST">
+                                        <form action="/teacher-delete/{{ $teacher->id }}" method="POST"
+                                              onclick="return confirm('Are you sure to Decline this item?')">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" href="" class="btn btn-sm btn-danger m-1"><i

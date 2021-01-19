@@ -52,13 +52,13 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <a href="{{route('meetings.edit', $meeting['id']) }}"
-                                           class="btn btn-secondary m-1"><i class="fas fa-edit"></i></a>
+                                           class="btn btn-secondary btn-sm m-1"><i class="fas fa-edit"></i></a>
                                     </div>
                                     <div class="col-3">
                                         <form action="{{route('meetings.destroy',  $meeting['id']) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" href="" class="btn btn-danger m-1"
+                                            <button type="submit" href="" class="btn btn-sm btn-danger m-1"
                                                     onclick="return confirm('Are you sure to delete this item?')"><i
                                                     class="fas fa-trash-alt"></i>
                                             </button>

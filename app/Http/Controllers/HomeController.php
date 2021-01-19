@@ -231,16 +231,14 @@ class HomeController extends Controller
 
     public function teacherRequestPage()
     {
-        $user = User::where('type', 0)->get();
-        $teachers = Teacher::all();
-        return view('admin/teacher/teacherrequest', compact('teachers', 'user'));
+        $teachers = Teacher::with('user')->get();
+        return view('admin/teacher/teacherrequest', compact('teachers'));
     }
 
     public function coachingRequestPage()
     {
-        $user = User::where('type', 1)->get();
-        $coachings = Coaching::all();
-        return view('admin/coaching/coachingrequest', compact('coachings', 'user'));
+        $coachings = Coaching::with('user')->get();
+        return view('admin/coaching/coachingrequest', compact('coachings'));
     }
 
     public function addTeacherPage()
@@ -376,19 +374,17 @@ class HomeController extends Controller
 
     public function deleteTeacher(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $teachers = Teacher::where('userid', $id)->first();
-        $user->delete();
-        $teachers->delete();
+        $teacher = Teacher::where('id', $id)->first();
+        $teacher->user->delete();
+        $teacher->delete();
         return back()->with('status', 'Your data is deleted successfully');
     }
 
     public function deleteCoaching(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $coachings = Coaching::where('userid', $id)->first();
-        $coachings->delete();
-        $user->delete();
+        $coaching = Coaching::where('id', $id)->first();
+        $coaching->user->delete();
+        $coaching->delete();
         return back()->with('status', 'Your data is deleted successfully');
     }
 
@@ -436,7 +432,7 @@ class HomeController extends Controller
         return view('admin/query', compact('queries'));
     }
 
-    public function acceptTeacher(Request $request, $id)
+    public function acceptTeacher($id)
     {
 //        $teachers = Teacher::findOrFail($id);
 //        $teachers->verified = 1;
@@ -444,7 +440,7 @@ class HomeController extends Controller
 //        return redirect('/teacher-request')->with('status', 'Teacher is verified now');
 
         try {
-            $teachers = Teacher::where('userid', $id)->first();
+            $teachers = Teacher::where('id', $id)->first();
             $teachers->verified = 1;
             $teachers->update();
             return redirect('/teacher-request')->with('status', 'Teacher is verified now');
@@ -454,10 +450,10 @@ class HomeController extends Controller
         }
     }
 
-    public function acceptCoaching(Request $request, $id)
+    public function acceptCoaching($id)
     {
         try {
-            $coachings = Coaching::where('userid', $id)->first();
+            $coachings = Coaching::whereId($id)->first();
             $coachings->verified = 1;
             $coachings->update();
 //            $data = $coachings->directorname;
