@@ -1,10 +1,49 @@
 @include('admin.partials.header')
 <!-- End of Topbar -->
 
-
 <script>
 
     window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainerCoaching", {
+            animationEnabled: true,
+            exportEnabled: true,
+            theme: "light1", // "light1", "light2", "dark1", "dark2"
+            title:{
+                text: "This year coachings"
+            },
+            axisY:{
+                includeZero: true
+            },
+            data: [{
+                type: "column", //change type to bar, line, area, pie, etc
+                //indexLabel: "{y}", //Shows y value on all Data Points
+                indexLabelFontColor: "#5A5757",
+                indexLabelPlacement: "outside",
+                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        chart.render();
+
+
+
+        {{--var chart = new CanvasJS.Chart("chartContainerCoaching", {--}}
+        {{--    animationEnabled: true,--}}
+        {{--    title:{--}}
+        {{--        text: "This year coachings"--}}
+        {{--    },--}}
+        {{--    axisY: {--}}
+        {{--        title: "Number of coachings",--}}
+
+        {{--    },--}}
+        {{--    data: [{--}}
+        {{--        type: "spline",--}}
+
+        {{--        dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>--}}
+        {{--    }]--}}
+        {{--});--}}
+
+        chart.render();
 
         var chart = new CanvasJS.Chart("graphchart", {
             theme: "light2",
@@ -23,20 +62,6 @@
         });
         chart.render();
 
-        var chart = new CanvasJS.Chart("chartContainerCoaching", {
-            title: {
-                text: "This year coachings"
-            },
-            axisY: {
-                title: "Number of coachings"
-            },
-            data: [{
-                type: "line",
-                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-            }]
-        });
-
-        chart.render();
         var chart = new CanvasJS.Chart("chartContainerTeacher", {
             title: {
                 text: "This year teachers"
@@ -45,13 +70,12 @@
                 title: "Number of teachers"
             },
             data: [{
-                type: "line",
+                type: "spline",
                 dataPoints: <?php echo json_encode($dataPointTeacher, JSON_NUMERIC_CHECK); ?>
             }]
         });
         chart.render();
 
-        chart.render();
         var chart = new CanvasJS.Chart("chartContainerStudent", {
             title: {
                 text: "This year students"
@@ -60,7 +84,7 @@
                 title: "Number of students"
             },
             data: [{
-                type: "line",
+                type: "spline",
                 dataPoints: <?php echo json_encode($dataPointStudent, JSON_NUMERIC_CHECK); ?>
             }]
         });
