@@ -54,14 +54,14 @@
                                                 {{ method_field('PUT') }}
                                                 <button type="submit" href=""
                                                         class="btn btn-success btn-sm m-1"><i class="fa fa-user-plus"
-                                                                                       title="  Feature"
+                                                                                       title="Feature"
                                                                                        aria-hidden="true"></i>
 
                                                 </button>
                                             </form>
                                         @endif
                                         <a href="{{route('teachers.edit', $teacher->id) }}"
-                                           class="btn btn-sm btn-secondary m-1"><i class="fas fa-edit" title="  Edit"
+                                           class="btn btn-sm btn-secondary m-1"><i class="fas fa-edit" title="Edit"
                                             ></i>
 
                                         </a>
@@ -71,7 +71,7 @@
                                             {{ method_field('DELETE') }}
                                             <button type="submit" href="" class="btn btn-sm btn-danger m-1"
                                                     onclick="return confirm('Are you sure to delete this item?')"><i
-                                                    class="fas fa-trash" title="  Delete"
+                                                    class="fas fa-trash" title="Delete"
                                                 ></i>
                                             </button>
                                         </form>
