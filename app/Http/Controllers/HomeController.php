@@ -372,12 +372,17 @@ class HomeController extends Controller
         return redirect('/coaching-page')->with('status', 'Your data is updated');
     }
 
-    public function deleteTeacher(Request $request, $id)
+    public function deleteTeacher($id)
     {
-        $teacher = Teacher::where('id', $id)->first();
-        $teacher->user->delete();
-        $teacher->delete();
-        return back()->with('status', 'Your data is deleted successfully');
+        try {
+            $teacher = Teacher::where('id', $id)->first();
+            $teacher->user->delete();
+            $teacher->delete();
+            return back()->with('status', 'Your data is deleted successfully');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . $exception->getTraceAsString());
+            return back()->with('status', 'Teacher cannot be deleted.');
+        }
     }
 
     public function deleteCoaching(Request $request, $id)
