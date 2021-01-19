@@ -20,13 +20,13 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'is_admin']);
     }
 
     public function index()
     {
         $registeredcoaching = Coaching::where('verified', 'LIKE', '1')->count();
-        $activeStudent = Student::where('active',  '1')->count();
+        $activeStudent = Student::where('active', '1')->count();
         $pendingcoaching = Coaching::where('verified', 'LIKE', '0')->count();
         $featuredcoaching = Coaching::where('is_featured', 'LIKE', '1')->count();
         $registeredteacher = Teacher::where('verified', 'LIKE', '1')->count();
@@ -133,8 +133,7 @@ class HomeController extends Controller
         );
 
 
-
-        return view('admin.dashboard', compact('registeredcoaching', 'featuredcoaching', 'pendingcoaching', 'registeredteacher', 'featuredteacher', 'pendingteacher', 'subscriptions', 'enquiry', 'dataPoints', 'dataPointTeacher', 'dataPointStudent','data'));
+        return view('admin.dashboard', compact('registeredcoaching', 'featuredcoaching', 'pendingcoaching', 'registeredteacher', 'featuredteacher', 'pendingteacher', 'subscriptions', 'enquiry', 'dataPoints', 'dataPointTeacher', 'dataPointStudent', 'data'));
     }
 
     public function event()

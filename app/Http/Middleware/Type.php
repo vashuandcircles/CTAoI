@@ -3,17 +3,18 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Razorpay\Api\Request;
 
 class Type
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if (auth()->user()->type == 1) {
             return redirect()->route('coachingdashboard');

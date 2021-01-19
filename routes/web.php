@@ -30,9 +30,7 @@ Route::get('/studentdetail/{id}', 'PageController@studentDetail');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'dashboard'], function () {
-        Route::resource('coachings', 'CoachingController');
-        Route::resource('teachers', 'TeacherController');
-        Route::resource('students', 'StudentController');
+
         Route::put('feature/{id}', 'CoachingController@feature')->name('coachings.feature');
         Route::put('tfeature/{id}', 'TeacherController@feature')->name('teachers.feature');
     });
@@ -88,9 +86,10 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'is_admin']], function () {
-
+    Route::resource('coachings', 'CoachingController');
+    Route::resource('teachers', 'TeacherController');
+    Route::resource('students', 'StudentController');
     Route::get('/home', 'HomeController@index')->name('home');
-
     Route::get('/subscription', 'HomeController@subscription');
     Route::get('/enquiry', 'HomeController@enquiry');
 
@@ -136,6 +135,30 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
 
     Route::put('/teacher-unfeature/{id}', 'HomeController@unfeatureTeacher');
     Route::put('/coaching-unfeature/{id}', 'HomeController@unfeatureCoaching');
+
+
+    Route::group(['prefix' => 'api'], function () {
+        Route::get('/meetings', 'Zoom\MeetingController@index')
+            ->name('meetings.index');
+
+        Route::get('/zoom-setup-create', 'Zoom\MeetingController@zoomSetupCreate')
+            ->name('meetings.setup-create');
+        Route::get('/zoom-setup', 'Zoom\MeetingController@zoomSetup')
+            ->name('meetings.setup');
+// Create meeting room using topic, agenda, start_time.
+        Route::post('/meetings', 'Zoom\MeetingController@store')
+            ->name('meetings.store');
+        Route::get('/meetings/create', 'Zoom\MeetingController@create')
+            ->name('meetings.create');
+// Get information of the meeting room by ID.
+        Route::get('/meetings/{meeting}', 'Zoom\MeetingController@edit')
+            ->where('meeting', '[0-9]+')->name('meetings.edit');
+        Route::patch('/meetings/{meeting}', 'Zoom\MeetingController@update')
+            ->where('meeting', '[0-9]+')->name('meetings.update');
+        Route::delete('/meetings/{meeting}', 'Zoom\MeetingController@destroy')
+            ->where('meeting', '[0-9]+')->name('meetings.destroy');
+
+    });
 });
 
 Route::get('laravel-logs', function () {
@@ -147,28 +170,6 @@ Route::get('laravel-logs', function () {
 //    }
 })->name('laravel.logs')->middleware('auth');
 
-Route::group(['prefix' => 'api'], function () {
-    Route::get('/meetings', 'Zoom\MeetingController@index')
-        ->name('meetings.index');
-
-    Route::get('/zoom-setup-create', 'Zoom\MeetingController@zoomSetupCreate')
-        ->name('meetings.setup-create');
-    Route::get('/zoom-setup', 'Zoom\MeetingController@zoomSetup')
-        ->name('meetings.setup');
-// Create meeting room using topic, agenda, start_time.
-    Route::post('/meetings', 'Zoom\MeetingController@store')
-        ->name('meetings.store');
-    Route::get('/meetings/create', 'Zoom\MeetingController@create')
-        ->name('meetings.create');
-// Get information of the meeting room by ID.
-    Route::get('/meetings/{meeting}', 'Zoom\MeetingController@edit')
-        ->where('meeting', '[0-9]+')->name('meetings.edit');
-    Route::patch('/meetings/{meeting}', 'Zoom\MeetingController@update')
-        ->where('meeting', '[0-9]+')->name('meetings.update');
-    Route::delete('/meetings/{meeting}', 'Zoom\MeetingController@destroy')
-        ->where('meeting', '[0-9]+')->name('meetings.destroy');
-
-});
 Route::get('/zoom-meeting-rooms', function () {
     $type = 'admin';
     return view('setup-zoom-meeting.introduction', compact('type'));
