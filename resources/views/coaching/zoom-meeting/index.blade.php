@@ -39,7 +39,9 @@
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$meeting['topic']}}</td>
-                            <td>{{\Carbon\Carbon::parse($meeting['start_time'])}}</td>
+                            <td>{{$meeting['start_time'] ? \Carbon\Carbon::parse($meeting['start_time'])->format('Y-m-d H:i'):''}}</td>
+
+{{--                            <td>{{\Carbon\Carbon::parse($meeting['start_time'])}}</td>--}}
                             <td>
                                 <a href="{{$meeting['join_url']}}" class="btn btn-success">
                                     Join
