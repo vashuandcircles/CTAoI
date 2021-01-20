@@ -30,7 +30,9 @@ Route::get('/studentdetail/{id}', 'PageController@studentDetail');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'dashboard'], function () {
-
+        Route::resource('coachings', 'CoachingController');
+        Route::resource('teachers', 'TeacherController');
+        Route::resource('students', 'StudentController');
         Route::put('feature/{id}', 'CoachingController@feature')->name('coachings.feature');
         Route::put('tfeature/{id}', 'TeacherController@feature')->name('teachers.feature');
     });
@@ -86,10 +88,9 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'is_admin']], function () {
-    Route::resource('coachings', 'CoachingController');
-    Route::resource('teachers', 'TeacherController');
-    Route::resource('students', 'StudentController');
+
     Route::get('/home', 'HomeController@index')->name('home');
+
     Route::get('/subscription', 'HomeController@subscription');
     Route::get('/enquiry', 'HomeController@enquiry');
 
