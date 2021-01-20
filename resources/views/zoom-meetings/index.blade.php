@@ -50,20 +50,22 @@
                             </td>
                             <td>
                                 <div class="row">
-                                    <div class="col-3">
-                                        <a href="{{route('meetings.edit', $meeting['id']) }}"
-                                           class="btn btn-secondary btn-sm m-1"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div class="col-3">
-                                        <form action="{{route('meetings.destroy',  $meeting['id']) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" href="" class="btn btn-sm btn-danger m-1"
-                                                    onclick="return confirm('Are you sure to delete this item?')"><i
-                                                    class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                    <button data-url="{{$meeting['join_url']}}"
+                                            title="Copy Meeting Url"
+                                            data-tooltip="Link copied to clipboard"
+                                            class="btn btn-secondary m-1 copyUrl"><i class="fas fa-copy"></i></button>
+                                    <a href="{{route('meetings.edit', $meeting['id']) }}" title="Edit"
+                                       class="btn btn-primary btn-sm m-1"><i class="fas fa-edit"></i></a>
+                                    <form action="{{route('meetings.destroy',  $meeting['id']) }}" method="POST"
+                                          style="display: inherit">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit" class="btn btn-sm btn-danger m-1"
+                                                title="Delete"
+                                                onclick="return confirm('Are you sure to delete this item?')"><i
+                                                class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -96,5 +98,6 @@
         $('#example').DataTable();
     });
 </script>
+
 @include('admin.partials.footer')
 

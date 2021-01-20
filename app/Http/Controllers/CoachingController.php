@@ -14,7 +14,6 @@ use App\Repositories\CustomRepository;
 use App\Traits\ZoomJWT;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -266,7 +265,7 @@ class CoachingController extends Controller
         }
     }
 
-    public function meetingStore(MeetingRequest $request)
+    public function meetingStore(MeetingRequest $request): \Illuminate\Http\RedirectResponse
     {
         $data = $request->only(['topic', 'start_time', 'agenda']);
         $path = 'users/me/meetings';
@@ -287,6 +286,55 @@ class CoachingController extends Controller
         } catch (\Exception $exception) {
             Log::error($exception->getMessage() . $exception->getTraceAsString());
             return redirect()->route('coaching.meetings.index')->with('failed', 'Meeting can not be created.');
+
+        }
+    }
+
+    public function meetingEdit(Request $request, $id)
+    {
+        $path = 'meetings/' . $id;
+        $response = $this->zoomGet($path);
+        $data = json_decode($response->body(), true);
+        if ($response->ok()) {
+            $data['start_at'] = $this->toUnixTimeStamp($data['start_time'], $data['timezone']);
+        }
+        return view('coaching.zoom-meeting.schedule')->with('meeting', collect($data));
+    }
+
+    public function meetingUpdate(Request $request, $id): \Illuminate\Http\RedirectResponse
+    {
+        $data = $request->all();
+        $path = 'meetings/' . $id;
+        try {
+            $this->zoomPatch($path, [
+                'topic' => $data['topic'],
+                'type' => 2,
+                'start_time' => (new \DateTime($data['start_time']))->format('Y-m-d\TH:i:s'),
+                'duration' => 40,
+                'agenda' => $data['agenda'],
+                'settings' => [
+                    'host_video' => false,
+                    'participant_video' => false,
+                    'waiting_room' => true,
+                ]
+            ]);
+            return redirect()->route('coaching.meetings.index')->with('success', 'Meeting updated successfully.');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . $exception->getTraceAsString());
+            return redirect()->route('coaching.meetings.index')->with('failed', 'Meeting can not be updated.');
+
+        }
+    }
+
+    public function meetingDelete(Request $request, string $id): \Illuminate\Http\RedirectResponse
+    {
+        try {
+            $path = 'meetings/' . $id;
+            $this->zoomDelete($path);
+            return redirect()->route('coaching.meetings.index')->with('success', 'Meeting deleted successfully.');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . $exception->getTraceAsString());
+            return redirect()->route('coaching.meetings.index')->with('status', 'Meeting can not be deleted.');
 
         }
     }

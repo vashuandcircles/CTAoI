@@ -59,6 +59,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'coaching/zoom-meeting', 'as' => 'coaching.meetings.'], function ($router) {
         $router->get('/', 'CoachingController@meetingIndex')->name('index');
+        $router->get('edit/{id}', 'CoachingController@meetingEdit')->name('edit');
+        $router->post('update/{id}', 'CoachingController@meetingUpdate')->name('update');
+        $router->delete('destroy/{id}', 'CoachingController@meetingDelete')->name('destroy');
         $router->get('/schedule', 'CoachingController@meetingSchedule')->name('schedule');
         $router->match(['GET', 'POST'], '/configuration', 'CoachingController@meetingConfiguration')->name('configuration');
         $router->get('/configuration/edit/{id}', 'CoachingController@meetingConfigurationEdit')->name('configuration.edit');
@@ -73,6 +76,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'teachers/zoom-meeting', 'as' => 'teachers.meetings.'], function ($router) {
         $router->get('/', 'TeacherController@meetingIndex')->name('index');
+        $router->get('edit/{id}', 'TeacherController@meetingEdit')->name('edit');
+        $router->post('update/{id}', 'TeacherController@meetingUpdate')->name('update');
+        $router->delete('destroy/{id}', 'TeacherController@meetingDelete')->name('destroy');
         $router->get('/schedule', 'TeacherController@meetingSchedule')->name('schedule');
         $router->match(['GET', 'POST'], '/configuration', 'TeacherController@meetingConfiguration')->name('configuration');
         $router->get('/configuration/edit/{id}', 'TeacherController@meetingConfigurationEdit')->name('configuration.edit');

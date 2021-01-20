@@ -1,16 +1,17 @@
 @include('teacher.partials.header')
 <div class="container-fluid">
+    @include('messages')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h3 class="card-title">Zoom meetings</h3>
             <div class="card-tools float-right">
                 @inject('zoomMeetingConfig','App\Http\Controllers\Zoom\ZoomMetingConfiguration')
                 @if($zoomMeetingConfig->hasZoomCredentials())
-                    <a href="{{route('teachers.meetings.schedule')}}" class="btn btn-success">
+                    <a href="{{route('teachers.meetings.schedule')}}" class="btn btn-primary">
                         Schedule Meeting
                     </a>
                 @else
-                    <a href="{{route('teachers.meetings.configuration')}}" class="btn btn-success">
+                    <a href="{{route('teachers.meetings.configuration')}}" class="btn btn-primary">
                         Set Zoom Credentials
                     </a>
                 @endif
@@ -29,6 +30,7 @@
                     </th>
                     <th>Start Time</th>
                     <th>Url</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,9 +43,28 @@
                             <td>
                                 <a href="{{$meeting['join_url']}}"
                                    target="_blank"
-                                   class="btn btn-flat btn-primary">
+                                   class="btn btn-flat btn-success">
                                     Join
                                 </a>
+                            </td>
+
+                            <td>
+                                <div class="row">
+                                    <button data-url="{{$meeting['join_url']}}"
+                                            data-tooltip="Link copied to clipboard"
+                                            class="btn btn-secondary m-1 copyUrl"><i class="fas fa-copy"></i></button>
+                                    <a href="{{route('teachers.meetings.edit', $meeting['id']) }}"
+                                       class="btn btn-primary btn-sm m-1"><i class="fas fa-edit"></i></a>
+                                    <form action="{{route('teachers.meetings.destroy',  $meeting['id']) }}"
+                                          method="POST" style="display: inherit">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit"  class="btn btn-sm btn-danger m-1"
+                                                onclick="return confirm('Are you sure to delete this item?')"><i
+                                                class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
