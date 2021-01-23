@@ -18,7 +18,8 @@
                                     <input id="topic" type="text"
                                            class="form-control @error('topic') is-invalid @enderror"
                                            placeholder="Topic of meeting"
-                                           value="{{ old('topic' , $meeting['topic'] ?? '') }}" name="topic" autocomplete="topic" autofocus>
+                                           value="{{ old('topic' , $meeting['topic'] ?? '') }}" name="topic"
+                                           autocomplete="topic" autofocus>
                                     @error('topic')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -27,7 +28,6 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group row">
                                 <label for="start_time" class="col-md-4 col-form-label text-md-right">Start Time</label>
                                 <div class="col-md-6">
@@ -35,7 +35,7 @@
                                            class="form-control @error('start_time') is-invalid @enderror"
                                            name="start_time"
                                            placeholder="Start time of meeting"
-                                           value="{{ old('start_time',isset( $meeting['start_time']) ? \Carbon\Carbon::parse(isset($meeting['start_time']))->toDateTimeLocalString() :'') }}"
+                                           value="{{ old('start_time',isset( $meeting['start_time']) ? \Carbon\Carbon::parse($meeting['start_time'])->toDateTimeLocalString() :'') }}"
                                            autocomplete="start_time">
                                     @error('start_time')
                                     <span class="invalid-feedback" role="alert">
