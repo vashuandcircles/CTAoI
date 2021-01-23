@@ -34,9 +34,9 @@
                                            class="form-control @error('start_time') is-invalid @enderror"
                                            name="start_time"
                                            placeholder="Start time of meeting"
-                                           value="{{ old('start_time', $meeting['start_time'] ? \Carbon\Carbon::parse($meeting['start_time'])->toDateTimeLocalString() :'') }}"
+                                           value="{{ old('start_time',isset( $meeting['start_time']) ? \Carbon\Carbon::parse(isset($meeting['start_time']))->toDateTimeLocalString() :'') }}"
 
-{{--                                           value="{{ old('start_time', $meeting['start_time'] ?? '') }}"--}}
+                                           {{--                                           value="{{ old('start_time', $meeting['start_time'] ?? '') }}"--}}
                                            autocomplete="start_time">
                                     @error('start_time')
                                     <span class="invalid-feedback" role="alert">
